@@ -13,7 +13,7 @@ class Program
     static async Task AsyncMain()
     {
         BusConfiguration busConfiguration = new BusConfiguration();
-        busConfiguration.EndpointName("Samples.StepByStep.Client");
+        busConfiguration.EndpointName("HashBus.Client");
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.EnableInstallers();
         busConfiguration.UsePersistence<InMemoryPersistence>();
@@ -49,7 +49,7 @@ class Program
                 Product = "New shoes",
                 Id = id
             };
-            await bus.SendAsync("Samples.StepByStep.Server", placeOrder);
+            await bus.SendAsync("HashBus.Server", placeOrder);
 
             Console.WriteLine("Sent a new PlaceOrder message with id: {0}", id.ToString("N"));
 

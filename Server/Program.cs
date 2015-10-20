@@ -13,7 +13,7 @@ class Program
     static async Task AsyncMain()
     {
         BusConfiguration busConfiguration = new BusConfiguration();
-        busConfiguration.EndpointName("Samples.StepByStep.Server");
+        busConfiguration.EndpointName("HashBus.Server");
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.EnableInstallers();
         busConfiguration.UsePersistence<InMemoryPersistence>();

@@ -14,7 +14,7 @@ class Program
     static async Task AsyncMain()
     {
         BusConfiguration busConfiguration = new BusConfiguration();
-        busConfiguration.EndpointName("Samples.StepByStep.Subscriber");
+        busConfiguration.EndpointName("HashBus.Subscriber");
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.EnableInstallers();
         busConfiguration.UsePersistence<InMemoryPersistence>();
