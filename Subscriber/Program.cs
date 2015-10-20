@@ -11,14 +11,14 @@ class Program
 
     static async Task AsyncMain()
     {
-        BusConfiguration busConfiguration = new BusConfiguration();
+        var busConfiguration = new BusConfiguration();
         busConfiguration.EndpointName("HashBus.Subscriber");
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.EnableInstallers();
         busConfiguration.UsePersistence<InMemoryPersistence>();
         busConfiguration.SendFailedMessagesTo("error");
 
-        using (IBus bus = await Bus.Create(busConfiguration).StartAsync())
+        using (var bus = await Bus.Create(busConfiguration).StartAsync())
         {
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
