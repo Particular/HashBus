@@ -1,5 +1,4 @@
-﻿#region PlaceOrderHandler
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using NServiceBus;
 
@@ -22,8 +21,7 @@ public class PlaceOrderHandler : IHandleMessages<PlaceOrder>
                                   {
                                       OrderId = message.Id
                                   };
+
         await bus.PublishAsync(orderPlaced);
     }
 }
-
-#endregion

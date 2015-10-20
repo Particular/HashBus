@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using NServiceBus;
-#region OrderCreatedHandler
+
 public class OrderCreatedHandler : IHandleMessages<OrderPlaced>
 {
     public Task Handle(OrderPlaced message)
@@ -10,4 +10,3 @@ public class OrderCreatedHandler : IHandleMessages<OrderPlaced>
         return Task.FromResult(0);
     }
 }
-#endregion
