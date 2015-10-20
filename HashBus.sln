@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.TwitterSimulator", "HashBus.TwitterSimulator\HashBus.TwitterSimulator.csproj", "{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subscriber", "Subscriber\Subscriber.csproj", "{EC04FD05-F3FE-439A-8791-D85856E3726A}"
 EndProject

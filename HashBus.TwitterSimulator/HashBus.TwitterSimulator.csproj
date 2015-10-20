@@ -7,8 +7,8 @@
     <ProjectGuid>{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Server</RootNamespace>
-    <AssemblyName>Server</AssemblyName>
+    <RootNamespace>HashBus.TwitterSimulator</RootNamespace>
+    <AssemblyName>HashBus.TwitterSimulator</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
