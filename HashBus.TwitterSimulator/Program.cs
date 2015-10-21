@@ -41,7 +41,7 @@ namespace HashBus.TwitterSimulator
                     break;
                 }
 
-                var id = Guid.NewGuid();
+                var id = DateTime.UtcNow.Ticks;
 
                 var message = new HashtagTweeted
                 {

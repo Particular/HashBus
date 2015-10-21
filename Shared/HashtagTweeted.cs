@@ -1,7 +1,6 @@
-﻿using System;
-using NServiceBus;
+﻿using NServiceBus;
 
 public class HashtagTweeted : IEvent
 {
-    public Guid Id { get; set; }
+    public long Id { get; set; }
 }
