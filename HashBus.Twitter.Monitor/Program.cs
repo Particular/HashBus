@@ -52,8 +52,6 @@ namespace HashBus.Twitter.Monitor
             stream.StreamStopped += (sender, args) => Console.WriteLine($"\"{hashtag}\" stream stopped. {args.Exception}");
             stream.MatchingTweetReceived += (sender, e) =>
             {
-                Console.WriteLine("Tweet received with ID {0}", e.Tweet.Id);
-
                 var message = new HashtagTweeted
                 {
                     Id = e.Tweet.Id,
@@ -65,6 +63,9 @@ namespace HashBus.Twitter.Monitor
                     UserScreenName = e.Tweet.CreatedBy.ScreenName,
                     CreatedAt = e.Tweet.CreatedAt,
                 };
+                
+                Console.WriteLine($"{message.CreatedAt} {(message.IsRetweet ? "Retweet" : "Tweet")} by {message.UserName} @{message.UserScreenName}");
+                Console.WriteLine($"  {message.Text}");
 
                 bus.PublishAsync(message).GetAwaiter().GetResult();
             };
