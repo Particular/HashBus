@@ -1,8 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using HashBus.Twitter.Events;
 using NServiceBus;
 
-namespace HashBus.TwitterSimulator
+namespace HashBus.Twitter.Monitor.Simulator
 {
     class Program
     {
@@ -14,7 +15,7 @@ namespace HashBus.TwitterSimulator
         static async Task AsyncMain()
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Server");
+            busConfiguration.EndpointName("HashBus.Twitter.Monitor");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();

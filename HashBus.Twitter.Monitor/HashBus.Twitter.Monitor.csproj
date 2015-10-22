@@ -7,8 +7,8 @@
     <ProjectGuid>{B1453AE4-B343-42F0-B6F6-E9016A62B3C2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.TwitterMonitor</RootNamespace>
-    <AssemblyName>HashBus.TwitterMonitor</AssemblyName>
+    <RootNamespace>HashBus.Twitter.Monitor</RootNamespace>
+    <AssemblyName>HashBus.Twitter.Monitor</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -119,9 +119,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">
       <Project>{5728de02-c264-4697-b554-dda5fad10a47}</Project>
-      <Name>Shared</Name>
+      <Name>HashBus.Twitter.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

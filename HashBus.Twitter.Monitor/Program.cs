@@ -1,12 +1,13 @@
-namespace HashBus.TwitterMonitor
-{
-    using System;
-    using System.Configuration;
-    using System.Threading.Tasks;
-    using NServiceBus;
-    using Tweetinvi;
-    using Tweetinvi.Core.Credentials;
+using System;
+using System.Configuration;
+using System.Threading.Tasks;
+using HashBus.Twitter.Events;
+using NServiceBus;
+using Tweetinvi;
+using Tweetinvi.Core.Credentials;
 
+namespace HashBus.Twitter.Monitor
+{ 
     class Program
     {
         static void Main()
@@ -17,7 +18,7 @@ namespace HashBus.TwitterMonitor
         static async Task AsyncMain()
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Server");
+            busConfiguration.EndpointName("HashBus.Twitter.Monitor");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
@@ -56,6 +57,13 @@ namespace HashBus.TwitterMonitor
                 var message = new HashtagTweeted
                 {
                     Id = e.Tweet.Id,
+                    Hashtag = hashtag,
+                    IsRetweet = e.Tweet.IsRetweet,
+                    Text = e.Tweet.Text,
+                    UserId = e.Tweet.CreatedBy.Id,
+                    UserName = e.Tweet.CreatedBy.Name,
+                    UserScreenName = e.Tweet.CreatedBy.ScreenName,
+                    CreatedAt = e.Tweet.CreatedAt,
                 };
 
                 bus.PublishAsync(message).GetAwaiter().GetResult();
