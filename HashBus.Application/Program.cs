@@ -20,7 +20,7 @@ namespace HashBus.Application
             busConfiguration.UsePersistence<InMemoryPersistence>();
             busConfiguration.SendFailedMessagesTo("error");
 
-            using (var bus = await Bus.Create(busConfiguration).StartAsync())
+            using (await Bus.Create(busConfiguration).StartAsync())
             {
                 Console.WriteLine("Press any key to exit");
                 Console.ReadKey();
