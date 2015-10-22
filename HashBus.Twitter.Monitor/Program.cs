@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Threading.Tasks;
+using ColoredConsole;
 using HashBus.Twitter.Events;
 using NServiceBus;
 using Tweetinvi;
@@ -64,8 +65,13 @@ namespace HashBus.Twitter.Monitor
                     CreatedAt = e.Tweet.CreatedAt,
                 };
                 
-                Console.WriteLine($"{message.CreatedAt} {(message.IsRetweet ? "Retweet" : "Tweet")} by {message.UserName} @{message.UserScreenName}");
-                Console.WriteLine($"  {message.Text}");
+                ColorConsole.WriteLine(
+                    $"{message.CreatedAt} ".DarkCyan(),
+                    message.IsRetweet ? "Retweet by ".DarkGreen() : "Tweet by ".Green(),
+                    $"{message.UserName} ".Yellow(),
+                    $"@{message.UserScreenName}".DarkYellow());
+
+                ColorConsole.WriteLine($"  {message.Text}".White());
 
                 bus.PublishAsync(message).GetAwaiter().GetResult();
             };
