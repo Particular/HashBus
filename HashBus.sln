@@ -3,13 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Events", "HashBus.Twitter.Events\HashBus.Twitter.Events.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Events", "src\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Simulator", "HashBus.Twitter.Monitor.Simulator\HashBus.Twitter.Monitor.Simulator.csproj", "{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Simulator", "src\HashBus.Twitter.Monitor.Simulator\HashBus.Twitter.Monitor.Simulator.csproj", "{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application", "HashBus.Application\HashBus.Application.csproj", "{EC04FD05-F3FE-439A-8791-D85856E3726A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application", "src\HashBus.Application\HashBus.Application.csproj", "{EC04FD05-F3FE-439A-8791-D85856E3726A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor", "HashBus.Twitter.Monitor\HashBus.Twitter.Monitor.csproj", "{B1453AE4-B343-42F0-B6F6-E9016A62B3C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor", "src\HashBus.Twitter.Monitor\HashBus.Twitter.Monitor.csproj", "{B1453AE4-B343-42F0-B6F6-E9016A62B3C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B34C7F0A-2903-47F2-A087-06D3136C9A1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B77C5EBC-7265-4E5E-B22A-5928FAFDC674}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		HashBus.sln.DotSettings = HashBus.sln.DotSettings
+		nuget.config = nuget.config
+		prerelease.txt = prerelease.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +47,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5728DE02-C264-4697-B554-DDA5FAD10A47} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{EC04FD05-F3FE-439A-8791-D85856E3726A} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{B1453AE4-B343-42F0-B6F6-E9016A62B3C2} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal
