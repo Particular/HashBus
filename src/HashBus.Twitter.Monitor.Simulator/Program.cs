@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ColoredConsole;
@@ -39,6 +40,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
                 var now = DateTime.UtcNow;
                 var userId = random.Next(64);
+                var userMentionId = random.Next(64);
                 var message = new HashtagTweeted
                 {
                     Id = now.Ticks,
@@ -46,10 +48,21 @@ namespace HashBus.Twitter.Monitor.Simulator
                     Hashtag = "Simulated",
                     IsRetweet = now.Millisecond % 3 == 0,
                     Text = string.Join(string.Empty, Enumerable.Range(0, 70).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                        $" @johnsmith{random.Next(64)}",
+                        $" @johnsmith{userMentionId}",
                     UserId = userId,
                     UserName = $"John Smith{userId}",
                     UserScreenName = $"johnsmith{userId}",
+                    UserMentions = new List<UserMention>
+                    {
+                        new UserMention
+                        {
+                            Id=userMentionId,
+                            IdStr= $"{userMentionId}",
+                            Indices = new List<int> { 71, },
+                            Name = $"John Smith{userMentionId}",
+                            ScreenName = $"johnsmith{userMentionId}",
+                        }
+                    },
                 };
 
                 ColorConsole.WriteLine(

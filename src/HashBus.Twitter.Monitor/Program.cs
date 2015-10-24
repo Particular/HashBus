@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using ColoredConsole;
 using HashBus.Twitter.Events;
@@ -8,7 +9,7 @@ using Tweetinvi;
 using Tweetinvi.Core.Credentials;
 
 namespace HashBus.Twitter.Monitor
-{ 
+{
     class Program
     {
         static void Main()
@@ -63,8 +64,18 @@ namespace HashBus.Twitter.Monitor
                     UserName = e.Tweet.CreatedBy.Name,
                     UserScreenName = e.Tweet.CreatedBy.ScreenName,
                     CreatedAt = e.Tweet.CreatedAt,
+                    UserMentions = e.Tweet.UserMentions
+                        .Select(userMention => new UserMention
+                        {
+                            Id = userMention.Id,
+                            IdStr = userMention.IdStr,
+                            Indices = userMention.Indices,
+                            Name = userMention.Name,
+                            ScreenName = userMention.ScreenName,
+                        })
+                        .ToArray()
                 };
-                
+
                 ColorConsole.WriteLine(
                     $"{message.CreatedAt} ".DarkCyan(),
                     message.IsRetweet ? "Retweet by ".DarkGreen() : "Tweet by ".Green(),

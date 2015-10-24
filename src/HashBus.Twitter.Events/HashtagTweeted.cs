@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NServiceBus;
 
 namespace HashBus.Twitter.Events
@@ -20,5 +21,7 @@ namespace HashBus.Twitter.Events
         public string UserScreenName { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public IList<UserMention> UserMentions { get; set; }
     }
 }
