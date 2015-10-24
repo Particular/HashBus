@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ColoredConsole;
 using HashBus.Twitter.Events;
 using NServiceBus;
 using System.Linq;
@@ -65,14 +64,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                     },
                 };
 
-                ColorConsole.WriteLine(
-                    $"{message.CreatedAt} ".DarkCyan(),
-                    message.IsRetweet ? "Retweet by ".DarkGreen() : "Tweet by ".Green(),
-                    $"{message.UserName} ".Yellow(),
-                    $"@{message.UserScreenName}".DarkYellow());
-
-                ColorConsole.WriteLine($"  {message.Text}".White());
-
+                Writer.Write(message);
                 await bus.PublishAsync(message);
             }
         }
