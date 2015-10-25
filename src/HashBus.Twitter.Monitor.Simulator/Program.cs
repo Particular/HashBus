@@ -1,7 +1,10 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
+using ColoredConsole;
 using HashBus.Twitter.Events;
 using NServiceBus;
+using System.Linq;
 
 namespace HashBus.Twitter.Monitor.Simulator
 {
@@ -23,35 +26,41 @@ namespace HashBus.Twitter.Monitor.Simulator
 
             using (var bus = await Bus.Create(busConfiguration).StartAsync())
             {
-                await SimulateHashtagTweeted(bus);
+                await SimulateTwitter(bus);
             }
         }
 
-        static async Task SimulateHashtagTweeted(ISendOnlyBus bus)
+        static async Task SimulateTwitter(ISendOnlyBus bus)
         {
-            Console.WriteLine("Press enter to simulate that a hashtag was tweeted");
-            Console.WriteLine("Press any key to exit");
-
+            var random = new Random();
             while (true)
             {
-                var key = Console.ReadKey();
-                Console.WriteLine();
+                Thread.Sleep(random.Next(3000));
 
-                if (key.Key != ConsoleKey.Enter)
-                {
-                    break;
-                }
-
-                var id = DateTime.UtcNow.Ticks;
-
+                var now = DateTime.UtcNow;
+                var userId = random.Next(64);
                 var message = new HashtagTweeted
                 {
-                    Id = id
+                    Id = now.Ticks,
+                    CreatedAt = now,
+                    Hashtag = "Simulated",
+                    IsRetweet = now.Millisecond % 3 == 0,
+                    Text = string.Join(string.Empty, Enumerable.Range(0, 70).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
+                        $" @johnsmith{random.Next(64)}",
+                    UserId = userId,
+                    UserName = $"John Smith{userId}",
+                    UserScreenName = $"johnsmith{userId}",
                 };
 
-                await bus.PublishAsync(message);
+                ColorConsole.WriteLine(
+                    $"{message.CreatedAt} ".DarkCyan(),
+                    message.IsRetweet ? "Retweet by ".DarkGreen() : "Tweet by ".Green(),
+                    $"{message.UserName} ".Yellow(),
+                    $"@{message.UserScreenName}".DarkYellow());
 
-                Console.WriteLine("Sent a new HashtagTweeted message with id: {0}", id.ToString("N"));
+                ColorConsole.WriteLine($"  {message.Text}".White());
+
+                await bus.PublishAsync(message);
             }
         }
     }
