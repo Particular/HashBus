@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ColoredConsole;
 using HashBus.Twitter.Events;
 using NServiceBus;
 using System.Linq;
@@ -39,27 +39,39 @@ namespace HashBus.Twitter.Monitor.Simulator
 
                 var now = DateTime.UtcNow;
                 var userId = random.Next(64);
+                var userMentionId = random.Next(64);
+                var userMentionIndex = random.Next(31) + 1;
                 var message = new HashtagTweeted
                 {
                     Id = now.Ticks,
                     CreatedAt = now,
                     Hashtag = "Simulated",
                     IsRetweet = now.Millisecond % 3 == 0,
-                    Text = string.Join(string.Empty, Enumerable.Range(0, 70).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                        $" @johnsmith{random.Next(64)}",
+                    Text =
+                        string.Join(
+                            string.Empty,
+                            Enumerable.Range(0, userMentionIndex - 1).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
+                        $" @johnsmith{userMentionId} " +
+                        string.Join(
+                            string.Empty,
+                            Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))),
                     UserId = userId,
                     UserName = $"John Smith{userId}",
                     UserScreenName = $"johnsmith{userId}",
+                    UserMentions = new List<UserMention>
+                    {
+                        new UserMention
+                        {
+                            Id=userMentionId,
+                            IdStr= $"{userMentionId}",
+                            Indices = new List<int> { userMentionIndex, userMentionIndex + $"@johnsmith{userMentionId}".Length },
+                            Name = $"John Smith{userMentionId}",
+                            ScreenName = $"johnsmith{userMentionId}",
+                        }
+                    },
                 };
 
-                ColorConsole.WriteLine(
-                    $"{message.CreatedAt} ".DarkCyan(),
-                    message.IsRetweet ? "Retweet by ".DarkGreen() : "Tweet by ".Green(),
-                    $"{message.UserName} ".Yellow(),
-                    $"@{message.UserScreenName}".DarkYellow());
-
-                ColorConsole.WriteLine($"  {message.Text}".White());
-
+                Writer.Write(message);
                 await bus.PublishAsync(message);
             }
         }

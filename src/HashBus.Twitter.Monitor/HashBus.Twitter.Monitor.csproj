@@ -120,6 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Writer.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
