@@ -40,7 +40,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                 var now = DateTime.UtcNow;
                 var userId = random.Next(64);
                 var userMentionId = random.Next(64);
-                var userMentionIndex = random.Next(32);
+                var userMentionIndex = random.Next(31) + 1;
                 var message = new HashtagTweeted
                 {
                     Id = now.Ticks,
@@ -50,7 +50,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                     Text =
                         string.Join(
                             string.Empty,
-                            Enumerable.Range(0, userMentionIndex - 2).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
+                            Enumerable.Range(0, userMentionIndex - 1).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
                         $" @johnsmith{userMentionId} " +
                         string.Join(
                             string.Empty,
@@ -64,7 +64,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                         {
                             Id=userMentionId,
                             IdStr= $"{userMentionId}",
-                            Indices = new List<int> { userMentionIndex, },
+                            Indices = new List<int> { userMentionIndex, userMentionIndex + $"@johnsmith{userMentionId}".Length },
                             Name = $"John Smith{userMentionId}",
                             ScreenName = $"johnsmith{userMentionId}",
                         }
