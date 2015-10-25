@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using ColoredConsole;
 using HashBus.Twitter.Events;
 
@@ -13,7 +15,22 @@ namespace HashBus.Twitter.Monitor
                 $"{message.UserName} ".Yellow(),
                 $"@{message.UserScreenName}".DarkYellow());
 
-            ColorConsole.WriteLine($"  {message.Text}".White());
+            var messageTokens = new List<ColorToken> { "  " };
+            for (var index = 0; index < message.Text.Length; ++index)
+            {
+                var userMention = message.UserMentions.FirstOrDefault(m => m.Indices.First() == index);
+                if (userMention == null)
+                {
+                    messageTokens.Add(message.Text.Substring(index, 1).White());
+                    continue;
+                }
+
+                var length = userMention.Indices.Last() - index;
+                messageTokens.Add(message.Text.Substring(index, length).Cyan());
+                index += length - 1;
+            }
+
+            ColorConsole.WriteLine(messageTokens.ToArray());
         }
     }
 }
