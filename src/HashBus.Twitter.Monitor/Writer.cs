@@ -10,23 +10,23 @@ namespace HashBus.Twitter.Monitor
         public static void Write(HashtagTweeted message)
         {
             ColorConsole.WriteLine(
-                $"{message.CreatedAt} ".DarkCyan(),
-                message.IsRetweet ? "Retweet by ".DarkGreen() : "Tweet by ".Green(),
-                $"{message.UserName} ".Yellow(),
-                $"@{message.UserScreenName}".DarkYellow());
+                $"{message.TweetCreatedAt} ".DarkCyan(),
+                message.TweetIsRetweet ? "Retweet by ".DarkGreen() : "Tweet by ".Green(),
+                $"{message.TweetCreatedByName} ".Yellow(),
+                $"@{message.TweetCreatedByScreenName}".DarkYellow());
 
             var messageTokens = new List<ColorToken> { "  " };
-            for (var index = 0; index < message.Text.Length; ++index)
+            for (var index = 0; index < message.TweetText.Length; ++index)
             {
-                var userMention = message.UserMentions.FirstOrDefault(m => m.Indices.First() == index);
+                var userMention = message.TweetUserMentions.FirstOrDefault(m => m.Indices.First() == index);
                 if (userMention == null)
                 {
-                    messageTokens.Add(message.Text.Substring(index, 1).White());
+                    messageTokens.Add(message.TweetText.Substring(index, 1).White());
                     continue;
                 }
 
                 var length = userMention.Indices.Last() - index;
-                messageTokens.Add(message.Text.Substring(index, length).Cyan());
+                messageTokens.Add(message.TweetText.Substring(index, length).Cyan());
                 index += length - 1;
             }
 

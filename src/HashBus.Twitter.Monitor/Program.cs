@@ -55,15 +55,16 @@ namespace HashBus.Twitter.Monitor
             {
                 var message = new HashtagTweeted
                 {
-                    Id = e.Tweet.Id,
                     Hashtag = hashtag,
-                    IsRetweet = e.Tweet.IsRetweet,
-                    Text = e.Tweet.Text,
-                    UserId = e.Tweet.CreatedBy.Id,
-                    UserName = e.Tweet.CreatedBy.Name,
-                    UserScreenName = e.Tweet.CreatedBy.ScreenName,
-                    CreatedAt = e.Tweet.CreatedAt,
-                    UserMentions = e.Tweet.UserMentions
+                    TweetId = e.Tweet.Id,
+                    TweetCreatedAt = e.Tweet.CreatedAt,
+                    TweetCreatedById = e.Tweet.CreatedBy.Id,
+                    TweetCreatedByIdStr = e.Tweet.CreatedBy.IdStr,
+                    TweetCreatedByName = e.Tweet.CreatedBy.Name,
+                    TweetCreatedByScreenName = e.Tweet.CreatedBy.ScreenName,
+                    TweetIsRetweet = e.Tweet.IsRetweet,
+                    TweetText = e.Tweet.Text,
+                    TweetUserMentions = e.Tweet.UserMentions
                         .Select(userMention => new UserMention
                         {
                             Id = userMention.Id,

@@ -21,22 +21,27 @@ namespace HashBus.Application
 
         public async Task Handle(HashtagTweeted message)
         {
-            foreach (var mentionMessage in message.UserMentions.Select(userMention => new UserMentionedWithHashtag
+            foreach (var mentionMessage in message.TweetUserMentions.Select(userMention => new UserMentionedWithHashtag
             {
                 Hashtag = message.Hashtag,
-                IsRetweet = message.IsRetweet,
-                TweetId = message.Id,
+                TweetId = message.TweetId,
+                TweetCreatedAt = message.TweetCreatedAt,
+                TweetCreatedById = message.TweetCreatedById,
+                TweetCreatedByIdStr = message.TweetCreatedByIdStr,
+                TweetCreatedByName = message.TweetCreatedByName,
+                TweetCreatedByScreenName = message.TweetCreatedByScreenName,
+                TweetIsRetweet = message.TweetIsRetweet,
+                TweetText = message.TweetText,
                 UserMentionId = userMention.Id,
                 UserMentionIdStr = userMention.IdStr,
                 UserMentionName = userMention.Name,
                 UserMentionScreenName = userMention.ScreenName,
-                TweetCreatedAt = message.CreatedAt,
             }))
             {
                 ColorConsole.WriteLine(
                     $"{mentionMessage.TweetCreatedAt} ".DarkCyan(),
                     $"#{message.Hashtag} ".Cyan(),
-                    mentionMessage.IsRetweet ? "retweet mentioning ".DarkGreen() : "tweet mentioning ".Green(),
+                    mentionMessage.TweetIsRetweet ? "retweet mentioning ".DarkGreen() : "tweet mentioning ".Green(),
                     $"{mentionMessage.UserMentionName} ".Yellow(),
                     $"@{mentionMessage.UserMentionScreenName}".DarkYellow());
 
