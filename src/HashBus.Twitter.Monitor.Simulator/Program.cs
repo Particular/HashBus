@@ -54,7 +54,8 @@ namespace HashBus.Twitter.Monitor.Simulator
                         $" @johnsmith{userMentionId} " +
                         string.Join(
                             string.Empty,
-                            Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))),
+                            Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
+                            " #Simulated",
                     UserId = userId,
                     UserName = $"John Smith{userId}",
                     UserScreenName = $"johnsmith{userId}",
