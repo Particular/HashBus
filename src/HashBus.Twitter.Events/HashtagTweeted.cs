@@ -25,5 +25,17 @@ namespace HashBus.Twitter.Events
         public string TweetText { get; set; }
 
         public IList<UserMention> TweetUserMentions { get; set; }
+
+        public long RetweetedTweetId { get; set; }
+
+        public DateTime RetweetedTweetCreatedAt { get; set; }
+
+        public long RetweetedTweetCreatedById { get; set; }
+
+        public string RetweetedTweetCreatedByIdStr { get; set; }
+
+        public string RetweetedTweetCreatedByName { get; set; }
+
+        public string RetweetedTweetCreatedByScreenName { get; set; }
     }
 }

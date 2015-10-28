@@ -41,6 +41,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                 var userId = random.Next(64);
                 var userMentionId = random.Next(64);
                 var userMentionIndex = random.Next(31) + 1;
+                var retweetedUserId = random.Next(64);
                 var message = new HashtagTweeted
                 {
                     Hashtag = "Simulated",
@@ -71,6 +72,12 @@ namespace HashBus.Twitter.Monitor.Simulator
                             ScreenName = $"johnsmith{userMentionId}",
                         }
                     },
+                    RetweetedTweetId = now.AddDays(-1000).Ticks,
+                    RetweetedTweetCreatedAt = now.AddDays(-1000),
+                    RetweetedTweetCreatedById = retweetedUserId,
+                    RetweetedTweetCreatedByIdStr = $"{retweetedUserId}",
+                    RetweetedTweetCreatedByName = $"John Smith{retweetedUserId}",
+                    RetweetedTweetCreatedByScreenName = $"johnsmith{retweetedUserId}",
                 };
 
                 Writer.Write(message);
