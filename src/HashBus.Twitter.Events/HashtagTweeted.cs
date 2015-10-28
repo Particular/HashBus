@@ -6,22 +6,24 @@ namespace HashBus.Twitter.Events
 {
     public class HashtagTweeted : IEvent
     {
-        public long Id { get; set; }
-
         public string Hashtag { get; set; }
 
-        public bool IsRetweet { get; set; }
+        public long TweetId { get; set; }
 
-        public string Text { get; set; }
+        public DateTime TweetCreatedAt { get; set; }
 
-        public long UserId { get; set; }
+        public long TweetCreatedById { get; set; }
 
-        public string UserName { get; set; }
+        public string TweetCreatedByIdStr { get; set; }
 
-        public string UserScreenName { get; set; }
+        public string TweetCreatedByName { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public string TweetCreatedByScreenName { get; set; }
 
-        public IList<UserMention> UserMentions { get; set; }
+        public bool TweetIsRetweet { get; set; }
+
+        public string TweetText { get; set; }
+
+        public IList<UserMention> TweetUserMentions { get; set; }
     }
 }

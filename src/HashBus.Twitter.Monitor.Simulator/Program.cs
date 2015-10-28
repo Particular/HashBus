@@ -43,11 +43,15 @@ namespace HashBus.Twitter.Monitor.Simulator
                 var userMentionIndex = random.Next(31) + 1;
                 var message = new HashtagTweeted
                 {
-                    Id = now.Ticks,
-                    CreatedAt = now,
                     Hashtag = "Simulated",
-                    IsRetweet = now.Millisecond % 3 == 0,
-                    Text =
+                    TweetId = now.Ticks,
+                    TweetCreatedAt = now,
+                    TweetCreatedById = userId,
+                    TweetCreatedByIdStr = $"{userId}",
+                    TweetCreatedByName = $"John Smith{userId}",
+                    TweetCreatedByScreenName = $"johnsmith{userId}",
+                    TweetIsRetweet = now.Millisecond % 3 == 0,
+                    TweetText =
                         string.Join(
                             string.Empty,
                             Enumerable.Range(0, userMentionIndex - 1).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
@@ -56,10 +60,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                             string.Empty,
                             Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
                             " #Simulated",
-                    UserId = userId,
-                    UserName = $"John Smith{userId}",
-                    UserScreenName = $"johnsmith{userId}",
-                    UserMentions = new List<UserMention>
+                    TweetUserMentions = new List<UserMention>
                     {
                         new UserMention
                         {
