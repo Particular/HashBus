@@ -33,15 +33,21 @@ namespace HashBus.Twitter.Monitor.Simulator
         static async Task SimulateTwitter(ISendOnlyBus bus)
         {
             var random = new Random();
+            var countOfUsers = 15;
             while (true)
             {
-                Thread.Sleep(random.Next(3000));
-
+                Thread.Sleep((int)Math.Pow(random.Next(6), 5));
                 var now = DateTime.UtcNow;
-                var userId = random.Next(64);
-                var userMentionId = random.Next(64);
+                var hashtag = "Simulated";
+                if (now.Millisecond % 3 == 0)
+                {
+                    hashtag = hashtag.ToLowerInvariant();
+                }
+
+                var userId = random.Next(countOfUsers);
+                var userMentionId = random.Next(countOfUsers);
                 var userMentionIndex = random.Next(31) + 1;
-                var retweetedUserId = random.Next(64);
+                var retweetedUserId = random.Next(countOfUsers);
                 var text = string.Join(
                         string.Empty,
                         Enumerable.Range(0, userMentionIndex - 1).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
@@ -49,11 +55,11 @@ namespace HashBus.Twitter.Monitor.Simulator
                     string.Join(
                         string.Empty,
                         Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                    " #Simulated";
+                    $" #{hashtag}";
 
                 var message = new HashtagTweeted
                 {
-                    Hashtag = "Simulated",
+                    Hashtag = hashtag,
                     TweetId = now.Ticks,
                     TweetCreatedAt = now,
                     TweetCreatedById = userId,
@@ -77,8 +83,8 @@ namespace HashBus.Twitter.Monitor.Simulator
                     {
                         new Hashtag
                         {
-                            Text = "Simulated",
-                            Indices = new[] { text.Length - "#Simulated".Length, text.Length, },
+                            Text = hashtag,
+                            Indices = new[] { text.Length - $"#{hashtag}".Length, text.Length, },
                         },
                     },
                     RetweetedTweetId = now.AddDays(-1000).Ticks,
