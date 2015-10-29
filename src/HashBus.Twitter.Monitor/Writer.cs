@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ColoredConsole;
@@ -41,7 +42,15 @@ namespace HashBus.Twitter.Monitor
                     }
 
                     var hashTaglength = hashTag.Indices.Last() - index;
-                    messageTokens.Add(message.TweetText.Substring(index, hashTaglength).Cyan());
+                    messageTokens.Add(
+                        message.TweetText.Substring(index, hashTaglength)
+                        .Color(hashTag.Text.Equals(message.Hashtag, StringComparison.OrdinalIgnoreCase)
+                            ? ConsoleColor.DarkCyan
+                            : ConsoleColor.Cyan)
+                            .On(hashTag.Text.Equals(message.Hashtag, StringComparison.OrdinalIgnoreCase)
+                            ? ConsoleColor.White
+                            : (ConsoleColor?)null));
+
                     index += hashTaglength - 1;
                     continue;
                 }
