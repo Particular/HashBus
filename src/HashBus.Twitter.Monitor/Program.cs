@@ -6,6 +6,7 @@ using HashBus.Twitter.Events;
 using NServiceBus;
 using Tweetinvi;
 using Tweetinvi.Core.Credentials;
+using System.Diagnostics;
 
 namespace HashBus.Twitter.Monitor
 {
@@ -29,28 +30,20 @@ namespace HashBus.Twitter.Monitor
             {
                 await MonitorTwitter(
                     bus,
-                    ConfigurationManager.AppSettings["consumerKey"],
-                    ConfigurationManager.AppSettings["consumerSecret"],
-                    ConfigurationManager.AppSettings["accessToken"],
-                    ConfigurationManager.AppSettings["accessTokenSecret"],
                     ConfigurationManager.AppSettings["hashTag"]);
             }
         }
 
-        static async Task MonitorTwitter(ISendOnlyBus bus, string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret, string hashtag)
+        static async Task MonitorTwitter(ISendOnlyBus bus, string hashtag)
         {
-            var credentials = new TwitterCredentials(
-                consumerKey,
-                consumerSecret,
-                accessToken,
-                accessTokenSecret);
-
+            var credentials = TwitterCredentials();
             var stream = Stream.CreateFilteredStream(credentials);
 
             stream.AddTrack('#' + hashtag);
 
             stream.StreamStarted += (sender, args) => Console.WriteLine($"\"{hashtag}\" stream started.");
             stream.StreamStopped += (sender, args) => Console.WriteLine($"\"{hashtag}\" stream stopped. {args.Exception}");
+
             stream.MatchingTweetReceived += (sender, e) =>
             {
                 var message = new HashtagTweeted
@@ -95,6 +88,36 @@ namespace HashBus.Twitter.Monitor
             await stream.StartStreamMatchingAnyConditionAsync();
 
             Console.ReadKey();
+        }
+
+        static TwitterCredentials TwitterCredentials()
+        {
+            var environmentVariables = Process.GetCurrentProcess().StartInfo.EnvironmentVariables;
+
+            if (ConfigurationManager.AppSettings["consumerKey"] ==null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["consumerKey"]))
+            {
+                throw new ArgumentException("Please make sure you have the 'TWITTER_CONSUMER_KEY' set in your enviroment variables and your appSettings");
+            }
+            if (ConfigurationManager.AppSettings["consumerSecret"] == null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["consumerSecret"]))
+            {
+                throw new ArgumentException("Please make sure you have the 'TWITTER_CONSUMER_SECRET' set in your enviroment variables and your appSettings");
+            }
+            if (ConfigurationManager.AppSettings["accessToken"] == null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["accessToken"]))
+            {
+                 throw new ArgumentException("Please make sure you have the 'TWITTER_ACCESS_TOKEN' set in your enviroment variables and your appSettings");
+            }
+            if (ConfigurationManager.AppSettings["accessTokenSecret"] == null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["accessTokenSecret"]))
+            {
+                throw new ArgumentException("Please make sure you have the 'TWITTER_ACCESS_TOKEN_SECRET' set in your enviroment variables and your appSettings");
+            }
+
+           var credentials = new TwitterCredentials(
+                environmentVariables[ConfigurationManager.AppSettings["consumerKey"]],
+                environmentVariables[ConfigurationManager.AppSettings["consumerSecret"]],
+                environmentVariables[ConfigurationManager.AppSettings["accessToken"]],
+                environmentVariables[ConfigurationManager.AppSettings["accessTokenSecret"]]);
+
+            return credentials;
         }
     }
 }
