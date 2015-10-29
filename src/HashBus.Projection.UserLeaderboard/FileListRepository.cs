@@ -12,6 +12,13 @@ namespace HashBus.Projection.UserLeaderboard
 
         public FileListRepository(string folderName)
         {
+            var dirInfo = new DirectoryInfo(folderName);
+
+            if(!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
+
             this.folderName = folderName;
         }
 
