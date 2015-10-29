@@ -26,6 +26,8 @@ namespace HashBus.Twitter.Events
 
         public IList<UserMention> TweetUserMentions { get; set; }
 
+        public IList<Hashtag> TweetHashtags { get; set; }
+
         public long RetweetedTweetId { get; set; }
 
         public DateTime RetweetedTweetCreatedAt { get; set; }

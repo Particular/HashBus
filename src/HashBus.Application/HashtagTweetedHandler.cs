@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using HashBus.Application.Events;
 using HashBus.Twitter.Events;
@@ -39,11 +40,13 @@ namespace HashBus.Application
             }))
             {
                 ColorConsole.WriteLine(
-                    $"{mentionMessage.TweetCreatedAt} ".DarkCyan(),
-                    $"#{message.Hashtag} ".Cyan(),
-                    mentionMessage.TweetIsRetweet ? "retweet mentioning ".DarkGreen() : "tweet mentioning ".Green(),
-                    $"{mentionMessage.UserMentionName} ".Yellow(),
-                    $"@{mentionMessage.UserMentionScreenName}".DarkYellow());
+                    $"{mentionMessage.TweetCreatedByName}".White(),
+                    $"{mentionMessage.RetweetedTweetCreatedByScreenName}".DarkGray(),
+                    mentionMessage.TweetIsRetweet ? " retweeted ".Gray() : " tweeted ".Gray(),
+                    $"@{mentionMessage.UserMentionScreenName}".Cyan(),
+                    $" and ".Gray(),
+                    $"#{mentionMessage.Hashtag}".DarkCyan().On(ConsoleColor.White),
+                    $" · {message.TweetCreatedAt}".DarkGray());
 
                 await bus.PublishAsync(mentionMessage);
             }

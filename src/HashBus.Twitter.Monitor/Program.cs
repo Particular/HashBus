@@ -80,6 +80,12 @@ namespace HashBus.Twitter.Monitor
                     RetweetedTweetCreatedByIdStr = e.Tweet.IsRetweet ? e.Tweet.RetweetedTweet.CreatedBy.IdStr : default(string),
                     RetweetedTweetCreatedByName = e.Tweet.IsRetweet ? e.Tweet.RetweetedTweet.CreatedBy.Name : default(string),
                     RetweetedTweetCreatedByScreenName = e.Tweet.IsRetweet ? e.Tweet.RetweetedTweet.CreatedBy.ScreenName : default(string),
+                    TweetHashtags = e.Tweet.Hashtags
+                        .Select(ht => new Hashtag
+                        {
+                            Text = ht.Text,
+                            Indices = ht.Indices,
+                        }).ToArray(),
                 };
 
                 Writer.Write(message);

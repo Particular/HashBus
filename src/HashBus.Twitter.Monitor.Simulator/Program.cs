@@ -42,6 +42,15 @@ namespace HashBus.Twitter.Monitor.Simulator
                 var userMentionId = random.Next(64);
                 var userMentionIndex = random.Next(31) + 1;
                 var retweetedUserId = random.Next(64);
+                var text = string.Join(
+                        string.Empty,
+                        Enumerable.Range(0, userMentionIndex - 1).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
+                    $" @johnsmith{userMentionId} " +
+                    string.Join(
+                        string.Empty,
+                        Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
+                    " #Simulated";
+
                 var message = new HashtagTweeted
                 {
                     Hashtag = "Simulated",
@@ -52,25 +61,25 @@ namespace HashBus.Twitter.Monitor.Simulator
                     TweetCreatedByName = $"John Smith{userId}",
                     TweetCreatedByScreenName = $"johnsmith{userId}",
                     TweetIsRetweet = now.Millisecond % 3 == 0,
-                    TweetText =
-                        string.Join(
-                            string.Empty,
-                            Enumerable.Range(0, userMentionIndex - 1).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                        $" @johnsmith{userMentionId} " +
-                        string.Join(
-                            string.Empty,
-                            Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                            " #Simulated",
+                    TweetText = text,
                     TweetUserMentions = new List<UserMention>
                     {
                         new UserMention
                         {
                             Id=userMentionId,
                             IdStr= $"{userMentionId}",
-                            Indices = new List<int> { userMentionIndex, userMentionIndex + $"@johnsmith{userMentionId}".Length },
+                            Indices = new List<int> { userMentionIndex, userMentionIndex + $"@johnsmith{userMentionId}".Length, },
                             Name = $"John Smith{userMentionId}",
                             ScreenName = $"johnsmith{userMentionId}",
-                        }
+                        },
+                    },
+                    TweetHashtags = new List<Hashtag>
+                    {
+                        new Hashtag
+                        {
+                            Text = "Simulated",
+                            Indices = new[] { text.Length - "#Simulated".Length, text.Length, },
+                        },
                     },
                     RetweetedTweetId = now.AddDays(-1000).Ticks,
                     RetweetedTweetCreatedAt = now.AddDays(-1000),
