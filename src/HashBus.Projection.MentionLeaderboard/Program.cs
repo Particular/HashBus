@@ -3,8 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
 
-namespace HashBus.Projection.MentionLeaderboard
+namespace HashBus.Projection.UserLeaderboard
 {
+    using System.Configuration;
+
     class Program
     {
         static void Main()
@@ -14,6 +16,11 @@ namespace HashBus.Projection.MentionLeaderboard
 
         static async Task AsyncMain()
         {
+            if (ConfigurationManager.AppSettings["JSON_FOLDER_PATH"] == null)
+            {
+                throw new ArgumentException("Please make sure you have the 'JSON_FOLDER_PATH' set in your appSettings");
+            }
+
             var busConfiguration = new BusConfiguration();
             busConfiguration.EndpointName("HashBus.Projection.MentionLeaderboard");
             busConfiguration.UseSerialization<JsonSerializer>();
@@ -22,8 +29,8 @@ namespace HashBus.Projection.MentionLeaderboard
             busConfiguration.SendFailedMessagesTo("error");
             busConfiguration.LimitMessageProcessingConcurrencyTo(1);
             busConfiguration.RegisterComponents(c =>
-                c.RegisterSingleton<IRepository<string, IEnumerable<Mention>>>(
-                    new FileListRepository<Mention>(@"C:\HashBus\MentionLeaderboardProjection.Mentions")));
+                c.RegisterSingleton<IRepository<string, IEnumerable<LeaderboardProjection.Mention>>>(
+                    new FileListRepository<LeaderboardProjection.Mention>(ConfigurationManager.AppSettings["JSON_FOLDER_PATH"])));
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {
