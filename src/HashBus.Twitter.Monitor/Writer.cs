@@ -33,13 +33,22 @@ namespace HashBus.Twitter.Monitor
                 var userMention = message.TweetUserMentions.FirstOrDefault(m => m.Indices.First() == index);
                 if (userMention == null)
                 {
-                    messageTokens.Add(message.TweetText.Substring(index, 1).Gray());
+                    var hashTag = message.TweetHashtags.FirstOrDefault(m => m.Indices.First() == index);
+                    if (hashTag == null)
+                    {
+                        messageTokens.Add(message.TweetText.Substring(index, 1).Gray());
+                        continue;
+                    }
+
+                    var hashTaglength = hashTag.Indices.Last() - index;
+                    messageTokens.Add(message.TweetText.Substring(index, hashTaglength).Cyan());
+                    index += hashTaglength - 1;
                     continue;
                 }
 
-                var length = userMention.Indices.Last() - index;
-                messageTokens.Add(message.TweetText.Substring(index, length).Cyan());
-                index += length - 1;
+                var userMentionLength = userMention.Indices.Last() - index;
+                messageTokens.Add(message.TweetText.Substring(index, userMentionLength).Cyan());
+                index += userMentionLength - 1;
             }
 
             ColorConsole.WriteLine(messageTokens.ToArray());
