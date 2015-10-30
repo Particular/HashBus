@@ -10,7 +10,7 @@ namespace HashBus.Projection.UserLeaderboard
 
     class Program
     {
-        const string DataFolderPath = "DATA_FOLDER_PATH";
+        const string DataFolderPath = "DataFolder";
 
         static void Main()
         {
@@ -21,7 +21,7 @@ namespace HashBus.Projection.UserLeaderboard
         {
             if (ConfigurationManager.AppSettings[DataFolderPath] == null)
             {
-                throw new ArgumentException("Please make sure you have the 'DATA_FOLDER_PATH' set in your appSettings");
+                throw new ArgumentException("Please make sure you have the 'DataFolder' set in your appSettings");
             }
 
             var busConfiguration = new BusConfiguration();
