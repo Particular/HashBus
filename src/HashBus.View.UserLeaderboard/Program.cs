@@ -16,9 +16,9 @@ namespace HashBus.Projection.UserLeaderboard
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>
             {
-                { -1, "↑" },
-                { 0, "→" },
-                { 1, "↓" },
+                { -1, "^" },
+                { 0, "=" },
+                { 1, "v" },
             };
 
         private static readonly Dictionary<int, ConsoleColor> movementColors =
