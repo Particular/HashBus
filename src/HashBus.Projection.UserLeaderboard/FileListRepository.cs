@@ -12,12 +12,7 @@ namespace HashBus.Projection.UserLeaderboard
 
         public FileListRepository(string folderName)
         {
-            var dirInfo = new DirectoryInfo(folderName);
-
-            if(!dirInfo.Exists)
-            {
-                dirInfo.Create();
-            }
+            CheckIfDirectoryExists(folderName);
 
             this.folderName = folderName;
         }
@@ -46,6 +41,14 @@ namespace HashBus.Projection.UserLeaderboard
             }
 
             return Task.FromResult(0);
+        }
+
+        static void CheckIfDirectoryExists(string folderName)
+        {
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
         }
     }
 }
