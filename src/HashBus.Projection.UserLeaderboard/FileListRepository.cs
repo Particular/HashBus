@@ -12,13 +12,12 @@ namespace HashBus.Projection.UserLeaderboard
 
         public FileListRepository(string folderName)
         {
-            CheckIfDirectoryExists(folderName);
-
             this.folderName = folderName;
         }
 
         public Task<IEnumerable<TValue>> GetAsync(string key)
         {
+            CheckIfDirectoryExists(folderName);
             var fileName = Path.Combine(this.folderName, $"{key}.json");
             if (!File.Exists(fileName))
             {
@@ -34,6 +33,7 @@ namespace HashBus.Projection.UserLeaderboard
 
         public Task SaveAsync(string key, IEnumerable<TValue> value)
         {
+            CheckIfDirectoryExists(folderName);
             var fileName = Path.Combine(this.folderName, $"{key}.json");
             using (var textReader = new StreamWriter(fileName))
             {
