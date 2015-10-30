@@ -6,6 +6,7 @@ using HashBus.Twitter.Events;
 using NServiceBus;
 using Tweetinvi;
 using Tweetinvi.Core.Credentials;
+using System.Diagnostics;
 
 namespace HashBus.Twitter.Monitor
 {
@@ -29,28 +30,20 @@ namespace HashBus.Twitter.Monitor
             {
                 await MonitorTwitter(
                     bus,
-                    ConfigurationManager.AppSettings["consumerKey"],
-                    ConfigurationManager.AppSettings["consumerSecret"],
-                    ConfigurationManager.AppSettings["accessToken"],
-                    ConfigurationManager.AppSettings["accessTokenSecret"],
                     ConfigurationManager.AppSettings["hashTag"]);
             }
         }
 
-        static async Task MonitorTwitter(ISendOnlyBus bus, string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret, string hashtag)
+        static async Task MonitorTwitter(ISendOnlyBus bus, string hashtag)
         {
-            var credentials = new TwitterCredentials(
-                consumerKey,
-                consumerSecret,
-                accessToken,
-                accessTokenSecret);
-
+            var credentials = TwitterCredentials();
             var stream = Stream.CreateFilteredStream(credentials);
 
             stream.AddTrack('#' + hashtag);
 
             stream.StreamStarted += (sender, args) => Console.WriteLine($"\"{hashtag}\" stream started.");
             stream.StreamStopped += (sender, args) => Console.WriteLine($"\"{hashtag}\" stream stopped. {args.Exception}");
+
             stream.MatchingTweetReceived += (sender, e) =>
             {
                 var message = new HashtagTweeted
@@ -95,6 +88,41 @@ namespace HashBus.Twitter.Monitor
             await stream.StartStreamMatchingAnyConditionAsync();
 
             Console.ReadKey();
+        }
+
+        static TwitterCredentials TwitterCredentials()
+        {
+            var environmentVariables = Process.GetCurrentProcess().StartInfo.EnvironmentVariables;
+
+            const string consumerKey = "HASHBUS_TWITTER_CONSUMER_KEY";
+            const string consumerSecret = "HASHBUS_TWITTER_CONSUMER_SECRET";
+            const string accessToken = "HASHBUS_TWITTER_ACCESS_TOKEN";
+            const string accessTokenSecret = "HASHBUS_TWITTER_ACCESS_TOKEN_SECRET";
+
+            if (!environmentVariables.ContainsKey(consumerKey))
+            {
+                throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_CONSUMER_KEY' set in your enviroment variables");
+            }
+            if (!environmentVariables.ContainsKey(consumerSecret))
+            {
+                throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_CONSUMER_SECRET' set in your enviroment variables");
+            }
+            if (!environmentVariables.ContainsKey(accessToken))
+            {
+                 throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_ACCESS_TOKEN' set in your enviroment variables");
+            }
+            if (!environmentVariables.ContainsKey(accessTokenSecret))
+            {
+                throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_ACCESS_TOKEN_SECRET' set in your enviroment variables");
+            }
+
+           var credentials = new TwitterCredentials(
+                environmentVariables[consumerKey],
+                environmentVariables[consumerSecret],
+                environmentVariables[accessToken],
+                environmentVariables[accessTokenSecret]);
+
+            return credentials;
         }
     }
 }
