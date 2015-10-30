@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}</ProjectGuid>
+    <ProjectGuid>{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Projection.UserLeaderboard</RootNamespace>
-    <AssemblyName>HashBus.Projection.UserLeaderboard</AssemblyName>
+    <RootNamespace>HashBus.View.UserLeaderboard</RootNamespace>
+    <AssemblyName>HashBus.View.UserLeaderboard</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -43,6 +43,10 @@
       <HintPath>..\..\packages\ColoredConsole.0.4.0\lib\net45\ColoredConsole.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer, Version=1.37.7.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Humanizer.1.37.7\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LiteGuard, Version=0.10.0.0, Culture=neutral, PublicKeyToken=d38e0b7ae24b08a1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LiteGuard.0.10.0\lib\net35\LiteGuard.dll</HintPath>
       <Private>True</Private>
@@ -51,18 +55,20 @@
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\..\packages\NServiceBus.6.0.0-unstable0929\lib\net451\NServiceBus.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileListRepository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="Mention.cs" />
-    <Compile Include="LeaderboardProjection.cs" />
+    <Compile Include="..\HashBus.Projection.UserLeaderboard\FileListRepository.cs">
+      <Link>FileListRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\HashBus.Projection.UserLeaderboard\IRepository.cs">
+      <Link>IRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\HashBus.Projection.UserLeaderboard\Mention.cs">
+      <Link>Mention.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

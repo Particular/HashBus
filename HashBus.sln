@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application.Events"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projection.UserLeaderboard", "src\HashBus.Projection.UserLeaderboard\HashBus.Projection.UserLeaderboard.csproj", "{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.View.UserLeaderboard", "src\HashBus.View.UserLeaderboard\HashBus.View.UserLeaderboard.csproj", "{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{B1453AE4-B343-42F0-B6F6-E9016A62B3C2} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{6991A5CF-25CB-4336-9F6D-2EB1E01EFB75} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{718D4969-A6F7-4B0B-8FD2-DE13F23F5860} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal
