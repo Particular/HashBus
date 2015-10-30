@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
 
@@ -27,8 +27,7 @@ namespace HashBus.Projection.UserLeaderboard
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {
-                Console.WriteLine("Press any key to exit");
-                Console.ReadKey();
+                Thread.Sleep(Timeout.Infinite);
             }
         }
     }

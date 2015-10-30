@@ -1,4 +1,4 @@
-using System;
+using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
 
@@ -22,8 +22,7 @@ namespace HashBus.Application
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {
-                Console.WriteLine("Press any key to exit");
-                Console.ReadKey();
+                Thread.Sleep(Timeout.Infinite);
             }
         }
     }
