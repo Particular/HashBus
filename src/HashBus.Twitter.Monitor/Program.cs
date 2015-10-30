@@ -94,28 +94,33 @@ namespace HashBus.Twitter.Monitor
         {
             var environmentVariables = Process.GetCurrentProcess().StartInfo.EnvironmentVariables;
 
-            if (ConfigurationManager.AppSettings["consumerKey"] ==null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["consumerKey"]))
+            const string consumerKey = "HASHBUS_TWITTER_CONSUMER_KEY";
+            const string consumerSecret = "HASHBUS_TWITTER_CONSUMER_SECRET";
+            const string accessToken = "HASHBUS_TWITTER_ACCESS_TOKEN";
+            const string accessTokenSecret = "HASHBUS_TWITTER_ACCESS_TOKEN_SECRET";
+
+            if (!environmentVariables.ContainsKey(consumerKey))
             {
-                throw new ArgumentException("Please make sure you have the 'TWITTER_CONSUMER_KEY' set in your enviroment variables and your appSettings");
+                throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_CONSUMER_KEY' set in your enviroment variables");
             }
-            if (ConfigurationManager.AppSettings["consumerSecret"] == null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["consumerSecret"]))
+            if (!environmentVariables.ContainsKey(consumerSecret))
             {
-                throw new ArgumentException("Please make sure you have the 'TWITTER_CONSUMER_SECRET' set in your enviroment variables and your appSettings");
+                throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_CONSUMER_SECRET' set in your enviroment variables");
             }
-            if (ConfigurationManager.AppSettings["accessToken"] == null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["accessToken"]))
+            if (!environmentVariables.ContainsKey(accessToken))
             {
-                 throw new ArgumentException("Please make sure you have the 'TWITTER_ACCESS_TOKEN' set in your enviroment variables and your appSettings");
+                 throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_ACCESS_TOKEN' set in your enviroment variables");
             }
-            if (ConfigurationManager.AppSettings["accessTokenSecret"] == null || !environmentVariables.ContainsKey(ConfigurationManager.AppSettings["accessTokenSecret"]))
+            if (!environmentVariables.ContainsKey(accessTokenSecret))
             {
-                throw new ArgumentException("Please make sure you have the 'TWITTER_ACCESS_TOKEN_SECRET' set in your enviroment variables and your appSettings");
+                throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_ACCESS_TOKEN_SECRET' set in your enviroment variables");
             }
 
            var credentials = new TwitterCredentials(
-                environmentVariables[ConfigurationManager.AppSettings["consumerKey"]],
-                environmentVariables[ConfigurationManager.AppSettings["consumerSecret"]],
-                environmentVariables[ConfigurationManager.AppSettings["accessToken"]],
-                environmentVariables[ConfigurationManager.AppSettings["accessTokenSecret"]]);
+                environmentVariables[consumerKey],
+                environmentVariables[consumerSecret],
+                environmentVariables[accessToken],
+                environmentVariables[accessTokenSecret]);
 
             return credentials;
         }
