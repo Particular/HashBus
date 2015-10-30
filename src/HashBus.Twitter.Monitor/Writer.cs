@@ -15,7 +15,7 @@ namespace HashBus.Twitter.Monitor
                 ColorConsole.WriteLine(
                     "» ".DarkGray(),
                     $"{message.RetweetedTweetCreatedByName} ".White(),
-                    $"{message.RetweetedTweetCreatedByScreenName} · ".DarkGray(),
+                    $"@{message.RetweetedTweetCreatedByScreenName} · ".DarkGray(),
                     $"{message.RetweetedTweetCreatedAt}".DarkGray(),
                     $" § {message.TweetCreatedByName} Retweeted ".DarkGray());
             }
