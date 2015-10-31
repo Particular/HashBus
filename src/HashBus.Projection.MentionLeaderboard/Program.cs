@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
+using System;
+using System.Configuration;
+using System.IO;
 
 namespace HashBus.Projection.UserLeaderboard
 {
-    using System;
-    using System.Configuration;
-
     class Program
     {
         const string DataFolderPath = "DataFolder";
@@ -33,7 +33,7 @@ namespace HashBus.Projection.UserLeaderboard
             busConfiguration.LimitMessageProcessingConcurrencyTo(1);
             busConfiguration.RegisterComponents(c =>
                 c.RegisterSingleton<IRepository<string, IEnumerable<LeaderboardProjection.Mention>>>(
-                    new FileListRepository<LeaderboardProjection.Mention>(ConfigurationManager.AppSettings[DataFolderPath])));
+                    new FileListRepository<LeaderboardProjection.Mention>(Path.Combine(ConfigurationManager.AppSettings[DataFolderPath], "LeaderboardProjection.Mention"))));
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {
