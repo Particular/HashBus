@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColoredConsole;
-using HashBus.Projection;
+using HashBus.ReadModel;
 using Humanizer;
 
 namespace HashBus.View.MentionLeaderboard

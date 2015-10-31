@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace HashBus.Projection
+namespace HashBus.ReadModel
 {
     public interface IRepository<TKey, TValue>
     {

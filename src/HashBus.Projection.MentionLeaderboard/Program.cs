@@ -1,10 +1,11 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using NServiceBus;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using HashBus.ReadModel;
+using NServiceBus;
 
 namespace HashBus.Projection.UserLeaderboard
 {
