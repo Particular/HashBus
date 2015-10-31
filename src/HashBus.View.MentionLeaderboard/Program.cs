@@ -17,6 +17,7 @@ namespace HashBus.View.MentionLeaderboard
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>
             {
+                { int.MaxValue, ">" },
                 { -1, "^" },
                 { 0, "=" },
                 { 1, "v" },
@@ -25,6 +26,7 @@ namespace HashBus.View.MentionLeaderboard
         private static readonly Dictionary<int, ConsoleColor> movementColors =
             new Dictionary<int, ConsoleColor>
             {
+                { int.MaxValue, ConsoleColor.DarkYellow },
                 { -1, ConsoleColor.DarkGreen },
                 { 0, ConsoleColor.Gray },
                 { 1, ConsoleColor.DarkRed },
@@ -33,6 +35,7 @@ namespace HashBus.View.MentionLeaderboard
         private static readonly Dictionary<int, ConsoleColor> movementUserNameColors =
             new Dictionary<int, ConsoleColor>
             {
+                { int.MaxValue, ConsoleColor.Yellow },
                 { -1, ConsoleColor.Green },
                 { 0, ConsoleColor.White },
                 { 1, ConsoleColor.Red },
@@ -79,7 +82,7 @@ namespace HashBus.View.MentionLeaderboard
                         .FirstOrDefault(e => e.Entry.UserMentionId == currentEntry.UserMentionId);
 
                     var movement = previousEntry == null
-                        ? 0
+                        ? int.MaxValue
                         : Math.Sign(position - previousEntry.Position);
 
                     lines.Add(new[]
