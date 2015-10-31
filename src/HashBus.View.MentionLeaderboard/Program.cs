@@ -11,13 +11,12 @@ using Humanizer;
 
 namespace HashBus.View.MentionLeaderboard
 {
-
     class Program
     {
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>
             {
-                { int.MaxValue, ">" },
+                { int.MinValue, ">" },
                 { -1, "^" },
                 { 0, "=" },
                 { 1, "v" },
@@ -26,7 +25,7 @@ namespace HashBus.View.MentionLeaderboard
         private static readonly Dictionary<int, ConsoleColor> movementColors =
             new Dictionary<int, ConsoleColor>
             {
-                { int.MaxValue, ConsoleColor.DarkYellow },
+                { int.MinValue, ConsoleColor.DarkYellow },
                 { -1, ConsoleColor.DarkGreen },
                 { 0, ConsoleColor.Gray },
                 { 1, ConsoleColor.DarkRed },
@@ -35,7 +34,7 @@ namespace HashBus.View.MentionLeaderboard
         private static readonly Dictionary<int, ConsoleColor> movementUserNameColors =
             new Dictionary<int, ConsoleColor>
             {
-                { int.MaxValue, ConsoleColor.Yellow },
+                { int.MinValue, ConsoleColor.Yellow },
                 { -1, ConsoleColor.Green },
                 { 0, ConsoleColor.White },
                 { 1, ConsoleColor.Red },
@@ -82,15 +81,17 @@ namespace HashBus.View.MentionLeaderboard
                         .FirstOrDefault(e => e.Entry.UserMentionId == currentEntry.UserMentionId);
 
                     var movement = previousEntry == null
-                        ? int.MaxValue
+                        ? int.MinValue
                         : Math.Sign(position - previousEntry.Position);
+
+                    var countMovement = Math.Sign(Math.Min(previousEntry?.Entry.Count - currentEntry.Count ?? 0, movement));
 
                     lines.Add(new[]
                     {
                         $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]),
                         $" {currentEntry.UserMentionName}".Color(movementUserNameColors[movement]),
                         $" @{currentEntry.UserMentionScreenName}".Cyan(),
-                        $" {currentEntry.Count:N0}".Color(movementColors[movement]),
+                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]),
                     });
                 }
 
