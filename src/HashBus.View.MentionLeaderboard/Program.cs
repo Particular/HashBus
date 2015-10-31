@@ -6,10 +6,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColoredConsole;
+using HashBus.Projection;
+using Humanizer;
 
-namespace HashBus.Projection.UserLeaderboard
+namespace HashBus.View.MentionLeaderboard
 {
-    using Humanizer;
 
     class Program
     {
@@ -46,7 +47,7 @@ namespace HashBus.Projection.UserLeaderboard
         {
             var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
             var hashtag = ConfigurationManager.AppSettings["hashTag"];
-            var mentions = new FileListRepository<Mention>(Path.Combine(dataFolder, "LeaderboardProjection.Mention"));
+            var mentions = new FileListRepository<Mention>(Path.Combine(dataFolder, "MentionLeaderboardProjection.Mentions"));
             var refreshInterval = int.Parse(ConfigurationManager.AppSettings["refreshInterval"]);
 
             var previousLeaderboard = new List<Entry>();
@@ -91,7 +92,7 @@ namespace HashBus.Projection.UserLeaderboard
                 Console.Clear();
                 ColorConsole.WriteLine(
                    $"#{hashtag}".DarkCyan().On(ConsoleColor.White),
-                   " user mentions".Gray(),
+                   " mentions".Gray(),
                    $" · {DateTime.UtcNow}".DarkGray());
 
                 ColorConsole.WriteLine(

@@ -7,8 +7,8 @@
     <ProjectGuid>{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Projection.UserLeaderboard</RootNamespace>
-    <AssemblyName>HashBus.Projection.UserLeaderboard</AssemblyName>
+    <RootNamespace>HashBus.Projection.MentionLeaderboard</RootNamespace>
+    <AssemblyName>HashBus.Projection.MentionLeaderboard</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -62,7 +62,7 @@
     <Compile Include="FileListRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Mention.cs" />
-    <Compile Include="LeaderboardProjection.cs" />
+    <Compile Include="MentionLeaderboardProjection.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

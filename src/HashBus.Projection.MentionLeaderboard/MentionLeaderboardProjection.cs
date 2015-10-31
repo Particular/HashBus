@@ -7,13 +7,13 @@ using HashBus.Application.Events;
 using LiteGuard;
 using NServiceBus;
 
-namespace HashBus.Projection.UserLeaderboard
+namespace HashBus.Projection.MentionLeaderboard
 {
-    public class LeaderboardProjection : IHandleMessages<UserMentionedWithHashtag>
+    public class MentionLeaderboardProjection : IHandleMessages<UserMentionedWithHashtag>
     {
         private readonly IRepository<string, IEnumerable<Mention>> mentions;
 
-        public LeaderboardProjection(IRepository<string, IEnumerable<Mention>> mentions)
+        public MentionLeaderboardProjection(IRepository<string, IEnumerable<Mention>> mentions)
         {
             Guard.AgainstNullArgument(nameof(mentions), mentions);
 

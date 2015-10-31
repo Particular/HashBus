@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
 
-namespace HashBus.Projection.UserLeaderboard
+namespace HashBus.Projection.MentionLeaderboard
 {
     class Program
     {
@@ -15,7 +15,7 @@ namespace HashBus.Projection.UserLeaderboard
         static async Task AsyncMain()
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Projection.UserLeaderboard");
+            busConfiguration.EndpointName("HashBus.Projection.MentionLeaderboard");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
@@ -23,7 +23,7 @@ namespace HashBus.Projection.UserLeaderboard
             busConfiguration.LimitMessageProcessingConcurrencyTo(1);
             busConfiguration.RegisterComponents(c =>
                 c.RegisterSingleton<IRepository<string, IEnumerable<Mention>>>(
-                    new FileListRepository<Mention>(@"C:\HashBus\LeaderboardProjection.Mention")));
+                    new FileListRepository<Mention>(@"C:\HashBus\MentionLeaderboardProjection.Mentions")));
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {

@@ -24,9 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application.Events", "src\HashBus.Application.Events\HashBus.Application.Events.csproj", "{6991A5CF-25CB-4336-9F6D-2EB1E01EFB75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projection.UserLeaderboard", "src\HashBus.Projection.UserLeaderboard\HashBus.Projection.UserLeaderboard.csproj", "{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projection.MentionLeaderboard", "src\HashBus.Projection.MentionLeaderboard\HashBus.Projection.MentionLeaderboard.csproj", "{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.View.UserLeaderboard", "src\HashBus.View.UserLeaderboard\HashBus.View.UserLeaderboard.csproj", "{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.View.MentionLeaderboard", "src\HashBus.View.MentionLeaderboard\HashBus.View.MentionLeaderboard.csproj", "{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
