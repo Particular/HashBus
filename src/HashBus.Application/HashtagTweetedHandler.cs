@@ -46,7 +46,7 @@ namespace HashBus.Application
                     $"@{mentionMessage.UserMentionScreenName}".Cyan(),
                     $" and ".Gray(),
                     $"#{mentionMessage.Hashtag}".DarkCyan().On(ConsoleColor.White),
-                    $" · {message.TweetCreatedAt}".DarkGray());
+                    $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
 
                 await bus.PublishAsync(mentionMessage);
             }
