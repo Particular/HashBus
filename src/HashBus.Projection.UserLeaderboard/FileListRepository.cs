@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace HashBus.Projection.UserLeaderboard
+namespace HashBus.Projection
 {
     public class FileListRepository<TValue> : IRepository<string, IEnumerable<TValue>>
     {
