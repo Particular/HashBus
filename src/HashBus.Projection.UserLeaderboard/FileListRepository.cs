@@ -17,6 +17,7 @@ namespace HashBus.Projection.UserLeaderboard
 
         public Task<IEnumerable<TValue>> GetAsync(string key)
         {
+            CheckIfDirectoryExists(folderName);
             var fileName = Path.Combine(this.folderName, $"{key}.json");
             if (!File.Exists(fileName))
             {
@@ -32,6 +33,7 @@ namespace HashBus.Projection.UserLeaderboard
 
         public Task SaveAsync(string key, IEnumerable<TValue> value)
         {
+            CheckIfDirectoryExists(folderName);
             var fileName = Path.Combine(this.folderName, $"{key}.json");
             using (var textReader = new StreamWriter(fileName))
             {
@@ -39,6 +41,14 @@ namespace HashBus.Projection.UserLeaderboard
             }
 
             return Task.FromResult(0);
+        }
+
+        static void CheckIfDirectoryExists(string folderName)
+        {
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
         }
     }
 }
