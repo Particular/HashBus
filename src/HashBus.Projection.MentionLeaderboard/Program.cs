@@ -32,8 +32,8 @@ namespace HashBus.Projection.UserLeaderboard
             busConfiguration.SendFailedMessagesTo("error");
             busConfiguration.LimitMessageProcessingConcurrencyTo(1);
             busConfiguration.RegisterComponents(c =>
-                c.RegisterSingleton<IRepository<string, IEnumerable<LeaderboardProjection.Mention>>>(
-                    new FileListRepository<LeaderboardProjection.Mention>(Path.Combine(ConfigurationManager.AppSettings[DataFolderPath], "LeaderboardProjection.Mention"))));
+                c.RegisterSingleton<IRepository<string, IEnumerable<Mention>>>(
+                    new FileListRepository<Mention>(Path.Combine(ConfigurationManager.AppSettings[DataFolderPath], "LeaderboardProjection.Mention"))));
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {

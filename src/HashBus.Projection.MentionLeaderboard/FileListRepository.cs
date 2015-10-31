@@ -17,7 +17,6 @@ namespace HashBus.Projection
 
         public Task<IEnumerable<TValue>> GetAsync(string key)
         {
-            CheckIfDirectoryExists(folderName);
             var fileName = Path.Combine(this.folderName, $"{key}.json");
             if (!File.Exists(fileName))
             {
