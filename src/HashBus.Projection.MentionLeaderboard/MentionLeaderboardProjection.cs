@@ -46,7 +46,7 @@ namespace HashBus.Projection.MentionLeaderboard
                 " mention to ".Gray(),
                 $"#{message.Hashtag}".DarkCyan().On(ConsoleColor.White),
                 " leaderboard".Gray(),
-                $" · {message.TweetCreatedAt}".DarkGray());
+                $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
         }
     }
 }

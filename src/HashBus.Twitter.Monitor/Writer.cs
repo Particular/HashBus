@@ -16,7 +16,7 @@ namespace HashBus.Twitter.Monitor
                     "» ".DarkGray(),
                     $"{message.RetweetedTweetCreatedByName} ".White(),
                     $"@{message.RetweetedTweetCreatedByScreenName} · ".DarkGray(),
-                    $"{message.RetweetedTweetCreatedAt}".DarkGray(),
+                    $"{message.RetweetedTweetCreatedAt.ToLocalTime()}".DarkGray(),
                     $" § {message.TweetCreatedByName} Retweeted ".DarkGray());
             }
             else
@@ -25,7 +25,7 @@ namespace HashBus.Twitter.Monitor
                     "» ".DarkGray(),
                     $"{message.TweetCreatedByName} ".White(),
                     $"{message.TweetCreatedByScreenName} · ".DarkGray(),
-                    $"{message.TweetCreatedAt}".DarkGray());
+                    $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray());
             }
 
             var messageTokens = new List<ColorToken> { "  " };

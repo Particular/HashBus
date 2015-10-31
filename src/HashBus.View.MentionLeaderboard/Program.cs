@@ -99,7 +99,7 @@ namespace HashBus.View.MentionLeaderboard
                 ColorConsole.WriteLine(
                    $"#{hashtag}".DarkCyan().On(ConsoleColor.White),
                    " mentions".Gray(),
-                   $" · {DateTime.UtcNow}".DarkGray());
+                   $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
 
                 ColorConsole.WriteLine(
                     "Powered by ".DarkGray(),
