@@ -50,6 +50,8 @@ namespace HashBus.View.MentionLeaderboard
             var mentions = new FileListRepository<Mention>(Path.Combine(dataFolder, "MentionLeaderboardProjection.Mentions"));
             var refreshInterval = int.Parse(ConfigurationManager.AppSettings["refreshInterval"]);
 
+            var start = DateTime.UtcNow;
+            var initialCount = (int?)null;
             var previousLeaderboard = new List<Entry>();
             while (true)
             {
@@ -106,7 +108,10 @@ namespace HashBus.View.MentionLeaderboard
                     ColorConsole.WriteLine(line);
                 }
 
-                ColorConsole.WriteLine($"Total mentions: {hashtagMentions.Count:N0}".DarkGray());
+                ColorConsole.Write($"Total mentions: {hashtagMentions.Count:N0}".DarkGray());
+                ColorConsole.WriteLine(initialCount.HasValue
+                    ? $" ({(hashtagMentions.Count - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
+                    : string.Empty);
 
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);
@@ -122,6 +127,7 @@ namespace HashBus.View.MentionLeaderboard
                     Thread.Sleep(refreshInterval);
                 }
 
+                initialCount = initialCount ?? hashtagMentions.Count;
                 previousLeaderboard = currentLeaderboard;
             }
         }
