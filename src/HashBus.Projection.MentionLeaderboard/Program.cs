@@ -10,7 +10,7 @@ namespace HashBus.Projection.UserLeaderboard
 {
     class Program
     {
-        const string DataFolderPath = "DataFolder";
+        const string DataFolderPathKey = "DataFolder";
 
         static void Main()
         {
@@ -19,7 +19,7 @@ namespace HashBus.Projection.UserLeaderboard
 
         static async Task AsyncMain()
         {
-            if (ConfigurationManager.AppSettings[DataFolderPath] == null)
+            if (ConfigurationManager.AppSettings[DataFolderPathKey] == null)
             {
                 throw new ArgumentException("Please make sure you have the 'DataFolder' set in your appSettings");
             }
@@ -33,7 +33,7 @@ namespace HashBus.Projection.UserLeaderboard
             busConfiguration.LimitMessageProcessingConcurrencyTo(1);
             busConfiguration.RegisterComponents(c =>
                 c.RegisterSingleton<IRepository<string, IEnumerable<Mention>>>(
-                    new FileListRepository<Mention>(Path.Combine(ConfigurationManager.AppSettings[DataFolderPath], "LeaderboardProjection.Mention"))));
+                    new FileListRepository<Mention>(Path.Combine(ConfigurationManager.AppSettings[DataFolderPathKey], "MentionLeaderboardProjection.Mentions"))));
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {
