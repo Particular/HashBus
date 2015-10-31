@@ -32,6 +32,7 @@ namespace HashBus.Projection
 
         public Task SaveAsync(string key, IEnumerable<TValue> value)
         {
+            CheckIfDirectoryExists(folderName);
             var fileName = Path.Combine(this.folderName, $"{key}.json");
             using (var textReader = new StreamWriter(fileName))
             {
@@ -39,6 +40,14 @@ namespace HashBus.Projection
             }
 
             return Task.FromResult(0);
+        }
+
+        static void CheckIfDirectoryExists(string folderName)
+        {
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
         }
     }
 }

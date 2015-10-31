@@ -2,11 +2,16 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
+using System;
+using System.Configuration;
+using System.IO;
 
-namespace HashBus.Projection.MentionLeaderboard
+namespace HashBus.Projection.UserLeaderboard
 {
     class Program
     {
+        const string DataFolderPathKey = "DataFolder";
+
         static void Main()
         {
             AsyncMain().GetAwaiter().GetResult();
@@ -14,6 +19,11 @@ namespace HashBus.Projection.MentionLeaderboard
 
         static async Task AsyncMain()
         {
+            if (ConfigurationManager.AppSettings[DataFolderPathKey] == null)
+            {
+                throw new ArgumentException("Please make sure you have the 'DataFolder' set in your appSettings");
+            }
+
             var busConfiguration = new BusConfiguration();
             busConfiguration.EndpointName("HashBus.Projection.MentionLeaderboard");
             busConfiguration.UseSerialization<JsonSerializer>();
@@ -23,7 +33,7 @@ namespace HashBus.Projection.MentionLeaderboard
             busConfiguration.LimitMessageProcessingConcurrencyTo(1);
             busConfiguration.RegisterComponents(c =>
                 c.RegisterSingleton<IRepository<string, IEnumerable<Mention>>>(
-                    new FileListRepository<Mention>(@"C:\HashBus\MentionLeaderboardProjection.Mentions")));
+                    new FileListRepository<Mention>(Path.Combine(ConfigurationManager.AppSettings[DataFolderPathKey], "MentionLeaderboardProjection.Mentions"))));
 
             using (await Bus.Create(busConfiguration).StartAsync())
             {
