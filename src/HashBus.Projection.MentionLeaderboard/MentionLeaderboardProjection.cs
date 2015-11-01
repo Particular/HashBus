@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ColoredConsole;
 using HashBus.Application.Events;
+using HashBus.ReadModel;
 using LiteGuard;
 using NServiceBus;
 
