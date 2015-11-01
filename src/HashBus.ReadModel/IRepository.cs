@@ -2,7 +2,7 @@
 
 namespace HashBus.ReadModel
 {
-    public interface IRepository<TKey, TValue>
+    public interface IRepository<in TKey, TValue>
     {
         Task<TValue> GetAsync(TKey key);
 
