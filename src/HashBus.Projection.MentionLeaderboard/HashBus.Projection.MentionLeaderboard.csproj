@@ -54,12 +54,16 @@
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\packages\NServiceBus.6.0.0-unstable0929\lib\net451\NServiceBus.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RavenDB.Client.3.0.3800\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileListRepository.cs" />
     <Compile Include="MentionLeaderboardProjection.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
@@ -73,6 +77,10 @@
     <ProjectReference Include="..\HashBus.Application.Events\HashBus.Application.Events.csproj">
       <Project>{6991a5cf-25cb-4336-9f6d-2eb1e01efb75}</Project>
       <Name>HashBus.Application.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HashBus.ReadModel.RavenDB\HashBus.ReadModel.RavenDB.csproj">
+      <Project>{34c86079-ccab-4312-98fc-f64f4a97d3a4}</Project>
+      <Name>HashBus.ReadModel.RavenDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.ReadModel\HashBus.ReadModel.csproj">
       <Project>{1709F0A9-F797-44FD-94C0-18A0D75442F8}</Project>
