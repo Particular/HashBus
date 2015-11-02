@@ -6,10 +6,12 @@ namespace HashBus.View.MentionLeaderboard
     {
         static void Main()
         {
-            var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
+            var mongoConnectionString = ConfigurationManager.AppSettings["MongoConnectionString"];
+            var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
             var hashTag = ConfigurationManager.AppSettings["hashTag"];
             var refreshInterval = int.Parse(ConfigurationManager.AppSettings["refreshInterval"]);
-            App.RunAsync(dataFolder, hashTag, refreshInterval).GetAwaiter().GetResult();
+
+            App.RunAsync(mongoConnectionString, mongoDBDatabase, hashTag, refreshInterval).GetAwaiter().GetResult();
         }
     }
 }

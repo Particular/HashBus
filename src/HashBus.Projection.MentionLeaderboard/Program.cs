@@ -1,4 +1,3 @@
-using System;
 using System.Configuration;
 
 namespace HashBus.Projection.UserLeaderboard
@@ -7,13 +6,10 @@ namespace HashBus.Projection.UserLeaderboard
     {
         static void Main()
         {
-            var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
-            if (dataFolder == null)
-            {
-                throw new ArgumentException("Please make sure you have the 'DataFolder' set in your appSettings");
-            }
+            var mongoConnectionString = ConfigurationManager.AppSettings["MongoConnectionString"];
+            var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
 
-            App.RunAsync(dataFolder).GetAwaiter().GetResult();
+            App.RunAsync(mongoConnectionString, mongoDBDatabase).GetAwaiter().GetResult();
         }
     }
 }
