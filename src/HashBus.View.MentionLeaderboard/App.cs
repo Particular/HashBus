@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using HashBus.Projection;
+using HashBus.ReadModel;
 
 namespace HashBus.View.MentionLeaderboard
 {

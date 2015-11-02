@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using HashBus.ReadModel;
 using NServiceBus;
-using System.IO;
 
 namespace HashBus.Projection.UserLeaderboard
 {

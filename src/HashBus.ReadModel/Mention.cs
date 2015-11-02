@@ -1,4 +1,4 @@
-﻿namespace HashBus.Projection
+﻿namespace HashBus.ReadModel
 {
     public class Mention
     {
