@@ -63,6 +63,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Mention.cs" />
     <Compile Include="MentionLeaderboardProjection.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
