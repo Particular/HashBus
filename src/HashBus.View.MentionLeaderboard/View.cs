@@ -23,9 +23,18 @@ namespace HashBus.View.MentionLeaderboard
         private static readonly Dictionary<int, ConsoleColor> movementColors =
             new Dictionary<int, ConsoleColor>
             {
+                { int.MinValue, ConsoleColor.Yellow },
+                { -1, ConsoleColor.Green},
+                { 0, ConsoleColor.Gray },
+                { 1, ConsoleColor.Red },
+            };
+
+        private static readonly Dictionary<int, ConsoleColor> movementBackgroundColors =
+            new Dictionary<int, ConsoleColor>
+            {
                 { int.MinValue, ConsoleColor.DarkYellow },
                 { -1, ConsoleColor.DarkGreen },
-                { 0, ConsoleColor.Gray },
+                { 0, ConsoleColor.Black },
                 { 1, ConsoleColor.DarkRed },
             };
 
@@ -81,10 +90,10 @@ namespace HashBus.View.MentionLeaderboard
 
                     lines.Add(new[]
                     {
-                        $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]),
-                        $" {currentEntry.UserMentionName}".Color(movementUserNameColors[movement]),
-                        $" @{currentEntry.UserMentionScreenName}".Cyan(),
-                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]),
+                        $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]).On(movementBackgroundColors[movement]),
+                        $" {currentEntry.UserMentionName}".White().On(movementBackgroundColors[movement]),
+                        $" @{currentEntry.UserMentionScreenName}".Cyan().On(movementBackgroundColors[movement]),
+                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]).On(movementBackgroundColors[movement]),
                     });
                 }
 
