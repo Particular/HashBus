@@ -69,6 +69,8 @@
     <Compile Include="..\HashBus.Projection.MentionLeaderboard\Mention.cs">
       <Link>Mention.cs</Link>
     </Compile>
+    <Compile Include="View.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
