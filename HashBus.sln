@@ -32,6 +32,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.ReadModel", "src\Ha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.ReadModel.MongoDB", "src\HashBus.ReadModel.MongoDB\HashBus.ReadModel.MongoDB.csproj", "{34C86079-CCAB-4312-98FC-F64F4A97D3A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projection.TweetLeaderboard", "src\HashBus.Projection.TweetLeaderboard\HashBus.Projection.TweetLeaderboard.csproj", "{501F4158-CF10-4C25-AAA3-7BE827924926}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.View.TweetLeaderboard", "src\HashBus.View.TweetLeaderboard\HashBus.View.TweetLeaderboard.csproj", "{36508ED8-DA6A-45AB-ABF6-4AD98F696009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,14 @@ Global
 		{34C86079-CCAB-4312-98FC-F64F4A97D3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34C86079-CCAB-4312-98FC-F64F4A97D3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34C86079-CCAB-4312-98FC-F64F4A97D3A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{501F4158-CF10-4C25-AAA3-7BE827924926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{501F4158-CF10-4C25-AAA3-7BE827924926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{501F4158-CF10-4C25-AAA3-7BE827924926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{501F4158-CF10-4C25-AAA3-7BE827924926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36508ED8-DA6A-45AB-ABF6-4AD98F696009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36508ED8-DA6A-45AB-ABF6-4AD98F696009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36508ED8-DA6A-45AB-ABF6-4AD98F696009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36508ED8-DA6A-45AB-ABF6-4AD98F696009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +100,7 @@ Global
 		{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{1709F0A9-F797-44FD-94C0-18A0D75442F8} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{34C86079-CCAB-4312-98FC-F64F4A97D3A4} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{501F4158-CF10-4C25-AAA3-7BE827924926} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{36508ED8-DA6A-45AB-ABF6-4AD98F696009} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal

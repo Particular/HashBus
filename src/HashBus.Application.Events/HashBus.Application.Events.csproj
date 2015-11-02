@@ -41,6 +41,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TweetWithHashtag.cs" />
     <Compile Include="UserMentionedWithHashtag.cs" />
   </ItemGroup>
   <ItemGroup>
