@@ -38,15 +38,6 @@ namespace HashBus.View.MentionLeaderboard
                 { 1, ConsoleColor.DarkRed },
             };
 
-        private static readonly Dictionary<int, ConsoleColor> movementUserNameColors =
-            new Dictionary<int, ConsoleColor>
-            {
-                { int.MinValue, ConsoleColor.Yellow },
-                { -1, ConsoleColor.Green },
-                { 0, ConsoleColor.White },
-                { 1, ConsoleColor.Red },
-            };
-
         public static async Task StartAsync(
             string hashtag, int refreshInterval, IRepository<string, IEnumerable<Mention>> mentions)
         {
