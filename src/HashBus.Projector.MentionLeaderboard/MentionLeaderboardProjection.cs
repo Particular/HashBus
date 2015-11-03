@@ -8,7 +8,7 @@ using HashBus.ReadModel;
 using LiteGuard;
 using NServiceBus;
 
-namespace HashBus.Projection.MentionLeaderboard
+namespace HashBus.Projector.MentionLeaderboard
 {
     public class MentionLeaderboardProjection : IHandleMessages<UserMentionedWithHashtag>
     {

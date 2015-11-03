@@ -24,17 +24,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application.Events", "src\HashBus.Application.Events\HashBus.Application.Events.csproj", "{6991A5CF-25CB-4336-9F6D-2EB1E01EFB75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projection.MentionLeaderboard", "src\HashBus.Projection.MentionLeaderboard\HashBus.Projection.MentionLeaderboard.csproj", "{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.MentionLeaderboard", "src\HashBus.Projector.MentionLeaderboard\HashBus.Projector.MentionLeaderboard.csproj", "{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.View.MentionLeaderboard", "src\HashBus.View.MentionLeaderboard\HashBus.View.MentionLeaderboard.csproj", "{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.MentionLeaderboard", "src\HashBus.Viewer.MentionLeaderboard\HashBus.Viewer.MentionLeaderboard.csproj", "{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.ReadModel", "src\HashBus.ReadModel\HashBus.ReadModel.csproj", "{1709F0A9-F797-44FD-94C0-18A0D75442F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.ReadModel.MongoDB", "src\HashBus.ReadModel.MongoDB\HashBus.ReadModel.MongoDB.csproj", "{34C86079-CCAB-4312-98FC-F64F4A97D3A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projection.TweetLeaderboard", "src\HashBus.Projection.TweetLeaderboard\HashBus.Projection.TweetLeaderboard.csproj", "{501F4158-CF10-4C25-AAA3-7BE827924926}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TweetLeaderboard", "src\HashBus.Projector.TweetLeaderboard\HashBus.Projector.TweetLeaderboard.csproj", "{501F4158-CF10-4C25-AAA3-7BE827924926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.View.TweetLeaderboard", "src\HashBus.View.TweetLeaderboard\HashBus.View.TweetLeaderboard.csproj", "{36508ED8-DA6A-45AB-ABF6-4AD98F696009}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.TweetLeaderboard", "src\HashBus.Viewer.TweetLeaderboard\HashBus.Viewer.TweetLeaderboard.csproj", "{36508ED8-DA6A-45AB-ABF6-4AD98F696009}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

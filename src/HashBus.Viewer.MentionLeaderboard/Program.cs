@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace HashBus.View.MentionLeaderboard
+namespace HashBus.Viewer.MentionLeaderboard
 {
     class Program
     {

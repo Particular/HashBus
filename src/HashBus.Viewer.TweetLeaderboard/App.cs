@@ -3,7 +3,7 @@ using HashBus.ReadModel;
 using HashBus.ReadModel.MongoDB;
 using MongoDB.Driver;
 
-namespace HashBus.View.MentionLeaderboard
+namespace HashBus.Viewer.TweetLeaderboard
 {
     class App
     {
@@ -15,7 +15,7 @@ namespace HashBus.View.MentionLeaderboard
             await View.StartAsync(
                 hashtag,
                 refreshInterval,
-                new MongoDBListRepository<Mention>(mongoDatabase, "mention_leaderboard__mentions"),
+                new MongoDBListRepository<Tweet>(mongoDatabase, "tweet_leaderboard__tweets"),
                 showPercentages);
         }
     }

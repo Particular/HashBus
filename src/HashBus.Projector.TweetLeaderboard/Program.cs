@@ -1,6 +1,6 @@
 using System.Configuration;
 
-namespace HashBus.Projection.UserLeaderboard
+namespace HashBus.Projector.TweetLeaderboard
 {
     class Program
     {
