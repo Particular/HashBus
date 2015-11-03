@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColoredConsole;
-using HashBus.ReadModel;
 using Humanizer;
 
 namespace HashBus.Viewer.TweetLeaderboard
@@ -39,33 +38,33 @@ namespace HashBus.Viewer.TweetLeaderboard
             };
 
         public static async Task StartAsync(
-            string hashtag, int refreshInterval, IRepository<string, IEnumerable<Tweet>> tweets, bool showPercentages)
+            string hashtag, int refreshInterval, IService<string, WebApi.TweetLeaderboard> leaderboards, bool showPercentages)
         {
             var start = DateTime.UtcNow;
             var initialCount = (int?)null;
-            var previousLeaderboard = new List<Entry>();
+            var previousLeaderboard = new WebApi.TweetLeaderboard();
             while (true)
             {
-                var hashtagTweets = (await tweets.GetAsync(hashtag)).ToList();
-                var currentLeaderboard = hashtagTweets
-                    .GroupBy(tweet => tweet.UserId)
-                    .Select(g => new Entry
-                    {
-                        UserId = g.Key,
-                        UserIdStr = g.First().UserIdStr,
-                        UserName = g.First().UserName,
-                        UserScreenName = g.First().UserScreenName,
-                        Count = g.Count(),
-                    })
-                    .OrderByDescending(entry => entry.Count)
-                    .Take(10).ToList();
+                WebApi.TweetLeaderboard currentLeaderboard;
+                try
+                {
+                    currentLeaderboard = await leaderboards.GetAsync(hashtag);
+                }
+                catch (Exception ex)
+                {
+                    ColorConsole.WriteLine("Failed to get leaderboard. ".Red(), ex.Message.DarkRed());
+                    Thread.Sleep(1000);
+                    continue;
+                }
 
                 var position = 0;
                 var lines = new List<ColorToken[]>();
-                foreach (var currentEntry in currentLeaderboard)
+                foreach (var currentEntry in currentLeaderboard?.Entries ??
+                    Enumerable.Empty<WebApi.TweetLeaderboard.Entry>())
                 {
                     ++position;
-                    var previousEntry = previousLeaderboard
+                    var previousEntry = (previousLeaderboard?.Entries ??
+                            Enumerable.Empty<WebApi.TweetLeaderboard.Entry>())
                         .Select((entry, index) => new
                         {
                             Entry = entry,
@@ -85,7 +84,7 @@ namespace HashBus.Viewer.TweetLeaderboard
                         $" {currentEntry.UserName}".White().On(movementBackgroundColors[movement]),
                         $" @{currentEntry.UserScreenName}".Cyan().On(movementBackgroundColors[movement]),
                         $" {currentEntry.Count:N0}".Color(movementColors[countMovement]).On(movementBackgroundColors[movement]),
-                        showPercentages ? $" ({currentEntry.Count / (double)hashtagTweets.Count:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
+                        showPercentages ? $" ({currentEntry.Count / (double)currentLeaderboard.TweetsCount:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
                     });
                 }
 
@@ -106,9 +105,9 @@ namespace HashBus.Viewer.TweetLeaderboard
                     ColorConsole.WriteLine(line);
                 }
 
-                ColorConsole.Write($"Total tweets: {hashtagTweets.Count:N0}".DarkGray());
+                ColorConsole.Write($"Total tweets: {currentLeaderboard?.TweetsCount ?? 0:N0}".DarkGray());
                 ColorConsole.WriteLine(initialCount.HasValue
-                    ? $" ({(hashtagTweets.Count - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
+                    ? $" ({(currentLeaderboard?.TweetsCount - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
                     : string.Empty);
 
                 var maxMessageLength = 0;
@@ -125,22 +124,9 @@ namespace HashBus.Viewer.TweetLeaderboard
                     Thread.Sleep(refreshInterval);
                 }
 
-                initialCount = initialCount ?? hashtagTweets.Count;
+                initialCount = initialCount ?? currentLeaderboard?.TweetsCount;
                 previousLeaderboard = currentLeaderboard;
             }
-        }
-
-        class Entry
-        {
-            public long? UserId { get; set; }
-
-            public string UserIdStr { get; set; }
-
-            public string UserName { get; set; }
-
-            public string UserScreenName { get; set; }
-
-            public int Count { get; set; }
         }
     }
 }

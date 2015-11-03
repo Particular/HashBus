@@ -6,13 +6,12 @@ namespace HashBus.Viewer.MentionLeaderboard
     {
         static void Main()
         {
-            var mongoConnectionString = ConfigurationManager.AppSettings["MongoConnectionString"];
-            var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
+            var webApiBaseUrl = ConfigurationManager.AppSettings["WebApiBaseUrl"];
             var hashTag = ConfigurationManager.AppSettings["hashTag"];
             var refreshInterval = int.Parse(ConfigurationManager.AppSettings["refreshInterval"]);
             var showPercentages = bool.Parse(ConfigurationManager.AppSettings["ShowPercentages"]);
 
-            App.RunAsync(mongoConnectionString, mongoDBDatabase, hashTag, refreshInterval, showPercentages).GetAwaiter().GetResult();
+            App.RunAsync(webApiBaseUrl, hashTag, refreshInterval, showPercentages).GetAwaiter().GetResult();
         }
     }
 }
