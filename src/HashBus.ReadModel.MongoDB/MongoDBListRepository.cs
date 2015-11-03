@@ -20,12 +20,14 @@ namespace HashBus.ReadModel.MongoDB
 
         public async Task<IEnumerable<TValue>> GetAsync(string key)
         {
+            key = key?.ToLowerInvariant();
             return (await this.collection.Find(doc => doc.Id == key).ToListAsync()).FirstOrDefault()?.Values
                 ?? Enumerable.Empty<TValue>();
         }
 
         public async Task SaveAsync(string key, IEnumerable<TValue> value)
         {
+            key = key?.ToLowerInvariant();
             await this.collection.ReplaceOneAsync(
                 doc => doc.Id == key, new Document { Id = key, Values = value }, new UpdateOptions { IsUpsert = true });
         }
