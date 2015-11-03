@@ -9,7 +9,7 @@ using Humanizer;
 
 namespace HashBus.Viewer.TweetLeaderboard
 {
-    class View
+    class TweetLeaderboardView
     {
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>

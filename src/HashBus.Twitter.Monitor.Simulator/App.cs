@@ -16,7 +16,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
             using (var bus = await Bus.Create(busConfiguration).StartAsync())
             {
-                await Simulator.StartAsync(bus);
+                await Simulation.StartAsync(bus);
             }
         }
     }

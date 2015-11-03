@@ -16,7 +16,7 @@ namespace HashBus.Twitter.Monitor
 
             using (var bus = await Bus.Create(busConfiguration).StartAsync())
             {
-                await Monitor.StartAsync(bus, hashtag, consumerKey, consumerSecret, accessToken, accessTokenSecret);
+                await Monitoring.StartAsync(bus, hashtag, consumerKey, consumerSecret, accessToken, accessTokenSecret);
             }
         }
     }

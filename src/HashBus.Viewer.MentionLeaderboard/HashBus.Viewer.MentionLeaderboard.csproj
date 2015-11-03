@@ -69,7 +69,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="View.cs" />
+    <Compile Include="MentionLeaderboardView.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

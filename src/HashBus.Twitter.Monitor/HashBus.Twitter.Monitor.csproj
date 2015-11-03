@@ -120,7 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Monitor.cs" />
+    <Compile Include="Monitoring.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Writer.cs" />
     <Compile Include="Program.cs" />

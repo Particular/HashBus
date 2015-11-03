@@ -9,7 +9,7 @@ using Humanizer;
 
 namespace HashBus.Viewer.MentionLeaderboard
 {
-    class View
+    class MentionLeaderboardView
     {
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>

@@ -8,7 +8,7 @@ using Tweetinvi.Core.Credentials;
 
 namespace HashBus.Twitter.Monitor
 {
-    class Monitor
+    class Monitoring
     {
         public static async Task StartAsync(
             ISendOnlyBus bus,
