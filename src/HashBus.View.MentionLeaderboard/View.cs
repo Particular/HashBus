@@ -39,7 +39,7 @@ namespace HashBus.View.MentionLeaderboard
             };
 
         public static async Task StartAsync(
-            string hashtag, int refreshInterval, IRepository<string, IEnumerable<Mention>> mentions)
+            string hashtag, int refreshInterval, IRepository<string, IEnumerable<Mention>> mentions, bool showPercentages)
         {
             var start = DateTime.UtcNow;
             var initialCount = (int?)null;
@@ -85,6 +85,7 @@ namespace HashBus.View.MentionLeaderboard
                         $" {currentEntry.UserMentionName}".White().On(movementBackgroundColors[movement]),
                         $" @{currentEntry.UserMentionScreenName}".Cyan().On(movementBackgroundColors[movement]),
                         $" {currentEntry.Count:N0}".Color(movementColors[countMovement]).On(movementBackgroundColors[movement]),
+                        showPercentages ? $" ({currentEntry.Count / (double)hashtagMentions.Count:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
                     });
                 }
 

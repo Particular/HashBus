@@ -10,8 +10,9 @@ namespace HashBus.View.MentionLeaderboard
             var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
             var hashTag = ConfigurationManager.AppSettings["hashTag"];
             var refreshInterval = int.Parse(ConfigurationManager.AppSettings["refreshInterval"]);
+            var showPercentages = bool.Parse(ConfigurationManager.AppSettings["ShowPercentages"]);
 
-            App.RunAsync(mongoConnectionString, mongoDBDatabase, hashTag, refreshInterval).GetAwaiter().GetResult();
+            App.RunAsync(mongoConnectionString, mongoDBDatabase, hashTag, refreshInterval, showPercentages).GetAwaiter().GetResult();
         }
     }
 }
