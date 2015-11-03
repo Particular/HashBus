@@ -41,7 +41,7 @@ namespace HashBus.Application
             {
                 ColorConsole.WriteLine(
                     $"{mentionMessage.TweetCreatedByName}".White(),
-                    $"{mentionMessage.RetweetedTweetCreatedByScreenName}".DarkGray(),
+                    $" @{mentionMessage.TweetCreatedByScreenName}".DarkGray(),
                     mentionMessage.TweetIsRetweet ? " retweeted ".Gray() : " tweeted ".Gray(),
                     $"@{mentionMessage.UserMentionScreenName}".Cyan(),
                     $" and ".Gray(),
