@@ -22,6 +22,30 @@ namespace HashBus.Application
 
         public async Task Handle(HashtagTweeted message)
         {
+            if (!message.TweetIsRetweet)
+            {
+                var tweetWithHashtag = new TweetWithHashtag
+                {
+                    Hashtag = message.Hashtag,
+                    TweetCreatedAt = message.TweetCreatedAt,
+                    TweetCreatedById = message.TweetCreatedById,
+                    TweetCreatedByIdStr = message.TweetCreatedByIdStr,
+                    TweetCreatedByName = message.TweetCreatedByName,
+                    TweetCreatedByScreenName = message.TweetCreatedByScreenName,
+                    TweetId = message.TweetId,
+                    TweetText = message.TweetText,
+                };
+
+                ColorConsole.WriteLine(
+                    $"{tweetWithHashtag.TweetCreatedByName}".White(),
+                    $" @{tweetWithHashtag.TweetCreatedByScreenName}".DarkGray(),
+                    " tweeted ".Gray(),
+                    $"#{tweetWithHashtag.Hashtag}".DarkCyan().On(ConsoleColor.White),
+                    $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
+
+                await bus.PublishAsync(tweetWithHashtag);
+            }
+
             foreach (var mentionMessage in message.TweetUserMentions.Select(userMention => new UserMentionedWithHashtag
             {
                 Hashtag = message.Hashtag,
