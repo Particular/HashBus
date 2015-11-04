@@ -26,7 +26,7 @@ namespace HashBus.Twitter.Monitor
                     HashtagMonitored = hashtag
                 };
 
-                bus.SendAsync(registerMonitor).GetAwaiter().GetResult();
+                bus.Send(registerMonitor);
 
                 await Monitoring.StartAsync(bus, hashtag, consumerKey, consumerSecret, accessToken, accessTokenSecret, EndpointName);
             }
