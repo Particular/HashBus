@@ -9,7 +9,7 @@ namespace HashBus.Projector.MentionLeaderboard
             var mongoConnectionString = ConfigurationManager.AppSettings["MongoConnectionString"];
             var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
 
-            App.RunAsync(mongoConnectionString, mongoDBDatabase).GetAwaiter().GetResult();
+            App.Run(mongoConnectionString, mongoDBDatabase);
         }
     }
 }

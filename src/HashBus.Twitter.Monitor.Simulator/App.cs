@@ -1,22 +1,20 @@
-using System.Threading.Tasks;
 using NServiceBus;
 
 namespace HashBus.Twitter.Monitor.Simulator
 {
     class App
     {
-        public static async Task RunAsync()
+        public static void Run()
         {
             var busConfiguration = new BusConfiguration();
             busConfiguration.EndpointName("HashBus.Twitter.Monitor");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
-            busConfiguration.SendFailedMessagesTo("error");
 
-            using (var bus = await Bus.Create(busConfiguration).StartAsync())
+            using (var bus = Bus.Create(busConfiguration).Start())
             {
-                await Simulation.StartAsync(bus);
+                Simulation.Start(bus);
             }
         }
     }

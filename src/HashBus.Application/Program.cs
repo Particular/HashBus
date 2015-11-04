@@ -4,7 +4,7 @@ namespace HashBus.Application
     {
         static void Main()
         {
-            App.RunAsync().GetAwaiter().GetResult();
+            App.Run();
         }
     }
 }

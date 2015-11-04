@@ -4,7 +4,7 @@ namespace HashBus.Twitter.Monitor.Simulator
     {
         static void Main()
         {
-            App.RunAsync().GetAwaiter().GetResult();
+            App.Run();
         }
     }
 }
