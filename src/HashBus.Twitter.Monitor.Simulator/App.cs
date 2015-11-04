@@ -4,6 +4,7 @@ namespace HashBus.Twitter.Monitor.Simulator
     using NServiceBus;
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
+    using NServiceBus.Persistence;
 
     class App
     {
@@ -16,7 +17,8 @@ namespace HashBus.Twitter.Monitor.Simulator
             busConfiguration.EndpointName(EndpointName);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
-            busConfiguration.UsePersistence<InMemoryPersistence>();
+            busConfiguration.UsePersistence<NHibernatePersistence>()
+                           .ConnectionString(@"Data Source=.\SqlExpress;Initial Catalog=NServiceBus;Integrated Security=True");
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
