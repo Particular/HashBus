@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace HashBus.Twitter.Monitor.Simulator
 {
-    class Simulator
+    class Simulation
     {
         public static async Task StartAsync(ISendOnlyBus bus)
         {

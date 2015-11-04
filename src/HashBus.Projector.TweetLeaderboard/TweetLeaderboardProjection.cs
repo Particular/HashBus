@@ -8,7 +8,7 @@ using HashBus.ReadModel;
 using LiteGuard;
 using NServiceBus;
 
-namespace HashBus.Projection.TweetLeaderboard
+namespace HashBus.Projector.TweetLeaderboard
 {
     public class TweetLeaderboardProjection : IHandleMessages<TweetWithHashtag>
     {

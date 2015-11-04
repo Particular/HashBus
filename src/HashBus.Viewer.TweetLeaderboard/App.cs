@@ -3,7 +3,7 @@ using HashBus.ReadModel;
 using HashBus.ReadModel.MongoDB;
 using MongoDB.Driver;
 
-namespace HashBus.View.TweetLeaderboard
+namespace HashBus.Viewer.TweetLeaderboard
 {
     class App
     {
@@ -12,7 +12,7 @@ namespace HashBus.View.TweetLeaderboard
         {
             var mongoDatabase = new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase);
 
-            await View.StartAsync(
+            await TweetLeaderboardView.StartAsync(
                 hashtag,
                 refreshInterval,
                 new MongoDBListRepository<Tweet>(mongoDatabase, "tweet_leaderboard__tweets"),

@@ -7,9 +7,9 @@ using ColoredConsole;
 using HashBus.ReadModel;
 using Humanizer;
 
-namespace HashBus.View.MentionLeaderboard
+namespace HashBus.Viewer.TweetLeaderboard
 {
-    class View
+    class TweetLeaderboardView
     {
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>
@@ -39,22 +39,22 @@ namespace HashBus.View.MentionLeaderboard
             };
 
         public static async Task StartAsync(
-            string hashtag, int refreshInterval, IRepository<string, IEnumerable<Mention>> mentions, bool showPercentages)
+            string hashtag, int refreshInterval, IRepository<string, IEnumerable<Tweet>> tweets, bool showPercentages)
         {
             var start = DateTime.UtcNow;
             var initialCount = (int?)null;
             var previousLeaderboard = new List<Entry>();
             while (true)
             {
-                var hashtagMentions = (await mentions.GetAsync(hashtag)).ToList();
-                var currentLeaderboard = hashtagMentions
-                    .GroupBy(mention => mention.UserMentionId)
+                var hashtagTweets = (await tweets.GetAsync(hashtag)).ToList();
+                var currentLeaderboard = hashtagTweets
+                    .GroupBy(tweet => tweet.UserId)
                     .Select(g => new Entry
                     {
-                        UserMentionId = g.Key,
-                        UserMentionIdStr = g.First().UserMentionIdStr,
-                        UserMentionName = g.First().UserMentionName,
-                        UserMentionScreenName = g.First().UserMentionScreenName,
+                        UserId = g.Key,
+                        UserIdStr = g.First().UserIdStr,
+                        UserName = g.First().UserName,
+                        UserScreenName = g.First().UserScreenName,
                         Count = g.Count(),
                     })
                     .OrderByDescending(entry => entry.Count)
@@ -71,7 +71,7 @@ namespace HashBus.View.MentionLeaderboard
                             Entry = entry,
                             Position = index + 1
                         })
-                        .FirstOrDefault(e => e.Entry.UserMentionId == currentEntry.UserMentionId);
+                        .FirstOrDefault(e => e.Entry.UserId == currentEntry.UserId);
 
                     var movement = previousEntry == null
                         ? int.MinValue
@@ -82,17 +82,17 @@ namespace HashBus.View.MentionLeaderboard
                     lines.Add(new[]
                     {
                         $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]).On(movementBackgroundColors[movement]),
-                        $" {currentEntry.UserMentionName}".White().On(movementBackgroundColors[movement]),
-                        $" @{currentEntry.UserMentionScreenName}".Cyan().On(movementBackgroundColors[movement]),
+                        $" {currentEntry.UserName}".White().On(movementBackgroundColors[movement]),
+                        $" @{currentEntry.UserScreenName}".Cyan().On(movementBackgroundColors[movement]),
                         $" {currentEntry.Count:N0}".Color(movementColors[countMovement]).On(movementBackgroundColors[movement]),
-                        showPercentages ? $" ({currentEntry.Count / (double)hashtagMentions.Count:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
+                        showPercentages ? $" ({currentEntry.Count / (double)hashtagTweets.Count:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
                     });
                 }
 
                 Console.Clear();
                 ColorConsole.WriteLine(
                     $"#{hashtag}".DarkCyan().On(ConsoleColor.White),
-                    " mentions".Gray(),
+                    " tweets".Gray(),
                     $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
 
                 ColorConsole.WriteLine(
@@ -106,9 +106,9 @@ namespace HashBus.View.MentionLeaderboard
                     ColorConsole.WriteLine(line);
                 }
 
-                ColorConsole.Write($"Total mentions: {hashtagMentions.Count:N0}".DarkGray());
+                ColorConsole.Write($"Total tweets: {hashtagTweets.Count:N0}".DarkGray());
                 ColorConsole.WriteLine(initialCount.HasValue
-                    ? $" ({(hashtagMentions.Count - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
+                    ? $" ({(hashtagTweets.Count - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
                     : string.Empty);
 
                 var maxMessageLength = 0;
@@ -125,20 +125,20 @@ namespace HashBus.View.MentionLeaderboard
                     Thread.Sleep(refreshInterval);
                 }
 
-                initialCount = initialCount ?? hashtagMentions.Count;
+                initialCount = initialCount ?? hashtagTweets.Count;
                 previousLeaderboard = currentLeaderboard;
             }
         }
 
         class Entry
         {
-            public long? UserMentionId { get; set; }
+            public long? UserId { get; set; }
 
-            public string UserMentionIdStr { get; set; }
+            public string UserIdStr { get; set; }
 
-            public string UserMentionName { get; set; }
+            public string UserName { get; set; }
 
-            public string UserMentionScreenName { get; set; }
+            public string UserScreenName { get; set; }
 
             public int Count { get; set; }
         }

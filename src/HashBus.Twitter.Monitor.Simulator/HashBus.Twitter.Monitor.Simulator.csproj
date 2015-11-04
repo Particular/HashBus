@@ -53,7 +53,7 @@
     <Compile Include="..\HashBus.Twitter.Monitor\Writer.cs">
       <Link>Writer.cs</Link>
     </Compile>
-    <Compile Include="Simulator.cs" />
+    <Compile Include="Simulation.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

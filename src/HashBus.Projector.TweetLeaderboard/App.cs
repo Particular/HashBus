@@ -6,7 +6,7 @@ using HashBus.ReadModel.MongoDB;
 using NServiceBus;
 using MongoDB.Driver;
 
-namespace HashBus.Projection.TweetLeaderboard
+namespace HashBus.Projector.TweetLeaderboard
 {
     class App
     {
