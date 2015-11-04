@@ -1,10 +1,8 @@
-using System.Threading.Tasks;
-using NServiceBus;
-
 namespace HashBus.Twitter.Monitor
 {
-    using System.Configuration;
-    using HashBus.Twitter.Monitor.Commands;
+    using System.Threading.Tasks;
+    using Commands;
+    using NServiceBus;
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
 

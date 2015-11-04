@@ -1,10 +1,10 @@
-using System.Threading;
-using NServiceBus;
-
 namespace HashBus.Application
 {
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using NServiceBus;
 
     class App
     {

@@ -1,8 +1,8 @@
-﻿using System;
-
-namespace HashBus.Application.Events
+﻿namespace HashBus.Application.Events
 {
-    public class TweetWithHashtag 
+    using System;
+
+    public class TweetWithHashtag
     {
         public string Hashtag { get; set; }
 

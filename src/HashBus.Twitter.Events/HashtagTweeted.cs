@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HashBus.Twitter.Events
+﻿namespace HashBus.Twitter.Events
 {
+    using System;
+    using System.Collections.Generic;
+
     public class HashtagTweeted 
     {
         public string Hashtag { get; set; }

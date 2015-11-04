@@ -1,13 +1,13 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using HashBus.Twitter.Events;
-using NServiceBus;
-using Tweetinvi;
-using Tweetinvi.Core.Credentials;
-
 namespace HashBus.Twitter.Monitor
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Events;
+    using NServiceBus;
+    using Tweetinvi;
+    using Tweetinvi.Core.Credentials;
+
     class Monitoring
     {
         public static async Task StartAsync(ISendOnlyBus bus, string hashtag, string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret, string endpointName)

@@ -1,12 +1,11 @@
-using System.Collections.Generic;
-using System.Threading;
-using HashBus.ReadModel;
-using HashBus.ReadModel.MongoDB;
-using NServiceBus;
-using MongoDB.Driver;
-
 namespace HashBus.Projector.MentionLeaderboard
 {
+    using System.Collections.Generic;
+    using System.Threading;
+    using ReadModel;
+    using ReadModel.MongoDB;
+    using MongoDB.Driver;
+    using NServiceBus;
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
 

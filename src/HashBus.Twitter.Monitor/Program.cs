@@ -1,8 +1,8 @@
-using System;
-using System.Configuration;
-
 namespace HashBus.Twitter.Monitor
 {
+    using System;
+    using System.Configuration;
+
     class Program
     {
         static void Main()

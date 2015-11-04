@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using HashBus.Twitter.Events;
-using NServiceBus;
-using System.Linq;
-
 namespace HashBus.Twitter.Monitor.Simulator
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using HashBus.Twitter.Events;
+    using NServiceBus;
+
     class Simulation
     {
         public static void Start(ISendOnlyBus bus, string endpointName)

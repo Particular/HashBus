@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using HashBus.ReadModel;
-using HashBus.ReadModel.MongoDB;
-using MongoDB.Driver;
-
-namespace HashBus.Viewer.TweetLeaderboard
+﻿namespace HashBus.Viewer.TweetLeaderboard
 {
+    using System.Threading.Tasks;
+    using ReadModel;
+    using ReadModel.MongoDB;
+    using MongoDB.Driver;
+
     class App
     {
         public static async Task RunAsync(

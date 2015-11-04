@@ -2,7 +2,7 @@
 
 namespace HashBus.Application.Events
 {
-    public class UserMentionedWithHashtag 
+    public class UserMentionedWithHashtag
     {
         public string Hashtag { get; set; }
 

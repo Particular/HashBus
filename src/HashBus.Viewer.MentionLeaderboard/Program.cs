@@ -1,7 +1,7 @@
-﻿using System.Configuration;
-
-namespace HashBus.Viewer.MentionLeaderboard
+﻿namespace HashBus.Viewer.MentionLeaderboard
 {
+    using System.Configuration;
+
     class Program
     {
         static void Main()

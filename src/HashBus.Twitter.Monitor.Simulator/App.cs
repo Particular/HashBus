@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
-using NServiceBus;
-
 namespace HashBus.Twitter.Monitor.Simulator
 {
+    using System.Threading.Tasks;
     using Commands;
+    using NServiceBus;
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
 
