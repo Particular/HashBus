@@ -7,6 +7,9 @@ using MongoDB.Driver;
 
 namespace HashBus.Projector.TweetLeaderboard
 {
+    using NServiceBus.Config;
+    using NServiceBus.Config.ConfigurationSource;
+
     class App
     {
         public static void Run(string mongoConnectionString, string mongoDBDatabase)
@@ -26,6 +29,38 @@ namespace HashBus.Projector.TweetLeaderboard
             {
                 Thread.Sleep(Timeout.Infinite);
             }
+        }
+    }
+
+    public class Configuration : INeedInitialization
+    {
+        public void Customize(BusConfiguration configuration)
+        {
+            configuration.Conventions()
+                .DefiningCommandsAs(t => t.Namespace != null && t.Namespace.EndsWith("Commands"))
+                .DefiningEventsAs(t => t.Namespace != null && t.Namespace.EndsWith("Events"));
+        }
+    }
+
+    public class ErrorQueueProvider : IProvideConfiguration<MessageForwardingInCaseOfFaultConfig>
+    {
+        public MessageForwardingInCaseOfFaultConfig GetConfiguration()
+        {
+            return new MessageForwardingInCaseOfFaultConfig
+            {
+                ErrorQueue = "error"
+            };
+        }
+    }
+
+    public class AuditQueueProvider : IProvideConfiguration<AuditConfig>
+    {
+        public AuditConfig GetConfiguration()
+        {
+            return new AuditConfig
+            {
+                QueueName = "audit"
+            };
         }
     }
 }

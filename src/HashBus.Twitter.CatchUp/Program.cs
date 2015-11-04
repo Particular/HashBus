@@ -1,24 +1,26 @@
-using System.Threading;
-using NServiceBus;
-
-namespace HashBus.Application
+﻿namespace HashBus.Twitter.Monitor.CatchUp
 {
+    using System;
+    using NServiceBus;
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
+    using NServiceBus.Persistence;
 
-    class App
+    class Program
     {
-        public static void Run()
+        static void Main()
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Application");
+            busConfiguration.EndpointName("HashBus.Twitter.Monitor.CatchUp");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
-            busConfiguration.UsePersistence<InMemoryPersistence>();
+            busConfiguration.UsePersistence<NHibernatePersistence>()
+                .ConnectionString(@"Data Source=.\SqlExpress;Initial Catalog=NServiceBus;Integrated Security=True");
 
             using (Bus.Create(busConfiguration).Start())
             {
-                Thread.Sleep(Timeout.Infinite);
+                //
+                Console.ReadLine();
             }
         }
 

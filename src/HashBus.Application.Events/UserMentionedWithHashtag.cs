@@ -1,9 +1,8 @@
-﻿using NServiceBus;
-using System;
+﻿using System;
 
 namespace HashBus.Application.Events
 {
-    public class UserMentionedWithHashtag : IEvent
+    public class UserMentionedWithHashtag 
     {
         public string Hashtag { get; set; }
 

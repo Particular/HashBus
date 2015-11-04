@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using HashBus.Twitter.Events;
 using NServiceBus;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 {
     class Simulation
     {
-        public static void Start(ISendOnlyBus bus)
+        public static void Start(ISendOnlyBus bus, string endpointName)
         {
             var random = new Random();
             var countOfUsers = 15;
@@ -38,6 +39,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
                 var message = new HashtagTweeted
                 {
+                    EndpointName = endpointName,
                     Hashtag = hashtag,
                     TweetId = now.Ticks,
                     TweetCreatedAt = now,
