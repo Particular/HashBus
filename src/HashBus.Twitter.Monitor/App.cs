@@ -12,9 +12,8 @@ namespace HashBus.Twitter.Monitor
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
-            busConfiguration.SendFailedMessagesTo("error");
 
-            using (var bus = await Bus.Create(busConfiguration).StartAsync())
+            using (var bus = Bus.Create(busConfiguration).Start())
             {
                 await Monitoring.StartAsync(bus, hashtag, consumerKey, consumerSecret, accessToken, accessTokenSecret);
             }

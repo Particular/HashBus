@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using HashBus.Application.Events;
 using HashBus.Twitter.Events;
 using LiteGuard;
@@ -20,7 +19,7 @@ namespace HashBus.Application
             this.bus = bus;
         }
 
-        public async Task Handle(HashtagTweeted message)
+        public void Handle(HashtagTweeted message)
         {
             if (!message.TweetIsRetweet)
             {
@@ -43,7 +42,7 @@ namespace HashBus.Application
                     $"#{tweetWithHashtag.Hashtag}".DarkCyan().On(ConsoleColor.White),
                     $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
 
-                await bus.PublishAsync(tweetWithHashtag);
+                bus.Publish(tweetWithHashtag);
             }
 
             foreach (var mentionMessage in message.TweetUserMentions.Select(userMention => new UserMentionedWithHashtag
@@ -72,7 +71,7 @@ namespace HashBus.Application
                     $"#{mentionMessage.Hashtag}".DarkCyan().On(ConsoleColor.White),
                     $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
 
-                await bus.PublishAsync(mentionMessage);
+                bus.Publish(mentionMessage);
             }
         }
     }

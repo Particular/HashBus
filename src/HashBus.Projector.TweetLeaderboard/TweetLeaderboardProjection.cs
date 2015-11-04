@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ColoredConsole;
 using HashBus.Application.Events;
 using HashBus.ReadModel;
@@ -21,9 +20,9 @@ namespace HashBus.Projector.TweetLeaderboard
             this.tweets = tweets;
         }
 
-        public async Task Handle(TweetWithHashtag message)
+        public void Handle(TweetWithHashtag message)
         {
-            var hashtagTweets = (await this.tweets.GetAsync(message.Hashtag)).ToList();
+            var hashtagTweets = this.tweets.GetAsync(message.Hashtag).GetAwaiter().GetResult().ToList();
             if (hashtagTweets.Any(mention => mention.TweetId == message.TweetId))
             {
                 return;
@@ -38,7 +37,7 @@ namespace HashBus.Projector.TweetLeaderboard
                 UserScreenName = message.TweetCreatedByScreenName,
             });
 
-            await this.tweets.SaveAsync(message.Hashtag, hashtagTweets);
+            this.tweets.SaveAsync(message.Hashtag, hashtagTweets).GetAwaiter().GetResult();
 
             ColorConsole.WriteLine(
                 "Added ".Gray(),

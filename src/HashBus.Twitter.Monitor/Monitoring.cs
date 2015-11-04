@@ -64,7 +64,7 @@ namespace HashBus.Twitter.Monitor
                 };
 
                 Writer.Write(message);
-                bus.PublishAsync(message).GetAwaiter().GetResult();
+                bus.Publish(message);
             };
 
             await stream.StartStreamMatchingAnyConditionAsync();
