@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ColoredConsole;
 using HashBus.Twitter.Events;
 using NServiceBus;
 using Tweetinvi;
@@ -12,7 +13,7 @@ namespace HashBus.Twitter.Monitor
     {
         public static async Task StartAsync(
             ISendOnlyBus bus,
-            string hashtag,
+            string track,
             string consumerKey,
             string consumerSecret,
             string accessToken,
@@ -21,16 +22,16 @@ namespace HashBus.Twitter.Monitor
             var credentials = new TwitterCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);
             var stream = Stream.CreateFilteredStream(credentials);
 
-            stream.AddTrack('#' + hashtag);
+            stream.AddTrack(track);
 
-            stream.StreamStarted += (sender, args) => Console.WriteLine($"\"{hashtag}\" stream started.");
-            stream.StreamStopped += (sender, args) => Console.WriteLine($"\"{hashtag}\" stream stopped. {args.Exception}");
+            stream.StreamStarted += (sender, args) => ColorConsole.WriteLine($" {track} ".DarkCyan().OnWhite(), " stream started.".Gray());
+            stream.StreamStopped += (sender, args) => ColorConsole.WriteLine($" {track} ".DarkCyan().OnWhite(), " stream stopped.".Red(), $" {args.Exception.Message}".DarkRed());
 
             stream.MatchingTweetReceived += (sender, e) =>
             {
-                var message = new HashtagTweeted
+                var message = new TweetReceived
                 {
-                    Hashtag = hashtag,
+                    Track = track,
                     TweetId = e.Tweet.Id,
                     TweetCreatedAt = e.Tweet.CreatedAt,
                     TweetCreatedById = e.Tweet.CreatedBy.Id,

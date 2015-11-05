@@ -9,7 +9,7 @@ using NServiceBus;
 
 namespace HashBus.Projector.MentionLeaderboard
 {
-    public class MentionLeaderboardProjection : IHandleMessages<UserMentionedWithHashtag>
+    public class MentionLeaderboardProjection : IHandleMessages<UserMentioned>
     {
         private readonly IRepository<string, IEnumerable<Mention>> mentions;
 
@@ -20,16 +20,16 @@ namespace HashBus.Projector.MentionLeaderboard
             this.mentions = mentions;
         }
 
-        public void Handle(UserMentionedWithHashtag message)
+        public void Handle(UserMentioned message)
         {
-            var hashtagMentions = this.mentions.GetAsync(message.Hashtag).GetAwaiter().GetResult().ToList();
+            var trackMentions = this.mentions.GetAsync(message.Track).GetAwaiter().GetResult().ToList();
             if (!message.UserMentionId.HasValue ||
-                hashtagMentions.Any(mention => mention.TweetId == message.TweetId && mention.UserMentionId == message.UserMentionId))
+                trackMentions.Any(mention => mention.TweetId == message.TweetId && mention.UserMentionId == message.UserMentionId))
             {
                 return;
             }
 
-            hashtagMentions.Add(new Mention
+            trackMentions.Add(new Mention
             {
                 TweetId = message.TweetId,
                 UserMentionId = message.UserMentionId,
@@ -38,14 +38,13 @@ namespace HashBus.Projector.MentionLeaderboard
                 UserMentionScreenName = message.UserMentionScreenName,
             });
 
-            this.mentions.SaveAsync(message.Hashtag, hashtagMentions).GetAwaiter().GetResult();
+            this.mentions.SaveAsync(message.Track, trackMentions).GetAwaiter().GetResult();
 
             ColorConsole.WriteLine(
                 "Added ".Gray(),
                 $"@{message.UserMentionScreenName}".Cyan(),
                 " mention to ".Gray(),
-                $"#{message.Hashtag}".DarkCyan().On(ConsoleColor.White),
-                " leaderboard".Gray(),
+                $" {message.Track} ".DarkCyan().On(ConsoleColor.White),
                 $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
         }
     }

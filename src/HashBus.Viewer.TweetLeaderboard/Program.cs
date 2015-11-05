@@ -7,11 +7,11 @@ namespace HashBus.Viewer.TweetLeaderboard
         static void Main()
         {
             var webApiBaseUrl = ConfigurationManager.AppSettings["WebApiBaseUrl"];
-            var hashTag = ConfigurationManager.AppSettings["hashTag"];
+            var track = ConfigurationManager.AppSettings["Track"];
             var refreshInterval = int.Parse(ConfigurationManager.AppSettings["refreshInterval"]);
             var showPercentages = bool.Parse(ConfigurationManager.AppSettings["ShowPercentages"]);
 
-            App.RunAsync(webApiBaseUrl, hashTag, refreshInterval, showPercentages).GetAwaiter().GetResult();
+            App.RunAsync(webApiBaseUrl, track, refreshInterval, showPercentages).GetAwaiter().GetResult();
         }
     }
 }

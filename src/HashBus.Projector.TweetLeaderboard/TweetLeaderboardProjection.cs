@@ -9,7 +9,7 @@ using NServiceBus;
 
 namespace HashBus.Projector.TweetLeaderboard
 {
-    public class TweetLeaderboardProjection : IHandleMessages<TweetWithHashtag>
+    public class TweetLeaderboardProjection : IHandleMessages<UserTweeted>
     {
         private readonly IRepository<string, IEnumerable<Tweet>> tweets;
 
@@ -20,15 +20,15 @@ namespace HashBus.Projector.TweetLeaderboard
             this.tweets = tweets;
         }
 
-        public void Handle(TweetWithHashtag message)
+        public void Handle(UserTweeted message)
         {
-            var hashtagTweets = this.tweets.GetAsync(message.Hashtag).GetAwaiter().GetResult().ToList();
-            if (hashtagTweets.Any(mention => mention.TweetId == message.TweetId))
+            var trackTweets = this.tweets.GetAsync(message.Track).GetAwaiter().GetResult().ToList();
+            if (trackTweets.Any(mention => mention.TweetId == message.TweetId))
             {
                 return;
             }
 
-            hashtagTweets.Add(new Tweet
+            trackTweets.Add(new Tweet
             {
                 TweetId = message.TweetId,
                 UserId = message.TweetCreatedById,
@@ -37,14 +37,13 @@ namespace HashBus.Projector.TweetLeaderboard
                 UserScreenName = message.TweetCreatedByScreenName,
             });
 
-            this.tweets.SaveAsync(message.Hashtag, hashtagTweets).GetAwaiter().GetResult();
+            this.tweets.SaveAsync(message.Track, trackTweets).GetAwaiter().GetResult();
 
             ColorConsole.WriteLine(
                 "Added ".Gray(),
                 $"@{message.TweetCreatedByScreenName}".Cyan(),
                 " tweet to ".Gray(),
-                $"#{message.Hashtag}".DarkCyan().On(ConsoleColor.White),
-                " leaderboard".Gray(),
+                $" {message.Track} ".DarkCyan().On(ConsoleColor.White),
                 $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
         }
     }

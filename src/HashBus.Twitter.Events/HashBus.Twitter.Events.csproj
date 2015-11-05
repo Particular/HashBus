@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Hashtag.cs" />
     <Compile Include="UserMention.cs" />
-    <Compile Include="HashtagTweeted.cs" />
+    <Compile Include="TweetReceived.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

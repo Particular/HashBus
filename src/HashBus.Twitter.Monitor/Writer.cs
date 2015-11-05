@@ -8,12 +8,17 @@ namespace HashBus.Twitter.Monitor
 {
     class Writer
     {
-        public static void Write(HashtagTweeted message)
+        public static void Write(TweetReceived message)
         {
+            var trackString = $" {message.Track} ";
+            ColorConsole.Write(
+                new string(' ', (int)Math.Floor(Math.Max(0, Console.WindowWidth - trackString.Length) / 2d)).OnDarkGray(),
+                trackString.DarkCyan().OnWhite(),
+                new string(' ', (int)Math.Ceiling(Math.Max(0, Console.WindowWidth - trackString.Length) / 2d)).OnDarkGray());
+
             if (message.TweetIsRetweet)
             {
                 ColorConsole.WriteLine(
-                    "» ".DarkGray(),
                     $"{message.RetweetedTweetCreatedByName} ".White(),
                     $"@{message.RetweetedTweetCreatedByScreenName} · ".DarkGray(),
                     $"{message.RetweetedTweetCreatedAt.ToLocalTime()}".DarkGray(),
@@ -22,13 +27,12 @@ namespace HashBus.Twitter.Monitor
             else
             {
                 ColorConsole.WriteLine(
-                    "» ".DarkGray(),
                     $"{message.TweetCreatedByName} ".White(),
                     $"{message.TweetCreatedByScreenName} · ".DarkGray(),
                     $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray());
             }
 
-            var messageTokens = new List<ColorToken> { "  " };
+            var messageTokens = new List<ColorToken>();
             for (var index = 0; index < message.TweetText.Length; ++index)
             {
                 var userMention = message.TweetUserMentions.FirstOrDefault(m => m.Indices.First() == index);
@@ -42,14 +46,7 @@ namespace HashBus.Twitter.Monitor
                     }
 
                     var hashTaglength = hashTag.Indices.Last() - index;
-                    messageTokens.Add(
-                        message.TweetText.Substring(index, hashTaglength)
-                        .Color(hashTag.Text.Equals(message.Hashtag, StringComparison.OrdinalIgnoreCase)
-                            ? ConsoleColor.DarkCyan
-                            : ConsoleColor.Cyan)
-                            .On(hashTag.Text.Equals(message.Hashtag, StringComparison.OrdinalIgnoreCase)
-                            ? ConsoleColor.White
-                            : (ConsoleColor?)null));
+                    messageTokens.Add(message.TweetText.Substring(index, hashTaglength).Cyan());
 
                     index += hashTaglength - 1;
                     continue;

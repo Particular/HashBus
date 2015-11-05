@@ -9,10 +9,12 @@ namespace HashBus.WebApi
     {
         public TweetLeaderboardModule(IRepository<string, IEnumerable<Tweet>> tweets)
         {
-            this.Get["/tweet-leaderboards/{hashtag}", true] = async (parameters, __) =>
+            this.Get["/tweet-leaderboards/{track}", true] = async (parameters, __) =>
             {
-                var hashtagTweets = (await tweets.GetAsync((string)parameters.hashtag)).ToList();
-                var entries = hashtagTweets
+                // see https://github.com/NancyFx/Nancy/issues/1154
+                var track = ((string)parameters.track).Replace("해시", "#");
+                var trackTweets = (await tweets.GetAsync(track)).ToList();
+                var entries = trackTweets
                     .GroupBy(tweet => tweet.UserId)
                     .Select(g => new TweetLeaderboard.Entry
                     {
@@ -29,7 +31,7 @@ namespace HashBus.WebApi
                 return new TweetLeaderboard
                 {
                     Entries = entries,
-                    TweetsCount = hashtagTweets.Count,
+                    TweetsCount = trackTweets.Count,
                 };
             };
         }

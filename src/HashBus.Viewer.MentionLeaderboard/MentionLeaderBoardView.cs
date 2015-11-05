@@ -38,7 +38,7 @@ namespace HashBus.Viewer.MentionLeaderboard
             };
 
         public static async Task StartAsync(
-            string hashtag, int refreshInterval, IService<string, WebApi.MentionLeaderboard> leaderboards, bool showPercentages)
+            string track, int refreshInterval, IService<string, WebApi.MentionLeaderboard> leaderboards, bool showPercentages)
         {
             var start = DateTime.UtcNow;
             var initialCount = (int?)null;
@@ -48,7 +48,7 @@ namespace HashBus.Viewer.MentionLeaderboard
                 WebApi.MentionLeaderboard currentLeaderboard;
                 try
                 {
-                    currentLeaderboard = await leaderboards.GetAsync(hashtag);
+                    currentLeaderboard = await leaderboards.GetAsync(track);
                 }
                 catch (Exception ex)
                 {
@@ -90,7 +90,7 @@ namespace HashBus.Viewer.MentionLeaderboard
 
                 Console.Clear();
                 ColorConsole.WriteLine(
-                    $"#{hashtag}".DarkCyan().On(ConsoleColor.White),
+                    $" {track} ".DarkCyan().On(ConsoleColor.White),
                     " mentions".Gray(),
                     $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
 
