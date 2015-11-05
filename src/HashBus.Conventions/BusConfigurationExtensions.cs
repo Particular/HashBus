@@ -2,7 +2,7 @@
 
 namespace HashBus.Conventions
 {
-    public static class MessageConventionsExtentions
+    public static class BusConfigurationExtensions
     {
         public static void ApplyMessageConventions(this BusConfiguration configuration)
         {

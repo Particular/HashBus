@@ -1,10 +1,13 @@
+    using System.Configuration;
+
 namespace HashBus.Twitter.Monitor.Simulator
 {
     class Program
     {
         static void Main()
         {
-            App.Run();
+            var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
+            App.Run(nserviceBusConnectionString);
         }
     }
 }
