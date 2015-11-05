@@ -10,7 +10,7 @@ namespace HashBus.WebApi
 
         public class Entry
         {
-            public long? UserId { get; set; }
+            public long UserId { get; set; }
 
             public string UserIdStr { get; set; }
 
