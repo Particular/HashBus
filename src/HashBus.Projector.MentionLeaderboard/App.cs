@@ -4,6 +4,7 @@ using HashBus.ReadModel;
 using HashBus.ReadModel.MongoDB;
 using NServiceBus;
 using MongoDB.Driver;
+using HashBus.Conventions;
 
 namespace HashBus.Projector.MentionLeaderboard
 {
@@ -21,6 +22,7 @@ namespace HashBus.Projector.MentionLeaderboard
             busConfiguration.RegisterComponents(c =>
                 c.RegisterSingleton<IRepository<string, IEnumerable<Mention>>>(
                     new MongoDBListRepository<Mention>(mongoDatabase, "mention_leaderboard__mentions")));
+            busConfiguration.ApplyMessageConventions();
 
             using (Bus.Create(busConfiguration).Start())
             {
