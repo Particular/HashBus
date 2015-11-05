@@ -3,8 +3,8 @@ namespace HashBus.Application
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
     using System.Threading;
-    using System.Threading.Tasks;
     using NServiceBus;
+    using NServiceBus.Persistence;
 
     class App
     {
@@ -14,7 +14,8 @@ namespace HashBus.Application
             busConfiguration.EndpointName("HashBus.Application");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
-            busConfiguration.UsePersistence<InMemoryPersistence>();
+            busConfiguration.UsePersistence<NHibernatePersistence>()
+               .ConnectionString(@"Data Source=.\SqlExpress;Initial Catalog=NServiceBus;Integrated Security=True");
 
             using (Bus.Create(busConfiguration).Start())
             {

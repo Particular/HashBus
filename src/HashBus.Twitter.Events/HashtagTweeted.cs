@@ -40,5 +40,7 @@
         public string RetweetedTweetCreatedByScreenName { get; set; }
 		
         public string EndpointName { get; set; }
+
+        public Guid SessionId { get; set; }
     }
 }

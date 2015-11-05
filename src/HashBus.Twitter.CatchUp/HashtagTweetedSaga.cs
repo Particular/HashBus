@@ -6,38 +6,28 @@
     using NServiceBus.Saga;
 
     public class HashtagTweetedSaga : Saga<HashtagTweetedSagaData>,
-        IAmStartedByMessages<RegisterMonitor>,
         IAmStartedByMessages<HashtagTweeted>
     {
         public void Handle(HashtagTweeted message)
         {
-            Data.HashtagMonitored = message.Hashtag;
-            Data.EndpointName = message.EndpointName;
-            Data.LatestTweetedId = message.TweetId;
-        }
-
-        public void Handle(RegisterMonitor message)
-        {
-            Data.HashtagMonitored = message.HashtagMonitored;
-            Data.EndpointName = message.EndpointName;
-
-            if (Data.LatestTweetedId.HasValue)
+            if (Data.PreviousSessionId != Guid.Empty && Data.PreviousSessionId != message.SessionId)
             {
+                // reset session id
                 Console.WriteLine("==================             ====================");
-                Console.WriteLine("Handling RegisterMonitor message: EndpointName: {0}, HashtagMonitored: {1} ", message.EndpointName, message.HashtagMonitored);
+                Console.WriteLine("Handling HashtagTweeted with new session id message: EndpointName: {0}, Hashtag: {1} ", message.EndpointName, message.Hashtag);
 
-                Bus.Send(new StartCatchUp
-                {
-                    TweetId = Data.LatestTweetedId.Value
-                });
+                Bus.Send(new StartCatchUp {TweetId = Data.PreviousTweetId});                
             }
+
+            Data.PreviousSessionId = message.SessionId;
+            Data.Hashtag = message.Hashtag;
+            Data.EndpointName = message.EndpointName;
+            Data.PreviousTweetId = message.TweetId;
         }
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<HashtagTweetedSagaData> mapper)
         {
-            // hashtag can be the unique key
-            // mapper.ConfigureMapping<HashtagTweeted>(m => m.EndpointName).ToSaga(s => s.EndpointName);
-            //  mapper.ConfigureMapping<RegisterMonitor>(m => m.EndpointName).ToSaga(s => s.EndpointName);
+            // hashtag and endpointNmae is our coposit key look at HashtagTweetedSagaFinder.cs
         }
     }
 }

@@ -1,7 +1,7 @@
 namespace HashBus.Twitter.Monitor
 {
+    using System;
     using System.Threading.Tasks;
-    using Commands;
     using NServiceBus;
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
@@ -22,15 +22,9 @@ namespace HashBus.Twitter.Monitor
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
-                var registerMonitor = new RegisterMonitor
-                {
-                    EndpointName = EndpointName,
-                    HashtagMonitored = hashtag
-                };
+                var sessionId = Guid.NewGuid();
 
-                bus.Send(registerMonitor);
-
-                await Monitoring.StartAsync(bus, hashtag, consumerKey, consumerSecret, accessToken, accessTokenSecret, EndpointName);
+                await Monitoring.StartAsync(bus, hashtag, consumerKey, consumerSecret, accessToken, accessTokenSecret, EndpointName, sessionId);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace HashBus.Twitter.Monitor
 
     class Monitoring
     {
-        public static async Task StartAsync(ISendOnlyBus bus, string hashtag, string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret, string endpointName)
+        public static async Task StartAsync(ISendOnlyBus bus, string hashtag, string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret, string endpointName, Guid sessionId)
         {
             var credentials = new TwitterCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);
             var stream = Stream.CreateFilteredStream(credentials);
@@ -25,6 +25,7 @@ namespace HashBus.Twitter.Monitor
                 var message = new HashtagTweeted
                 {
                     EndpointName = endpointName,
+                    SessionId = sessionId,
                     Hashtag = hashtag,
                     TweetId = e.Tweet.Id,
                     TweetCreatedAt = e.Tweet.CreatedAt,

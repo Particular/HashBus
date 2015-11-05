@@ -5,11 +5,12 @@
 
     public class HashtagTweetedSagaData : IContainSagaData
     {
-        public virtual string EndpointName { get; set; }
-        public virtual string HashtagMonitored { get; set; }
-        public virtual long? LatestTweetedId { get; set; }
         public virtual Guid Id { get; set; }
         public virtual string Originator { get; set; }
         public virtual string OriginalMessageId { get; set; }
+        public virtual string EndpointName { get; set; }
+        public virtual string Hashtag { get; set; }
+        public virtual Guid PreviousSessionId { get; set; }
+        public virtual long PreviousTweetId { get; set; }
     }
 }

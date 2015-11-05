@@ -16,7 +16,7 @@
             var session = storageContext.Session;
 
             return session.QueryOver<HashtagTweetedSagaData>()
-                .Where(d => d.HashtagMonitored == message.Hashtag).And(e => e.EndpointName == message.EndpointName)
+                .Where(d => d.Hashtag == message.Hashtag).And(e => e.EndpointName == message.EndpointName)
                 .SingleOrDefault();
         }
 

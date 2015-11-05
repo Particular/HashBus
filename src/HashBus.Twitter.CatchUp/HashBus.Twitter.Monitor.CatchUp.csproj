@@ -47,15 +47,15 @@
       <HintPath>..\..\packages\NServiceBus.5.2.9\lib\net45\NServiceBus.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NServiceBus.NHibernate">
-      <HintPath>..\..\packages\NServiceBus.NHibernate 6.3.0-unstable0013\lib\net45\NServiceBus.NHibernate.dll</HintPath>
+    <Reference Include="NServiceBus.NHibernate, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NServiceBus.NHibernate.6.2.4\lib\net45\NServiceBus.NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HashtagTweetedSagaFinder.cs" />
-    <Compile Include="MonitorStartedSagaFinder.cs" />
     <Compile Include="HashtagTweetedSaga.cs" />
     <Compile Include="HashtagTweetedSagaData.cs" />
     <Compile Include="Program.cs" />

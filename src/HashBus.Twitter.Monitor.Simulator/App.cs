@@ -1,6 +1,6 @@
 namespace HashBus.Twitter.Monitor.Simulator
 {
-    using Commands;
+    using System;
     using NServiceBus;
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;
@@ -8,7 +8,6 @@ namespace HashBus.Twitter.Monitor.Simulator
 
     class App
     {
-        const string HashTag = "Simulated";
         const string EndpointName = "HashBus.Twitter.Monitor";
 
         public static void Run()
@@ -22,15 +21,9 @@ namespace HashBus.Twitter.Monitor.Simulator
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
-                var registerMonitor = new RegisterMonitor
-                {
-                    EndpointName = EndpointName,
-                    HashtagMonitored = HashTag
-                };
+                var sessionId = Guid.NewGuid();
 
-                bus.Send(registerMonitor);
-
-                Simulation.Start(bus, EndpointName);
+                Simulation.Start(bus, EndpointName, sessionId);
             }
         }
     }
