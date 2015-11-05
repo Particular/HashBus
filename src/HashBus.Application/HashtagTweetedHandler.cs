@@ -45,22 +45,31 @@ namespace HashBus.Application
                 bus.Publish(tweetWithHashtag);
             }
 
-            foreach (var mentionMessage in message.TweetUserMentions.Select(userMention => new UserMentionedWithHashtag
-            {
-                Hashtag = message.Hashtag,
-                TweetId = message.TweetId,
-                TweetCreatedAt = message.TweetCreatedAt,
-                TweetCreatedById = message.TweetCreatedById,
-                TweetCreatedByIdStr = message.TweetCreatedByIdStr,
-                TweetCreatedByName = message.TweetCreatedByName,
-                TweetCreatedByScreenName = message.TweetCreatedByScreenName,
-                TweetIsRetweet = message.TweetIsRetweet,
-                TweetText = message.TweetText,
-                UserMentionId = userMention.Id,
-                UserMentionIdStr = userMention.IdStr,
-                UserMentionName = userMention.Name,
-                UserMentionScreenName = userMention.ScreenName,
-            }))
+            foreach (var mentionMessage in message.TweetUserMentions
+                .Where(userMention =>
+                    message.TweetCreatedById != userMention.Id &&
+                    message.TweetCreatedByIdStr != userMention.IdStr &&
+                    message.TweetCreatedByScreenName != userMention.ScreenName &&
+                    message.RetweetedTweetCreatedById != userMention.Id &&
+                    message.RetweetedTweetCreatedByIdStr != userMention.IdStr &&
+                    message.RetweetedTweetCreatedByScreenName != userMention.ScreenName &&
+                    message.TweetText.Substring(0, userMention.Indices[0]).Trim().ToUpperInvariant() != "RT")
+                .Select(userMention => new UserMentionedWithHashtag
+                {
+                    Hashtag = message.Hashtag,
+                    TweetId = message.TweetId,
+                    TweetCreatedAt = message.TweetCreatedAt,
+                    TweetCreatedById = message.TweetCreatedById,
+                    TweetCreatedByIdStr = message.TweetCreatedByIdStr,
+                    TweetCreatedByName = message.TweetCreatedByName,
+                    TweetCreatedByScreenName = message.TweetCreatedByScreenName,
+                    TweetIsRetweet = message.TweetIsRetweet,
+                    TweetText = message.TweetText,
+                    UserMentionId = userMention.Id,
+                    UserMentionIdStr = userMention.IdStr,
+                    UserMentionName = userMention.Name,
+                    UserMentionScreenName = userMention.ScreenName,
+                }))
             {
                 ColorConsole.WriteLine(
                     $"{mentionMessage.TweetCreatedByName}".White(),
