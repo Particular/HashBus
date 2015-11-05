@@ -1,14 +1,14 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using ColoredConsole;
-using HashBus.Twitter.Events;
-using NServiceBus;
-using Tweetinvi;
-using Tweetinvi.Core.Credentials;
-
 namespace HashBus.Twitter.Monitor
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+using ColoredConsole;
+    using HashBus.Twitter.Events;
+    using NServiceBus;
+    using Tweetinvi;
+    using Tweetinvi.Core.Credentials;
+
     class Monitoring
     {
         public static async Task StartAsync(
@@ -17,7 +17,8 @@ namespace HashBus.Twitter.Monitor
             string consumerKey,
             string consumerSecret,
             string accessToken,
-            string accessTokenSecret)
+            string accessTokenSecret,
+			Guid sessionId)
         {
             var credentials = new TwitterCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);
             var stream = Stream.CreateFilteredStream(credentials);
@@ -31,6 +32,8 @@ namespace HashBus.Twitter.Monitor
             {
                 var message = new TweetReceived
                 {
+                    EndpointName = endpointName,
+                    SessionId = sessionId,
                     Track = track,
                     TweetId = e.Tweet.Id,
                     TweetCreatedAt = e.Tweet.CreatedAt,

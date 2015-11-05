@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using HashBus.Twitter.Events;
-using NServiceBus;
-using System.Linq;
-
 namespace HashBus.Twitter.Monitor.Simulator
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using HashBus.Twitter.Events;
+    using NServiceBus;
+    using System.Linq;
+
     class Simulation
     {
-        public static void Start(ISendOnlyBus bus)
+        public static void Start(ISendOnlyBus bus, string endpointName, Guid sessionId)
         {
             var random = new Random();
             var countOfUsers = 15;
@@ -41,6 +41,8 @@ namespace HashBus.Twitter.Monitor.Simulator
 
                 var message = new TweetReceived
                 {
+                    EndpointName = endpointName,
+                    SessionId = sessionId,
                     Track = track,
                     TweetId = now.Ticks,
                     TweetCreatedAt = now,

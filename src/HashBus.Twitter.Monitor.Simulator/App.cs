@@ -1,15 +1,18 @@
-using NServiceBus;
-using NServiceBus.Persistence;
-using HashBus.Conventions;
-
 namespace HashBus.Twitter.Monitor.Simulator
 {
+    using NServiceBus;
+    using NServiceBus.Persistence;
+    using HashBus.Conventions;
+    using System;
+
     class App
     {
+        const string EndpointName = "HashBus.Twitter.Monitor";
+
         public static void Run(string nserviceBusConnectionString)
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Twitter.Monitor");
+            busConfiguration.EndpointName(EndpointName);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
@@ -17,7 +20,9 @@ namespace HashBus.Twitter.Monitor.Simulator
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
-                Simulation.Start(bus);
+                var sessionId = Guid.NewGuid();
+
+                Simulation.Start(bus, EndpointName, sessionId);
             }
         }
     }

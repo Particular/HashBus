@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HashBus.Twitter.Events
+﻿namespace HashBus.Twitter.Events
 {
+    using System;
+    using System.Collections.Generic;
+
     public class TweetReceived
     {
-        public string Track { get; set; }
+        public string Hashtag { get; set; }
 
         public long TweetId { get; set; }
 
@@ -38,5 +38,9 @@ namespace HashBus.Twitter.Events
         public string RetweetedTweetCreatedByName { get; set; }
 
         public string RetweetedTweetCreatedByScreenName { get; set; }
+		
+        public string EndpointName { get; set; }
+
+        public Guid SessionId { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-using System.Configuration;
-
 namespace HashBus.Projector.MentionLeaderboard
 {
+    using System.Configuration;
+
     class Program
     {
         static void Main()

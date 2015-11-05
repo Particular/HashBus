@@ -1,7 +1,6 @@
-﻿using System.Configuration;
-
-namespace HashBus.WebApi
+﻿namespace HashBus.WebApi
 {
+    using System.Configuration;
     using System;
 
     class Program

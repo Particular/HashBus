@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using global::MongoDB.Bson.Serialization.Attributes;
-using LiteGuard;
-using MongoDB.Driver;
-
-namespace HashBus.ReadModel.MongoDB
+﻿namespace HashBus.ReadModel.MongoDB
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using global::MongoDB.Bson.Serialization.Attributes;
+    using global::MongoDB.Driver;
+    using LiteGuard;
+
     public class MongoDBListRepository<TValue> : IRepository<string, IEnumerable<TValue>>
     {
         private readonly IMongoCollection<Document> collection;

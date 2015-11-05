@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using ColoredConsole;
-using HashBus.Twitter.Events;
-
 namespace HashBus.Twitter.Monitor
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ColoredConsole;
+    using HashBus.Twitter.Events;
+
     class Writer
     {
         public static void Write(TweetReceived message)

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using LiteGuard;
-using Newtonsoft.Json;
-using RestSharp;
-
-namespace HashBus.Viewer.TweetLeaderboard
+﻿namespace HashBus.Viewer.TweetLeaderboard
 {
+    using System;
+    using System.Net;
+    using System.Threading.Tasks;
+    using LiteGuard;
+    using Newtonsoft.Json;
+    using RestSharp;
+
     class TweetLeaderboardService : IService<string, WebApi.TweetLeaderboard>
     {
         private readonly IRestClient client;
