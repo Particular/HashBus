@@ -4,6 +4,7 @@ using HashBus.ReadModel;
 using HashBus.ReadModel.MongoDB;
 using NServiceBus;
 using MongoDB.Driver;
+using HashBus.Conventions;
 
 namespace HashBus.Projector.TweetLeaderboard
 {
@@ -21,6 +22,7 @@ namespace HashBus.Projector.TweetLeaderboard
             busConfiguration.RegisterComponents(c =>
                 c.RegisterSingleton<IRepository<string, IEnumerable<Tweet>>>(
                     new MongoDBListRepository<Tweet>(mongoDatabase, "tweet_leaderboard__tweets")));
+            busConfiguration.ApplyMessageConventions();
 
             using (Bus.Create(busConfiguration).Start())
             {

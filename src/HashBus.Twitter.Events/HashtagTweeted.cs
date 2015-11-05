@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NServiceBus;
 
 namespace HashBus.Twitter.Events
 {
-    public class HashtagTweeted : IEvent
+    public class HashtagTweeted 
     {
         public string Hashtag { get; set; }
 

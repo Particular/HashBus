@@ -1,9 +1,8 @@
 ﻿using System;
-using NServiceBus;
 
 namespace HashBus.Application.Events
 {
-    public class TweetWithHashtag : IEvent
+    public class TweetWithHashtag
     {
         public string Hashtag { get; set; }
 

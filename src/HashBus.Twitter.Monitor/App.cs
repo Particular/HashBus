@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 using NServiceBus;
+using NServiceBus.Persistence;
+using HashBus.Conventions;
 
 namespace HashBus.Twitter.Monitor
 {
@@ -11,7 +13,9 @@ namespace HashBus.Twitter.Monitor
             busConfiguration.EndpointName("HashBus.Twitter.Monitor");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
-            busConfiguration.UsePersistence<InMemoryPersistence>();
+            busConfiguration.UsePersistence<NHibernatePersistence>()
+               .ConnectionString(@"Data Source=.\SqlExpress;Initial Catalog=NServiceBus;Integrated Security=True");
+            busConfiguration.ApplyMessageConventions();
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
