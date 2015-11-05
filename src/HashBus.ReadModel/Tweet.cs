@@ -4,7 +4,7 @@
     {
         public long TweetId { get; set; }
 
-        public long? UserId { get; set; }
+        public long UserId { get; set; }
 
         public string UserIdStr { get; set; }
 
