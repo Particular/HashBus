@@ -47,6 +47,9 @@ namespace HashBus.Application
 
             foreach (var mentionMessage in message.TweetUserMentions
                 .Where(userMention =>
+                    message.TweetCreatedById != userMention.Id &&
+                    message.TweetCreatedByIdStr != userMention.IdStr &&
+                    message.TweetCreatedByScreenName != userMention.ScreenName &&
                     message.RetweetedTweetCreatedById != userMention.Id &&
                     message.RetweetedTweetCreatedByIdStr != userMention.IdStr &&
                     message.RetweetedTweetCreatedByScreenName != userMention.ScreenName &&
