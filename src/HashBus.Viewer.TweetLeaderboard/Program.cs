@@ -1,7 +1,7 @@
-﻿using System.Configuration;
-
-namespace HashBus.Viewer.TweetLeaderboard
+﻿namespace HashBus.Viewer.TweetLeaderboard
 {
+    using System.Configuration;
+
     class Program
     {
         static void Main()

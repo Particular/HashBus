@@ -1,23 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using HashBus.Twitter.Events;
-using NServiceBus;
-using System.Linq;
-
 namespace HashBus.Twitter.Monitor.Simulator
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Events;
+    using NServiceBus;
+
     class Simulation
     {
-        public static void Start(ISendOnlyBus bus)
+        public static void Start(ISendOnlyBus bus, string endpointName, Guid sessionId)
         {
             var random = new Random();
             var countOfUsers = 15;
             while (true)
             {
                 Thread.Sleep((int)Math.Pow(random.Next(6), 5));
+
                 var now = DateTime.UtcNow;
                 var hashtag = "Simulated";
+
                 if (now.Millisecond % 3 == 0)
                 {
                     hashtag = hashtag.ToLowerInvariant();
@@ -38,6 +40,8 @@ namespace HashBus.Twitter.Monitor.Simulator
 
                 var message = new HashtagTweeted
                 {
+                    EndpointName = endpointName,
+                    SessionId = sessionId,
                     Hashtag = hashtag,
                     TweetId = now.Ticks,
                     TweetCreatedAt = now,

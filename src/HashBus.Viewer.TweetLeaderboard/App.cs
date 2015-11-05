@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿namespace HashBus.Viewer.TweetLeaderboard
+{
+    using System.Threading.Tasks;
 using RestSharp;
 
-namespace HashBus.Viewer.TweetLeaderboard
-{
     class App
     {
         public static async Task RunAsync(

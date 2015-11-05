@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ColoredConsole;
-using HashBus.Application.Events;
-using HashBus.ReadModel;
-using LiteGuard;
-using NServiceBus;
-
-namespace HashBus.Projector.TweetLeaderboard
+﻿namespace HashBus.Projector.TweetLeaderboard
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ColoredConsole;
+    using Application.Events;
+    using ReadModel;
+    using LiteGuard;
+    using NServiceBus;
+
     public class TweetLeaderboardProjection : IHandleMessages<TweetWithHashtag>
     {
         private readonly IRepository<string, IEnumerable<Tweet>> tweets;
