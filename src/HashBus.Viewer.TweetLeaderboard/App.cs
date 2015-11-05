@@ -1,21 +1,19 @@
 ﻿namespace HashBus.Viewer.TweetLeaderboard
 {
     using System.Threading.Tasks;
-    using ReadModel;
-    using ReadModel.MongoDB;
-    using MongoDB.Driver;
+using RestSharp;
 
     class App
     {
         public static async Task RunAsync(
-            string mongoConnectionString, string mongoDBDatabase, string hashtag, int refreshInterval, bool showPercentages)
+            string webApiBaseUrl, string hashtag, int refreshInterval, bool showPercentages)
         {
-            var mongoDatabase = new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase);
+            var client = new RestClient(webApiBaseUrl);
 
             await TweetLeaderboardView.StartAsync(
                 hashtag,
                 refreshInterval,
-                new MongoDBListRepository<Tweet>(mongoDatabase, "tweet_leaderboard__tweets"),
+                new TweetLeaderboardService(client),
                 showPercentages);
         }
     }

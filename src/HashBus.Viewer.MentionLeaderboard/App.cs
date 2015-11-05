@@ -1,21 +1,19 @@
-﻿namespace HashBus.Viewer.MentionLeaderboard
-{
-    using System.Threading.Tasks;
-    using ReadModel;
-    using ReadModel.MongoDB;
-    using MongoDB.Driver;
+﻿using System.Threading.Tasks;
+using RestSharp;
 
+namespace HashBus.Viewer.MentionLeaderboard
+{
     class App
     {
         public static async Task RunAsync(
-            string mongoConnectionString, string mongoDBDatabase, string hashtag, int refreshInterval, bool showPercentages)
+            string webApiBaseUrl, string hashtag, int refreshInterval, bool showPercentages)
         {
-            var mongoDatabase = new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase);
+            var client = new RestClient(webApiBaseUrl);
 
             await MentionLeaderboardView.StartAsync(
                 hashtag,
                 refreshInterval,
-                new MongoDBListRepository<Mention>(mongoDatabase, "mention_leaderboard__mentions"),
+                new MentionLeaderboardService(client), 
                 showPercentages);
         }
     }
