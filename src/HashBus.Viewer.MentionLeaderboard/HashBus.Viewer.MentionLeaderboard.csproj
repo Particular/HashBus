@@ -51,16 +51,12 @@
       <HintPath>..\..\packages\LiteGuard.0.10.0\lib\net35\LiteGuard.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Bson, Version=2.1.0.145, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MongoDB.Bson.2.1.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.1.0.145, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MongoDB.Driver.2.1.0\lib\net45\MongoDB.Driver.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.1.0.145, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MongoDB.Driver.Core.2.1.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -69,6 +65,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\HashBus.WebApi\MentionLeaderboard.cs">
+      <Link>MentionLeaderboard.cs</Link>
+    </Compile>
+    <Compile Include="IService.cs" />
+    <Compile Include="MentionLeaderboardService.cs" />
     <Compile Include="MentionLeaderboardView.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
@@ -78,20 +79,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HashBus.Application.Events\HashBus.Application.Events.csproj">
-      <Project>{6991a5cf-25cb-4336-9f6d-2eb1e01efb75}</Project>
-      <Name>HashBus.Application.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HashBus.ReadModel.MongoDB\HashBus.ReadModel.MongoDB.csproj">
-      <Project>{34C86079-CCAB-4312-98FC-F64F4A97D3A4}</Project>
-      <Name>HashBus.ReadModel.MongoDB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HashBus.ReadModel\HashBus.ReadModel.csproj">
-      <Project>{1709F0A9-F797-44FD-94C0-18A0D75442F8}</Project>
-      <Name>HashBus.ReadModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

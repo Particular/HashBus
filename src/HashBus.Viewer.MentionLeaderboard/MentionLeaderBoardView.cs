@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColoredConsole;
-using HashBus.ReadModel;
 using Humanizer;
 
 namespace HashBus.Viewer.MentionLeaderboard
@@ -39,33 +38,33 @@ namespace HashBus.Viewer.MentionLeaderboard
             };
 
         public static async Task StartAsync(
-            string hashtag, int refreshInterval, IRepository<string, IEnumerable<Mention>> mentions, bool showPercentages)
+            string hashtag, int refreshInterval, IService<string, WebApi.MentionLeaderboard> leaderboards, bool showPercentages)
         {
             var start = DateTime.UtcNow;
             var initialCount = (int?)null;
-            var previousLeaderboard = new List<Entry>();
+            var previousLeaderboard = new WebApi.MentionLeaderboard();
             while (true)
             {
-                var hashtagMentions = (await mentions.GetAsync(hashtag)).ToList();
-                var currentLeaderboard = hashtagMentions
-                    .GroupBy(mention => mention.UserMentionId)
-                    .Select(g => new Entry
-                    {
-                        UserMentionId = g.Key,
-                        UserMentionIdStr = g.First().UserMentionIdStr,
-                        UserMentionName = g.First().UserMentionName,
-                        UserMentionScreenName = g.First().UserMentionScreenName,
-                        Count = g.Count(),
-                    })
-                    .OrderByDescending(entry => entry.Count)
-                    .Take(10).ToList();
+                WebApi.MentionLeaderboard currentLeaderboard;
+                try
+                {
+                    currentLeaderboard = await leaderboards.GetAsync(hashtag);
+                }
+                catch (Exception ex)
+                {
+                    ColorConsole.WriteLine("Failed to get leaderboard. ".Red(), ex.Message.DarkRed());
+                    Thread.Sleep(1000);
+                    continue;
+                }
 
                 var position = 0;
                 var lines = new List<ColorToken[]>();
-                foreach (var currentEntry in currentLeaderboard)
+                foreach (var currentEntry in currentLeaderboard?.Entries ??
+                    Enumerable.Empty<WebApi.MentionLeaderboard.Entry>())
                 {
                     ++position;
-                    var previousEntry = previousLeaderboard
+                    var previousEntry = (previousLeaderboard?.Entries ??
+                            Enumerable.Empty<WebApi.MentionLeaderboard.Entry>())
                         .Select((entry, index) => new
                         {
                             Entry = entry,
@@ -85,7 +84,7 @@ namespace HashBus.Viewer.MentionLeaderboard
                         $" {currentEntry.UserMentionName}".White().On(movementBackgroundColors[movement]),
                         $" @{currentEntry.UserMentionScreenName}".Cyan().On(movementBackgroundColors[movement]),
                         $" {currentEntry.Count:N0}".Color(movementColors[countMovement]).On(movementBackgroundColors[movement]),
-                        showPercentages ? $" ({currentEntry.Count / (double)hashtagMentions.Count:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
+                        showPercentages ? $" ({currentEntry.Count / (double)currentLeaderboard.MentionsCount:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
                     });
                 }
 
@@ -106,9 +105,9 @@ namespace HashBus.Viewer.MentionLeaderboard
                     ColorConsole.WriteLine(line);
                 }
 
-                ColorConsole.Write($"Total mentions: {hashtagMentions.Count:N0}".DarkGray());
+                ColorConsole.Write($"Total mentions: {currentLeaderboard?.MentionsCount ?? 0:N0}".DarkGray());
                 ColorConsole.WriteLine(initialCount.HasValue
-                    ? $" ({(hashtagMentions.Count - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
+                    ? $" ({(currentLeaderboard?.MentionsCount - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
                     : string.Empty);
 
                 var maxMessageLength = 0;
@@ -125,22 +124,9 @@ namespace HashBus.Viewer.MentionLeaderboard
                     Thread.Sleep(refreshInterval);
                 }
 
-                initialCount = initialCount ?? hashtagMentions.Count;
+                initialCount = initialCount ?? currentLeaderboard?.MentionsCount;
                 previousLeaderboard = currentLeaderboard;
             }
-        }
-
-        class Entry
-        {
-            public long? UserMentionId { get; set; }
-
-            public string UserMentionIdStr { get; set; }
-
-            public string UserMentionName { get; set; }
-
-            public string UserMentionScreenName { get; set; }
-
-            public int Count { get; set; }
         }
     }
 }
