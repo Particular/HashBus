@@ -7,7 +7,13 @@
 
     class App
     {
-        public static void Run(string nserviceBusConnectionString, string endpointName)
+        public static void Run(
+            string nserviceBusConnectionString,
+            string endpointName,
+            string consumerKey,
+            string consumerSecret,
+            string accessToken,
+            string accessTokenSecret)
         {
             var busConfiguration = new BusConfiguration();
             busConfiguration.EndpointName(endpointName);
@@ -15,6 +21,8 @@
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
             busConfiguration.ApplyMessageConventions();
+            busConfiguration.RegisterComponents(c=>c.RegisterSingleton<ITweetReceivedService>(
+                new TweetReceivedService(consumerKey, consumerSecret, accessToken, accessTokenSecret)));
 
             using (Bus.Create(busConfiguration).Start())
             {

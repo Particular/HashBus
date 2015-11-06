@@ -4,7 +4,7 @@ namespace HashBus.Twitter.Monitor
     using System.Collections.Generic;
     using System.Linq;
     using ColoredConsole;
-    using Events;
+    using HashBus.Twitter.Events;
 
     class Writer
     {

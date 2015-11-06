@@ -39,7 +39,10 @@
 
                     Bus.Send(new StartCatchUp
                     {
-                        TweetId = Data.PreviousTweetId,EndpointName = message.EndpointName, Track = message.Track, SessionId = message.SessionId
+                        TweetId = Data.PreviousTweetId,
+                        EndpointName = message.EndpointName,
+                        Track = message.Track,
+                        SessionId = message.SessionId,
                     });
                 }
             }
