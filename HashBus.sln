@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.TweetLeaderb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.WebApi", "src\HashBus.WebApi\HashBus.WebApi.csproj", "{4EC0F237-1CF1-4A0F-B849-E8B75A18CEEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Conventions", "src\HashBus.Conventions\HashBus.Conventions.csproj", "{F302F223-C0CD-46A6-8BB6-01F1213BDD58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.NServiceBusConfiguration", "src\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj", "{F302F223-C0CD-46A6-8BB6-01F1213BDD58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.CatchUp", "src\HashBus.Twitter.CatchUp\HashBus.Twitter.Monitor.CatchUp.csproj", "{63B64572-B72C-4BCE-BB3D-C3F7635A6858}"
 EndProject

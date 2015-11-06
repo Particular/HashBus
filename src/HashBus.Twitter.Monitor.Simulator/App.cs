@@ -1,9 +1,9 @@
 namespace HashBus.Twitter.Monitor.Simulator
 {
+    using System;
+    using HashBus.NServiceBusConfiguration;
     using NServiceBus;
     using NServiceBus.Persistence;
-    using HashBus.Conventions;
-    using System;
 
     class App
     {

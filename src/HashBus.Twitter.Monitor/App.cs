@@ -1,10 +1,10 @@
 namespace HashBus.Twitter.Monitor
 {
+    using System;
     using System.Threading.Tasks;
+    using HashBus.NServiceBusConfiguration;
     using NServiceBus;
     using NServiceBus.Persistence;
-    using Conventions;
-    using System;
 
     class App
     {

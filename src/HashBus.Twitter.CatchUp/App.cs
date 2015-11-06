@@ -1,7 +1,7 @@
 ﻿namespace HashBus.Twitter.Monitor.CatchUp
 {
     using System;
-    using Conventions;
+    using HashBus.NServiceBusConfiguration;
     using NServiceBus;
     using NServiceBus.Persistence;
 

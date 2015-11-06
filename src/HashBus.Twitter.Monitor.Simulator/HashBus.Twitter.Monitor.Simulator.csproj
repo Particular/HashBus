@@ -72,9 +72,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HashBus.Conventions\HashBus.Conventions.csproj">
+    <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
       <Project>{f302f223-c0cd-46a6-8bb6-01f1213bdd58}</Project>
-      <Name>HashBus.Conventions</Name>
+      <Name>HashBus.NServiceBusConfiguration</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">
       <Project>{5728de02-c264-4697-b554-dda5fad10a47}</Project>

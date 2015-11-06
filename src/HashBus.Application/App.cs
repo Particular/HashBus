@@ -1,9 +1,9 @@
 namespace HashBus.Application
 {
     using System.Threading;
+    using HashBus.NServiceBusConfiguration;
     using NServiceBus;
     using NServiceBus.Persistence;
-    using Conventions;
 
     class App
     {

@@ -2,11 +2,11 @@ namespace HashBus.Projector.TweetLeaderboard
 {
     using System.Collections.Generic;
     using System.Threading;
+    using HashBus.NServiceBusConfiguration;
     using HashBus.ReadModel;
     using HashBus.ReadModel.MongoDB;
-    using NServiceBus;
     using MongoDB.Driver;
-    using HashBus.Conventions;
+    using NServiceBus;
 
     class App
     {
