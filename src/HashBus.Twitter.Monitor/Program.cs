@@ -9,37 +9,45 @@ namespace HashBus.Twitter.Monitor
         {
             var track = ConfigurationManager.AppSettings["Track"];
             var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
+            var endpointName = ConfigurationManager.AppSettings["EndpointName"];
 
-            const string consumerKeyName = "HASHBUS_TWITTER_CONSUMER_KEY";
-            const string consumerSecretKeyName = "HASHBUS_TWITTER_CONSUMER_SECRET";
-            const string accessTokenSecretKeyName = "HASHBUS_TWITTER_ACCESS_TOKEN_SECRET";
-            const string accessTokenKeyName = "HASHBUS_TWITTER_ACCESS_TOKEN";
+            var consumerKeyName = "HASHBUS_TWITTER_CONSUMER_KEY";
+            var consumerSecretKeyName = "HASHBUS_TWITTER_CONSUMER_SECRET";
+            var accessTokenSecretKeyName = "HASHBUS_TWITTER_ACCESS_TOKEN_SECRET";
+            var accessTokenKeyName = "HASHBUS_TWITTER_ACCESS_TOKEN";
 
             var consumerKey = Environment.GetEnvironmentVariable(consumerKeyName);
             if (consumerKey == null)
             {
-                throw new ArgumentException("Please make sure you have the {0} set in your enviroment variables", consumerKeyName);
+                throw new Exception($"{consumerKeyName} enviroment variable is not set.");
             }
 
             var consumerSecret = Environment.GetEnvironmentVariable(consumerSecretKeyName);
             if (consumerSecret == null)
             {
-                throw new ArgumentException("Please make sure you have the {0} set in your enviroment variables", consumerSecretKeyName);
+                throw new Exception($"{consumerSecretKeyName} enviroment variable is not set.");
             }
 
             var accessToken = Environment.GetEnvironmentVariable(accessTokenKeyName);
             if (accessToken == null)
             {
-                throw new ArgumentException("Please make sure you have the {0} set in your enviroment variables", accessTokenKeyName);
+                throw new Exception($"{accessTokenKeyName} enviroment variable is not set.");
             }
 
             var accessTokenSecret = Environment.GetEnvironmentVariable(accessTokenSecretKeyName);
             if (accessTokenSecret == null)
             {
-                throw new ArgumentException("Please make sure you have the {0} set in your enviroment variables", accessTokenSecretKeyName);
+                throw new Exception($"{accessTokenSecretKeyName} enviroment variable is not set.");
             }
 
-            App.RunAsync(nserviceBusConnectionString, track, consumerKey, consumerSecret, accessToken, accessTokenSecret)
+            App.RunAsync(
+                    nserviceBusConnectionString,
+                    track,
+                    consumerKey,
+                    consumerSecret,
+                    accessToken,
+                    accessTokenSecret,
+                    endpointName)
                 .GetAwaiter().GetResult();
         }
     }

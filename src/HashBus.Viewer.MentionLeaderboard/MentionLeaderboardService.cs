@@ -1,11 +1,11 @@
 ﻿namespace HashBus.Viewer.MentionLeaderboard
 {
-    using System.Threading.Tasks;
-    using LiteGuard;
-    using RestSharp;
-    using Newtonsoft.Json;
     using System;
     using System.Net;
+    using System.Threading.Tasks;
+    using LiteGuard;
+    using Newtonsoft.Json;
+    using RestSharp;
 
     class MentionLeaderboardService : IService<string, WebApi.MentionLeaderboard>
     {

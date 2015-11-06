@@ -38,10 +38,11 @@
         public string RetweetedTweetCreatedByName { get; set; }
 
         public string RetweetedTweetCreatedByScreenName { get; set; }
-		
+
         public string EndpointName { get; set; }
 
         public Guid SessionId { get; set; }
-        public bool Simulated { get; set; }
+
+        public bool IsSimulated { get; set; }
     }
 }

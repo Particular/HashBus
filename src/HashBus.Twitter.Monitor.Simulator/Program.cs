@@ -7,7 +7,8 @@ namespace HashBus.Twitter.Monitor.Simulator
         static void Main()
         {
             var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
-            App.Run(nserviceBusConnectionString);
+            var endpointName = ConfigurationManager.AppSettings["EndpointName"];
+            App.Run(nserviceBusConnectionString, endpointName);
         }
     }
 }

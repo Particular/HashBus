@@ -3,7 +3,7 @@ namespace HashBus.Twitter.Monitor
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-using ColoredConsole;
+    using ColoredConsole;
     using HashBus.Twitter.Events;
     using NServiceBus;
     using Tweetinvi;
@@ -11,8 +11,6 @@ using ColoredConsole;
 
     class Monitoring
     {
-        const string EndpointName = "HashBus.Twitter.Monitor";
-
         public static async Task StartAsync(
             ISendOnlyBus bus,
             string track,
@@ -20,7 +18,8 @@ using ColoredConsole;
             string consumerSecret,
             string accessToken,
             string accessTokenSecret,
-			Guid sessionId)
+            Guid sessionId,
+            string endpointName)
         {
             var credentials = new TwitterCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);
             var stream = Stream.CreateFilteredStream(credentials);
@@ -34,7 +33,7 @@ using ColoredConsole;
             {
                 var message = new TweetReceived
                 {
-                    EndpointName = EndpointName,
+                    EndpointName = endpointName,
                     SessionId = sessionId,
                     Track = track,
                     TweetId = e.Tweet.Id,

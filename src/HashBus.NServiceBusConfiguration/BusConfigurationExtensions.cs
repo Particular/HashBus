@@ -1,7 +1,7 @@
-﻿using NServiceBus;
-
-namespace HashBus.Conventions
+﻿namespace HashBus.NServiceBusConfiguration
 {
+    using NServiceBus;
+
     public static class BusConfigurationExtensions
     {
         public static void ApplyMessageConventions(this BusConfiguration configuration)
