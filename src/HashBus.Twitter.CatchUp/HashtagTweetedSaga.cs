@@ -14,9 +14,10 @@
             {
                 // reset session id
                 Console.WriteLine("==================             ====================");
-                Console.WriteLine("Handling HashtagTweeted with new session id message: EndpointName: {0}, Hashtag: {1} ", message.EndpointName, message.Track);
+                Console.WriteLine("Handling HashtagTweeted with new session id message: EndpointName: {0}, Hashtag: {1} simulated: {2}", message.EndpointName, message.Track, message.Simulated);
 
-                Bus.Send(new StartCatchUp {TweetId = Data.PreviousTweetId});                
+                if (!message.Simulated)
+                    Bus.Send(new StartCatchUp {TweetId = Data.PreviousTweetId});                
             }
 
             Data.PreviousSessionId = message.SessionId;

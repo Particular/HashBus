@@ -41,6 +41,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
                 var message = new TweetReceived
                 {
+                    Simulated = true,
                     EndpointName = endpointName,
                     SessionId = sessionId,
                     Track = track,
