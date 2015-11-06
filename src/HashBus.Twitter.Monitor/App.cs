@@ -1,6 +1,5 @@
 namespace HashBus.Twitter.Monitor
 {
-    using System;
     using System.Threading.Tasks;
     using HashBus.NServiceBusConfiguration;
     using NServiceBus;
@@ -33,7 +32,6 @@ namespace HashBus.Twitter.Monitor
                     consumerSecret,
                     accessToken,
                     accessTokenSecret,
-                    Guid.NewGuid(),
                     endpointName);
             }
         }
