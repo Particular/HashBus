@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace HashBus.Twitter.Events
 {
-    public class HashtagTweeted 
+    public class TweetReceived
     {
-        public string Hashtag { get; set; }
+        public string Track { get; set; }
 
         public long TweetId { get; set; }
 

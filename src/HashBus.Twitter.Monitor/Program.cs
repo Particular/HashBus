@@ -7,7 +7,7 @@ namespace HashBus.Twitter.Monitor
     {
         static void Main()
         {
-            var hashtag = ConfigurationManager.AppSettings["hashtag"];
+            var track = ConfigurationManager.AppSettings["Track"];
             var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
 
             var consumerKey = Environment.GetEnvironmentVariable("HASHBUS_TWITTER_CONSUMER_KEY");
@@ -35,7 +35,7 @@ namespace HashBus.Twitter.Monitor
                 throw new ArgumentException("Please make sure you have the 'HASHBUS_TWITTER_ACCESS_TOKEN_SECRET' set in your enviroment variables");
             }
 
-            App.RunAsync(nserviceBusConnectionString, hashtag, consumerKey, consumerSecret, accessToken, accessTokenSecret)
+            App.RunAsync(nserviceBusConnectionString, track, consumerKey, consumerSecret, accessToken, accessTokenSecret)
                 .GetAwaiter().GetResult();
         }
     }

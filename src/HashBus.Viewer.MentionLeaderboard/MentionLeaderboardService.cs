@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using LiteGuard;
 using RestSharp;
 using Newtonsoft.Json;
@@ -21,7 +21,8 @@ namespace HashBus.Viewer.MentionLeaderboard
 
         public async Task<WebApi.MentionLeaderboard> GetAsync(string key)
         {
-            var request = new RestRequest($"/mention-leaderboards/{key}");
+            // see https://github.com/NancyFx/Nancy/issues/1154
+            var request = new RestRequest($"/mention-leaderboards/{Uri.EscapeDataString(key.Replace("#", "해시"))}");
             var response = await this.client.ExecuteGetTaskAsync(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {

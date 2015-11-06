@@ -36,8 +36,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="TweetWithHashtag.cs" />
-    <Compile Include="UserMentionedWithHashtag.cs" />
+    <Compile Include="UserTweeted.cs" />
+    <Compile Include="UserMentioned.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

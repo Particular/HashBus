@@ -18,9 +18,12 @@ namespace HashBus.Twitter.Monitor.Simulator
                 Thread.Sleep((int)Math.Pow(random.Next(6), 5));
                 var now = DateTime.UtcNow;
                 var hashtag = "Simulated";
+                var track = $"#{hashtag}";
+                var hashtagText = track;
                 if (now.Millisecond % 3 == 0)
                 {
                     hashtag = hashtag.ToLowerInvariant();
+                    hashtagText = hashtagText.ToLowerInvariant();
                 }
 
                 var userId = random.Next(countOfUsers);
@@ -34,11 +37,11 @@ namespace HashBus.Twitter.Monitor.Simulator
                     string.Join(
                         string.Empty,
                         Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                    $" #{hashtag}";
+                    $" {hashtagText}";
 
-                var message = new HashtagTweeted
+                var message = new TweetReceived
                 {
-                    Hashtag = hashtag,
+                    Track = track,
                     TweetId = now.Ticks,
                     TweetCreatedAt = now,
                     TweetCreatedById = userId,
@@ -63,7 +66,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                         new Hashtag
                         {
                             Text = hashtag,
-                            Indices = new[] { text.Length - $"#{hashtag}".Length, text.Length, },
+                            Indices = new[] { text.Length - $"{hashtagText}".Length, text.Length, },
                         },
                     },
                     RetweetedTweetId = now.AddDays(-1000).Ticks,

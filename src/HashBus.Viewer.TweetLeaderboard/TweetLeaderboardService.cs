@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Net;
 using System.Threading.Tasks;
 using LiteGuard;
@@ -20,7 +20,8 @@ namespace HashBus.Viewer.TweetLeaderboard
 
         public async Task<WebApi.TweetLeaderboard> GetAsync(string key)
         {
-            var request = new RestRequest($"/tweet-leaderboards/{key}");
+            // see https://github.com/NancyFx/Nancy/issues/1154
+            var request = new RestRequest($"/tweet-leaderboards/{Uri.EscapeDataString(key.Replace("#", "해시"))}");
             var response = await this.client.ExecuteGetTaskAsync(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {

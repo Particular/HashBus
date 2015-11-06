@@ -2,9 +2,9 @@
 
 namespace HashBus.Application.Events
 {
-    public class UserMentionedWithHashtag
+    public class UserMentioned
     {
-        public string Hashtag { get; set; }
+        public string Track { get; set; }
 
         public long TweetId { get; set; }
 

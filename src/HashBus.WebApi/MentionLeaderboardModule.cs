@@ -9,10 +9,12 @@ namespace HashBus.WebApi
     {
         public MentionLeaderboardModule(IRepository<string, IEnumerable<Mention>> mentions)
         {
-            this.Get["/mention-leaderboards/{hashtag}", true] = async (parameters, __) =>
+            this.Get["/mention-leaderboards/{track}", true] = async (parameters, __) =>
             {
-                var hashtagMentions = (await mentions.GetAsync((string)parameters.hashtag)).ToList();
-                var entries = hashtagMentions
+                // see https://github.com/NancyFx/Nancy/issues/1154
+                var track = ((string)parameters.track).Replace("해시", "#");
+                var trackMentions = (await mentions.GetAsync(track)).ToList();
+                var entries = trackMentions
                     .GroupBy(mention => mention.UserMentionId)
                     .Select(g => new MentionLeaderboard.Entry
                     {
@@ -29,7 +31,7 @@ namespace HashBus.WebApi
                 return new MentionLeaderboard
                 {
                     Entries = entries,
-                    MentionsCount = hashtagMentions.Count,
+                    MentionsCount = trackMentions.Count,
                 };
             };
         }

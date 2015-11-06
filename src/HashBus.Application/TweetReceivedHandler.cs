@@ -8,24 +8,24 @@ using ColoredConsole;
 
 namespace HashBus.Application
 {
-    public class HashtagTweetedHandler : IHandleMessages<HashtagTweeted>
+    public class TweetReceivedHandler : IHandleMessages<TweetReceived>
     {
         private ISendOnlyBus bus;
 
-        public HashtagTweetedHandler(ISendOnlyBus bus)
+        public TweetReceivedHandler(ISendOnlyBus bus)
         {
             Guard.AgainstNullArgument("bus", bus);
 
             this.bus = bus;
         }
 
-        public void Handle(HashtagTweeted message)
+        public void Handle(TweetReceived message)
         {
             if (!message.TweetIsRetweet)
             {
-                var tweetWithHashtag = new TweetWithHashtag
+                var @event = new UserTweeted
                 {
-                    Hashtag = message.Hashtag,
+                    Track = message.Track,
                     TweetCreatedAt = message.TweetCreatedAt,
                     TweetCreatedById = message.TweetCreatedById,
                     TweetCreatedByIdStr = message.TweetCreatedByIdStr,
@@ -36,16 +36,17 @@ namespace HashBus.Application
                 };
 
                 ColorConsole.WriteLine(
-                    $"{tweetWithHashtag.TweetCreatedByName}".White(),
-                    $" @{tweetWithHashtag.TweetCreatedByScreenName}".DarkGray(),
-                    " tweeted ".Gray(),
-                    $"#{tweetWithHashtag.Hashtag}".DarkCyan().On(ConsoleColor.White),
+                    $" {@event.Track} ".DarkCyan().On(ConsoleColor.White),
+                    " ",
+                    "tweet by".Gray(),
+                    " ",
+                    $"@{@event.TweetCreatedByScreenName}".Cyan(),
                     $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
 
-                bus.Publish(tweetWithHashtag);
+                bus.Publish(@event);
             }
 
-            foreach (var mentionMessage in message.TweetUserMentions
+            foreach (var @event in message.TweetUserMentions
                 .Where(userMention =>
                     message.TweetCreatedById != userMention.Id &&
                     message.TweetCreatedByIdStr != userMention.IdStr &&
@@ -54,9 +55,9 @@ namespace HashBus.Application
                     message.RetweetedTweetCreatedByIdStr != userMention.IdStr &&
                     message.RetweetedTweetCreatedByScreenName != userMention.ScreenName &&
                     message.TweetText.Substring(0, userMention.Indices[0]).Trim().ToUpperInvariant() != "RT")
-                .Select(userMention => new UserMentionedWithHashtag
+                .Select(userMention => new UserMentioned
                 {
-                    Hashtag = message.Hashtag,
+                    Track = message.Track,
                     TweetId = message.TweetId,
                     TweetCreatedAt = message.TweetCreatedAt,
                     TweetCreatedById = message.TweetCreatedById,
@@ -72,15 +73,16 @@ namespace HashBus.Application
                 }))
             {
                 ColorConsole.WriteLine(
-                    $"{mentionMessage.TweetCreatedByName}".White(),
-                    $" @{mentionMessage.TweetCreatedByScreenName}".DarkGray(),
-                    mentionMessage.TweetIsRetweet ? " retweeted ".Gray() : " tweeted ".Gray(),
-                    $"@{mentionMessage.UserMentionScreenName}".Cyan(),
-                    $" and ".Gray(),
-                    $"#{mentionMessage.Hashtag}".DarkCyan().On(ConsoleColor.White),
+                    $" {@event.Track} ".DarkCyan().On(ConsoleColor.White),
+                    " ",
+                    (@event.TweetIsRetweet ? "retweet" : "tweet").Gray(),
+                    " ",
+                    "mentioning".Gray(),
+                    " ",
+                    $"@{@event.UserMentionScreenName}".Cyan(),
                     $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
 
-                bus.Publish(mentionMessage);
+                bus.Publish(@event);
             }
         }
     }

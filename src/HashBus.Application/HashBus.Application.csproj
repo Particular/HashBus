@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorQueueConfigurationProvider.cs" />
-    <Compile Include="HashtagTweetedHandler.cs" />
+    <Compile Include="TweetReceivedHandler.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
