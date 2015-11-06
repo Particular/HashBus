@@ -39,8 +39,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyMessageConventionsExtentions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BusConfigurationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
