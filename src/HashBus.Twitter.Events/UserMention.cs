@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace HashBus.Twitter.Events
+﻿namespace HashBus.Twitter.Events
 {
+    using System.Collections.Generic;
+
     public class UserMention
     {
         public long? Id { get; set; }

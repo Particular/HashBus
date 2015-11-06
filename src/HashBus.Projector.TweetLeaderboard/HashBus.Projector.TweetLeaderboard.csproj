@@ -69,9 +69,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\HashBus.Application\ErrorQueueConfigurationProvider.cs">
-      <Link>ErrorQueueConfigurationProvider.cs</Link>
-    </Compile>
     <Compile Include="TweetLeaderboardProjection.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />

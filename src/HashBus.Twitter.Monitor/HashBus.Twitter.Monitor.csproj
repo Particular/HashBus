@@ -133,9 +133,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\HashBus.Application\ErrorQueueConfigurationProvider.cs">
-      <Link>ErrorQueueConfigurationProvider.cs</Link>
-    </Compile>
     <Compile Include="Monitoring.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Writer.cs" />
@@ -149,6 +146,10 @@
     <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">
       <Project>{5728de02-c264-4697-b554-dda5fad10a47}</Project>
       <Name>HashBus.Twitter.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj">
+      <Project>{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}</Project>
+      <Name>HashBus.Twitter.Monitor.Commands</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

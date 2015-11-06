@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HashBus.ReadModel;
-using Nancy;
-
-namespace HashBus.WebApi
+﻿namespace HashBus.WebApi
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using HashBus.ReadModel;
+    using Nancy;
+
     public class TweetLeaderboardModule : NancyModule
     {
         public TweetLeaderboardModule(IRepository<string, IEnumerable<Tweet>> tweets)

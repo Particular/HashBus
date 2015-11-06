@@ -1,28 +1,24 @@
-namespace HashBus.Twitter.Monitor.Simulator
+﻿namespace HashBus.Twitter.Monitor.CatchUp
 {
+    using System;
+    using Conventions;
     using NServiceBus;
     using NServiceBus.Persistence;
-    using HashBus.Conventions;
-    using System;
 
     class App
     {
-        const string EndpointName = "HashBus.Twitter.Monitor";
-
-        public static void Run(string nserviceBusConnectionString)
+        public static void Run (string nserviceBusConnectionString)
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName(EndpointName);
+            busConfiguration.EndpointName("HashBus.Twitter.Monitor.CatchUp");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
             busConfiguration.ApplyMessageConventions();
 
-            using (var bus = Bus.Create(busConfiguration).Start())
+            using (Bus.Create(busConfiguration).Start())
             {
-                var sessionId = Guid.NewGuid();
-
-                Simulation.Start(bus, EndpointName, sessionId);
+                Console.ReadLine();
             }
         }
     }

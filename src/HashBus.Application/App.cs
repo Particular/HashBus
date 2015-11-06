@@ -1,10 +1,10 @@
-using System.Threading;
-using NServiceBus;
-using NServiceBus.Persistence;
-using HashBus.Conventions;
-
 namespace HashBus.Application
 {
+    using System.Threading;
+    using NServiceBus;
+    using NServiceBus.Persistence;
+    using Conventions;
+
     class App
     {
         public static void Run(string nserviceBusConnectionString)

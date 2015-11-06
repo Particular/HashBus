@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using HashBus.Application.Events;
-using HashBus.Twitter.Events;
-using LiteGuard;
-using NServiceBus;
-using ColoredConsole;
-
-namespace HashBus.Application
+﻿namespace HashBus.Application
 {
+    using System;
+    using System.Linq;
+    using HashBus.Application.Events;
+    using HashBus.Twitter.Events;
+    using LiteGuard;
+    using NServiceBus;
+    using ColoredConsole;
+
     public class TweetReceivedHandler : IHandleMessages<TweetReceived>
     {
         private ISendOnlyBus bus;

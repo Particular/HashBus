@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using ColoredConsole;
-using HashBus.ReadModel;
-using HashBus.ReadModel.MongoDB;
-using MongoDB.Driver;
-using Nancy;
-using Nancy.Bootstrapper;
-using Nancy.Hosting.Self;
-using Nancy.Responses.Negotiation;
-using Nancy.TinyIoc;
-
-namespace HashBus.WebApi
+﻿namespace HashBus.WebApi
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using ColoredConsole;
+    using HashBus.ReadModel;
+    using HashBus.ReadModel.MongoDB;
+    using MongoDB.Driver;
+    using Nancy;
+    using Nancy.Bootstrapper;
+    using Nancy.Hosting.Self;
+    using Nancy.Responses.Negotiation;
+    using Nancy.TinyIoc;
+
     class App
     {
         public static void Run(

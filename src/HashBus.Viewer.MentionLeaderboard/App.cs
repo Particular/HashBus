@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using RestSharp;
-
-namespace HashBus.Viewer.MentionLeaderboard
+﻿namespace HashBus.Viewer.MentionLeaderboard
 {
+    using System.Threading.Tasks;
+    using RestSharp;
+
     class App
     {
         public static async Task RunAsync(

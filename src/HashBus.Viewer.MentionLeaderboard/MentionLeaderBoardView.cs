@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ColoredConsole;
-using Humanizer;
-
-namespace HashBus.Viewer.MentionLeaderboard
+﻿namespace HashBus.Viewer.MentionLeaderboard
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using ColoredConsole;
+    using Humanizer;
+
     class MentionLeaderboardView
     {
         private static readonly Dictionary<int, string> movementTokens =

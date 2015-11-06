@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using LiteGuard;
-using RestSharp;
-using Newtonsoft.Json;
-
-namespace HashBus.Viewer.MentionLeaderboard
+﻿namespace HashBus.Viewer.MentionLeaderboard
 {
+    using System.Threading.Tasks;
+    using LiteGuard;
+    using RestSharp;
+    using Newtonsoft.Json;
     using System;
     using System.Net;
 

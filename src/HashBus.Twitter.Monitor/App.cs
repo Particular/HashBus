@@ -1,16 +1,19 @@
-using System.Threading.Tasks;
-using NServiceBus;
-using NServiceBus.Persistence;
-using HashBus.Conventions;
-
 namespace HashBus.Twitter.Monitor
 {
+    using System.Threading.Tasks;
+    using NServiceBus;
+    using NServiceBus.Persistence;
+    using Conventions;
+    using System;
+
     class App
     {
+        const string EndpointName = "HashBus.Twitter.Monitor";
+
         public static async Task RunAsync(string nserviceBusConnectionString, string track, string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret)
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Twitter.Monitor");
+            busConfiguration.EndpointName(EndpointName);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
@@ -18,7 +21,7 @@ namespace HashBus.Twitter.Monitor
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
-                await Monitoring.StartAsync(bus, track, consumerKey, consumerSecret, accessToken, accessTokenSecret);
+                await Monitoring.StartAsync(bus, track, consumerKey, consumerSecret, accessToken, accessTokenSecret, Guid.NewGuid());
             }
         }
     }

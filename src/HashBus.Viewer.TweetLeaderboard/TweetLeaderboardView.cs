@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ColoredConsole;
-using Humanizer;
-
-namespace HashBus.Viewer.TweetLeaderboard
+﻿namespace HashBus.Viewer.TweetLeaderboard
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using ColoredConsole;
+    using Humanizer;
+
     class TweetLeaderboardView
     {
         private static readonly Dictionary<int, string> movementTokens =
