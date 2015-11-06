@@ -7,10 +7,10 @@
 
     class App
     {
-        public static void Run (string nserviceBusConnectionString)
+        public static void Run(string nserviceBusConnectionString, string endpointName)
         {
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Twitter.Monitor.CatchUp");
+            busConfiguration.EndpointName(endpointName);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);

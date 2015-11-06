@@ -6,9 +6,9 @@
     {
         static void Main()
         {
-            var nserviceBusConnectionString = ConfigurationManager.ConnectionStrings["NServiceBusConnectionString"].ConnectionString;
-
-            App.Run(nserviceBusConnectionString);
+            var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
+            var endpointName = ConfigurationManager.AppSettings["EndpointName"];
+            App.Run(nserviceBusConnectionString, endpointName);
         }
     }
 }

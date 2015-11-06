@@ -4,18 +4,16 @@
     using NServiceBus.Persistence.NHibernate;
     using NServiceBus.Saga;
 
-    class HashtagTweetedSagaFinder : IFindSagas<HashtagTweetedSagaData>.Using<TweetReceived>
+    class TweetReceivedSagaFinder : IFindSagas<TweetReceivedSagaData>.Using<TweetReceived>
     {
-        public HashtagTweetedSagaFinder(NHibernateStorageContext storageContext)
+        public TweetReceivedSagaFinder(NHibernateStorageContext storageContext)
         {
             this.storageContext = storageContext;
         }
 
-        public HashtagTweetedSagaData FindBy(TweetReceived message)
+        public TweetReceivedSagaData FindBy(TweetReceived message)
         {
-            var session = storageContext.Session;
-
-            return session.QueryOver<HashtagTweetedSagaData>()
+            return this.storageContext.Session.QueryOver<TweetReceivedSagaData>()
                 .Where(d => d.Hashtag == message.Track).And(e => e.EndpointName == message.EndpointName)
                 .SingleOrDefault();
         }

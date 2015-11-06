@@ -1,4 +1,4 @@
-﻿namespace HashBus
+﻿namespace HashBus.Conventions
 {
     using NServiceBus.Config;
     using NServiceBus.Config.ConfigurationSource;

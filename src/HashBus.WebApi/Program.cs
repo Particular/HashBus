@@ -1,7 +1,7 @@
 ﻿namespace HashBus.WebApi
 {
-    using System.Configuration;
     using System;
+    using System.Configuration;
 
     class Program
     {
