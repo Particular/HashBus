@@ -6,21 +6,21 @@
     using NServiceBus.Saga;
 
     public class HashtagTweetedSaga : Saga<HashtagTweetedSagaData>,
-        IAmStartedByMessages<HashtagTweeted>
+        IAmStartedByMessages<TweetReceived>
     {
-        public void Handle(HashtagTweeted message)
+        public void Handle(TweetReceived message)
         {
             if (Data.PreviousSessionId != Guid.Empty && Data.PreviousSessionId != message.SessionId)
             {
                 // reset session id
                 Console.WriteLine("==================             ====================");
-                Console.WriteLine("Handling HashtagTweeted with new session id message: EndpointName: {0}, Hashtag: {1} ", message.EndpointName, message.Hashtag);
+                Console.WriteLine("Handling HashtagTweeted with new session id message: EndpointName: {0}, Hashtag: {1} ", message.EndpointName, message.Track);
 
                 Bus.Send(new StartCatchUp {TweetId = Data.PreviousTweetId});                
             }
 
             Data.PreviousSessionId = message.SessionId;
-            Data.Hashtag = message.Hashtag;
+            Data.Hashtag = message.Track;
             Data.EndpointName = message.EndpointName;
             Data.PreviousTweetId = message.TweetId;
         }

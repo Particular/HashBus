@@ -11,6 +11,8 @@ using ColoredConsole;
 
     class Monitoring
     {
+        const string EndpointName = "HashBus.Twitter.Monitor";
+
         public static async Task StartAsync(
             ISendOnlyBus bus,
             string track,
@@ -32,7 +34,7 @@ using ColoredConsole;
             {
                 var message = new TweetReceived
                 {
-                    EndpointName = endpointName,
+                    EndpointName = EndpointName,
                     SessionId = sessionId,
                     Track = track,
                     TweetId = e.Tweet.Id,

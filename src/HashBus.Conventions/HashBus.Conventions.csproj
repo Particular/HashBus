@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AuditQueueProvider.cs" />
     <Compile Include="BusConfigurationExtensions.cs" />
+    <Compile Include="ErrorQueueConfigurationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

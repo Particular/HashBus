@@ -55,6 +55,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="HashtagTweetedSagaFinder.cs" />
     <Compile Include="HashtagTweetedSaga.cs" />
     <Compile Include="HashtagTweetedSagaData.cs" />
@@ -71,6 +72,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HashBus.Conventions\HashBus.Conventions.csproj">
+      <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
+      <Name>HashBus.Conventions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj">
       <Project>{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}</Project>
       <Name>HashBus.Twitter.Monitor.Commands</Name>

@@ -21,9 +21,7 @@ namespace HashBus.Twitter.Monitor
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
-                var sessionId = Guid.NewGuid();
-
-                await Monitoring.StartAsync(bus, track, consumerKey, consumerSecret, accessToken, accessTokenSecret);
+                await Monitoring.StartAsync(bus, track, consumerKey, consumerSecret, accessToken, accessTokenSecret, Guid.NewGuid());
             }
         }
     }

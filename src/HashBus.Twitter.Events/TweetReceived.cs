@@ -5,7 +5,7 @@
 
     public class TweetReceived
     {
-        public string Hashtag { get; set; }
+        public string Track { get; set; }
 
         public long TweetId { get; set; }
 
