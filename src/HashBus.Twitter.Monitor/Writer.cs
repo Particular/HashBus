@@ -28,7 +28,7 @@ namespace HashBus.Twitter.Monitor
             {
                 ColorConsole.WriteLine(
                     $"{message.TweetCreatedByName} ".White(),
-                    $"{message.TweetCreatedByScreenName} · ".DarkGray(),
+                    $"@{message.TweetCreatedByScreenName} · ".DarkGray(),
                     $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray());
             }
 
