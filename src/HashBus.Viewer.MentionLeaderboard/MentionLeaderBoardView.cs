@@ -89,9 +89,10 @@
                         tokens.Add($" ({currentEntry.Count / (double)currentLeaderboard.MentionsCount:P0})".DarkGray());
                     }
 
-                    tokens.Add(new string(' ', Math.Max(0, Console.WindowWidth - 1 - tokens.Sum(token => token.Text.Length))));
+                    var maxWidth = Console.WindowWidth - 1;
+                    tokens.Add(new string(' ', Math.Max(0, maxWidth - tokens.Sum(token => token.Text.Length))));
 
-                    lines.Add(tokens.Select(token => token.On(movementBackgroundColors[movement])).ToArray());
+                    lines.Add(tokens.Trim(maxWidth).Select(token => token.On(movementBackgroundColors[movement])).ToArray());
                 }
 
                 Console.Clear();
