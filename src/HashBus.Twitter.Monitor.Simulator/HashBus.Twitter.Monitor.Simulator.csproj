@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
-      <Project>{f302f223-c0cd-46a6-8bb6-01f1213bdd58}</Project>
+      <Project>{BC4B11B8-4DC3-4DFF-B3D3-B091B54E1277}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">

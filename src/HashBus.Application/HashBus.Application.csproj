@@ -84,7 +84,7 @@
       <Name>HashBus.Application.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
-      <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
+      <Project>{BC4B11B8-4DC3-4DFF-B3D3-B091B54E1277}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">
