@@ -89,8 +89,7 @@
                 Console.Clear();
                 ColorConsole.WriteLine(
                     $" {track} ".DarkCyan().On(ConsoleColor.White),
-                    " mentions".Gray(),
-                    $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
+                    " Most Mentioned".White());
 
                 ColorConsole.WriteLine(
                     "Powered by ".DarkGray(),
@@ -98,12 +97,18 @@
                     " from ".DarkGray(),
                     "Particular Software".White());
 
+                ColorConsole.WriteLine();
                 foreach (var line in lines)
                 {
                     ColorConsole.WriteLine(line);
                 }
 
-                ColorConsole.WriteLine($"Total mentions: {currentLeaderboard?.MentionsCount ?? 0:N0}".DarkGray());
+                ColorConsole.WriteLine(
+                    $"Total mentions:".Gray(),
+                    " ",
+                    $"{currentLeaderboard?.MentionsCount ?? 0:N0}"
+                        .Color(currentLeaderboard?.MentionsCount - previousLeaderboard?.MentionsCount > 0 ? movementColors[-1] : movementColors[0]),
+                    $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
 
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);

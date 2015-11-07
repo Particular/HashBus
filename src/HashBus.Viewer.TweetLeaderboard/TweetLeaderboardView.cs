@@ -89,8 +89,7 @@
                 Console.Clear();
                 ColorConsole.WriteLine(
                     $" {track} ".DarkCyan().On(ConsoleColor.White),
-                    " tweets".Gray(),
-                    $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
+                    " Top Tweeters".White());
 
                 ColorConsole.WriteLine(
                     "Powered by ".DarkGray(),
@@ -98,12 +97,18 @@
                     " from ".DarkGray(),
                     "Particular Software".White());
 
+                ColorConsole.WriteLine();
                 foreach (var line in lines)
                 {
                     ColorConsole.WriteLine(line);
                 }
 
-                ColorConsole.WriteLine($"Total tweets: {currentLeaderboard?.TweetsCount ?? 0:N0}".DarkGray());
+                ColorConsole.WriteLine(
+                    "Total tweets:".Gray(),
+                    " ",
+                    $"{currentLeaderboard?.TweetsCount ?? 0:N0}"
+                        .Color(currentLeaderboard?.TweetsCount - previousLeaderboard?.TweetsCount > 0 ? movementColors[-1] : movementColors[0]),
+                    $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
 
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);

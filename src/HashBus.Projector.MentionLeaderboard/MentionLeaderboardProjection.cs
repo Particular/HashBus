@@ -41,11 +41,12 @@
             this.mentions.SaveAsync(message.Track, trackMentions).GetAwaiter().GetResult();
 
             ColorConsole.WriteLine(
+                $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray(),
+                " ",
                 "Added ".Gray(),
                 $"@{message.UserMentionScreenName}".Cyan(),
                 " mention to ".Gray(),
-                $" {message.Track} ".DarkCyan().On(ConsoleColor.White),
-                $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
+                $" {message.Track} ".DarkCyan().On(ConsoleColor.White));
         }
     }
 }

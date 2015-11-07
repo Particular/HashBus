@@ -36,12 +36,13 @@
                 };
 
                 ColorConsole.WriteLine(
+                    $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray(),
+                    " ",
                     $" {@event.Track} ".DarkCyan().On(ConsoleColor.White),
                     " ",
                     "tweet by".Gray(),
                     " ",
-                    $"@{@event.TweetCreatedByScreenName}".Cyan(),
-                    $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
+                    $"@{@event.TweetCreatedByScreenName}".Cyan());
 
                 bus.Publish(@event);
             }
@@ -73,14 +74,15 @@
                 }))
             {
                 ColorConsole.WriteLine(
+                    $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray(),
+                    " ",
                     $" {@event.Track} ".DarkCyan().On(ConsoleColor.White),
                     " ",
                     (@event.TweetIsRetweet ? "retweet" : "tweet").Gray(),
                     " ",
                     "mentioning".Gray(),
                     " ",
-                    $"@{@event.UserMentionScreenName}".Cyan(),
-                    $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
+                    $"@{@event.UserMentionScreenName}".Cyan());
 
                 bus.Publish(@event);
             }
