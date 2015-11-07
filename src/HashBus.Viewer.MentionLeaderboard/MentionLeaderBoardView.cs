@@ -38,7 +38,12 @@
             };
 
         public static async Task StartAsync(
-            string track, int refreshInterval, IService<string, WebApi.MentionLeaderboard> leaderboards, bool showPercentages)
+            string track,
+            int refreshInterval,
+            IService<string, WebApi.MentionLeaderboard> leaderboards,
+            bool showPercentages,
+            int verticalPadding,
+            int horizontalPadding)
         {
             var previousLeaderboard = new WebApi.MentionLeaderboard();
             while (true)
@@ -56,7 +61,7 @@
                 }
 
                 var position = 0;
-                var lines = new List<ColorToken[]>();
+                var lines = new List<IEnumerable<ColorToken>>();
                 foreach (var currentEntry in currentLeaderboard?.Entries ??
                     Enumerable.Empty<WebApi.MentionLeaderboard.Entry>())
                 {
@@ -89,18 +94,26 @@
                         tokens.Add($" ({currentEntry.Count / (double)currentLeaderboard.MentionsCount:P0})".DarkGray());
                     }
 
-                    var maxWidth = Console.WindowWidth - 1;
+                    var maxWidth = Console.WindowWidth - (horizontalPadding * 2);
                     tokens.Add(new string(' ', Math.Max(0, maxWidth - tokens.Sum(token => token.Text.Length))));
 
-                    lines.Add(tokens.Trim(maxWidth).Select(token => token.On(movementBackgroundColors[movement])).ToArray());
+                    lines.Add(tokens.Trim(maxWidth).Select(token => token.On(movementBackgroundColors[movement])));
                 }
 
                 Console.Clear();
+                for (var newLine = verticalPadding - 1; newLine >= 0; newLine--)
+                {
+                    ColorConsole.WriteLine();
+                }
+
+                var padding = new string(' ', horizontalPadding);
                 ColorConsole.WriteLine(
+                    padding,
                     $" {track} ".DarkCyan().On(ConsoleColor.White),
                     " Most Mentioned".White());
 
                 ColorConsole.WriteLine(
+                    padding,
                     "Powered by ".DarkGray(),
                     " NServiceBus ".White().OnDarkBlue(),
                     " from ".DarkGray(),
@@ -109,10 +122,11 @@
                 ColorConsole.WriteLine();
                 foreach (var line in lines)
                 {
-                    ColorConsole.WriteLine(line);
+                    ColorConsole.WriteLine(new ColorToken[] { padding }.Concat(line).ToArray());
                 }
 
                 ColorConsole.WriteLine(
+                    padding,
                     $"Total mentions:".Gray(),
                     " ",
                     $"{currentLeaderboard?.MentionsCount ?? 0:N0}"
@@ -124,7 +138,7 @@
                 using (var timer = new Timer(c =>
                 {
                     var timeLeft = new TimeSpan(0, 0, 0, (int)Math.Round((refreshTime - DateTime.UtcNow).TotalSeconds));
-                    var message = $"\rRefreshing in {timeLeft.Humanize()}...";
+                    var message = $"\r{padding}Refreshing in {timeLeft.Humanize()}...";
                     maxMessageLength = Math.Max(maxMessageLength, message.Length);
                     ColorConsole.Write(message.PadRight(maxMessageLength).DarkGray());
                 }))
