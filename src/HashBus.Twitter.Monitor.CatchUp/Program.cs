@@ -7,6 +7,8 @@
     {
         static void Main()
         {
+            var maximumNumberOfTweetsPerCatchUp = int.Parse(ConfigurationManager.AppSettings["MaximumNumberOfTweetsPerCatchUp"]);
+            var defaultTransactionTimeout = TimeSpan.Parse(ConfigurationManager.AppSettings["defaultTransactionTimeout"]);
             var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
             var endpointName = ConfigurationManager.AppSettings["EndpointName"];
 
@@ -39,7 +41,15 @@
                 throw new Exception($"{accessTokenSecretKeyName} enviroment variable is not set.");
             }
 
-            App.Run(nserviceBusConnectionString, endpointName, consumerKey, consumerSecret, accessToken, accessTokenSecret);
+            App.Run(
+                maximumNumberOfTweetsPerCatchUp,
+                defaultTransactionTimeout,
+                nserviceBusConnectionString, 
+                endpointName,
+                consumerKey, 
+                consumerSecret,
+                accessToken,
+                accessTokenSecret);
         }
     }
 }

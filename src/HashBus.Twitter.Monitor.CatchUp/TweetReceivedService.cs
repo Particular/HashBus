@@ -10,15 +10,18 @@
 
     class TweetReceivedService : ITweetReceivedService
     {
-        public TweetReceivedService(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret)
+        private readonly int maximumNumberOfTweets;
+
+        public TweetReceivedService(int maximumNumberOfTweets, string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret)
         {
+            this.maximumNumberOfTweets = maximumNumberOfTweets;
             Auth.SetCredentials(new TwitterCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret));
         }
 
         public IEnumerable<TweetReceived> Get(string track, long sinceTweetId, string endpointName, Guid sessionId)
         {
             return Search
-                .SearchTweets(new TweetSearchParameters(track) { SinceId = sinceTweetId, })
+                .SearchTweets(new TweetSearchParameters(track) { SinceId = sinceTweetId, MaximumNumberOfResults = this.maximumNumberOfTweets })
                 .Select(tweet => TweetMapper.Map(tweet, endpointName, sessionId, track));
         }
     }

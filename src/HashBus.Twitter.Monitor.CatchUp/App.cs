@@ -8,6 +8,8 @@
     class App
     {
         public static void Run(
+            int maximumNumberOfTweetsPerCatchUp,
+            TimeSpan defaultTransactionTimeout,
             string nserviceBusConnectionString,
             string endpointName,
             string consumerKey,
@@ -16,13 +18,14 @@
             string accessTokenSecret)
         {
             var busConfiguration = new BusConfiguration();
+            busConfiguration.Transactions().DefaultTimeout(defaultTransactionTimeout);
             busConfiguration.EndpointName(endpointName);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
             busConfiguration.ApplyMessageConventions();
             busConfiguration.RegisterComponents(c=>c.RegisterSingleton<ITweetReceivedService>(
-                new TweetReceivedService(consumerKey, consumerSecret, accessToken, accessTokenSecret)));
+                new TweetReceivedService(maximumNumberOfTweetsPerCatchUp, consumerKey, consumerSecret, accessToken, accessTokenSecret)));
 
             using (Bus.Create(busConfiguration).Start())
             {
