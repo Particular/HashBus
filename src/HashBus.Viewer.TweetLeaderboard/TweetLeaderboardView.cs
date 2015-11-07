@@ -40,8 +40,6 @@
         public static async Task StartAsync(
             string track, int refreshInterval, IService<string, WebApi.TweetLeaderboard> leaderboards, bool showPercentages)
         {
-            var start = DateTime.UtcNow;
-            var initialCount = (int?)null;
             var previousLeaderboard = new WebApi.TweetLeaderboard();
             while (true)
             {
@@ -105,10 +103,7 @@
                     ColorConsole.WriteLine(line);
                 }
 
-                ColorConsole.Write($"Total tweets: {currentLeaderboard?.TweetsCount ?? 0:N0}".DarkGray());
-                ColorConsole.WriteLine(initialCount.HasValue
-                    ? $" ({(currentLeaderboard?.TweetsCount - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
-                    : string.Empty);
+                ColorConsole.WriteLine($"Total tweets: {currentLeaderboard?.TweetsCount ?? 0:N0}".DarkGray());
 
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);
@@ -124,7 +119,6 @@
                     Thread.Sleep(refreshInterval);
                 }
 
-                initialCount = initialCount ?? currentLeaderboard?.TweetsCount;
                 previousLeaderboard = currentLeaderboard;
             }
         }
