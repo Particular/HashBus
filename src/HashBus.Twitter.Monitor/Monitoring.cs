@@ -43,7 +43,11 @@ namespace HashBus.Twitter.Monitor
                             $"{sessionId}".White());
                     };
 
-                    stream.StreamStopped += (sender, args) => ColorConsole.WriteLine($"{DateTime.UtcNow.ToLocalTime()} ".DarkGray(), $" {track} ".DarkCyan().OnWhite(), " stream stopped.".Red(), $" {args.Exception.Message}".DarkRed());
+                    stream.StreamStopped += (sender, args) => ColorConsole.WriteLine(
+                        $"{DateTime.UtcNow.ToLocalTime()} ".DarkGray(),
+                        $" {track} ".DarkCyan().OnWhite(),
+                        " stream stopped.".Red(),
+                        args.Exception == null ? string.Empty : $" {args.Exception.Message}".DarkRed());
 
                     stream.MatchingTweetReceived += (sender, e) =>
                     {
