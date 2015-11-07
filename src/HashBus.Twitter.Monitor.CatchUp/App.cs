@@ -18,6 +18,7 @@
             string accessTokenSecret)
         {
             var busConfiguration = new BusConfiguration();
+            busConfiguration.Transactions().DoNotWrapHandlersExecutionInATransactionScope();
             busConfiguration.Transactions().DefaultTimeout(defaultTransactionTimeout);
             busConfiguration.EndpointName(endpointName);
             busConfiguration.UseSerialization<JsonSerializer>();
