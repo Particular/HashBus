@@ -76,14 +76,22 @@
 
                     var countMovement = Math.Sign(Math.Min(previousEntry?.Entry.Count - currentEntry.Count ?? 0, movement));
 
-                    lines.Add(new[]
+                    var tokens = new List<ColorToken>
                     {
-                        $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]).On(movementBackgroundColors[movement]),
-                        $" {currentEntry.UserName}".White().On(movementBackgroundColors[movement]),
-                        $" @{currentEntry.UserScreenName}".Cyan().On(movementBackgroundColors[movement]),
-                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]).On(movementBackgroundColors[movement]),
-                        showPercentages ? $" ({currentEntry.Count / (double)currentLeaderboard.TweetsCount:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
-                    });
+                        $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]),
+                        $" {currentEntry.UserName}".White(),
+                        $" @{currentEntry.UserScreenName}".Cyan(),
+                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]),
+                    };
+
+                    if (showPercentages)
+                    {
+                        tokens.Add($" ({currentEntry.Count / (double)currentLeaderboard.TweetsCount:P0})".DarkGray());
+                    }
+
+                    tokens.Add(new string(' ', Math.Max(0, Console.WindowWidth - 1 - tokens.Sum(token => token.Text.Length))));
+
+                    lines.Add(tokens.Select(token => token.On(movementBackgroundColors[movement])).ToArray());
                 }
 
                 Console.Clear();
