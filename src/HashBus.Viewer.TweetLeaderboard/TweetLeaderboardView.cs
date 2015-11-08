@@ -45,6 +45,7 @@
             int verticalPadding,
             int horizontalPadding)
         {
+            Console.CursorVisible = false;
             var previousLeaderboard = new WebApi.TweetLeaderboard();
             while (true)
             {
