@@ -1,4 +1,4 @@
-﻿namespace HashBus.Twitter.Events
+﻿namespace HashBus.Application.Events
 {
     public class Hashtag
     {

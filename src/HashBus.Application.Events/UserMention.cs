@@ -1,10 +1,10 @@
-﻿namespace HashBus.Twitter.Events
+﻿namespace HashBus.Application.Events
 {
     using System.Collections.Generic;
 
     public class UserMention
     {
-        public long? Id { get; set; }
+        public long Id { get; set; }
 
         public string IdStr { get; set; }
 

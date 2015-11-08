@@ -2,49 +2,58 @@ namespace HashBus.Twitter.Monitor
 {
     using System;
     using System.Linq;
+    using HashBus.Application.Events;
     using HashBus.Twitter.Events;
     using Tweetinvi.Core.Interfaces;
 
     static class TweetMapper
     {
-        public static TweetReceived Map(ITweet tweet, string endpointName, Guid sessionId, string track)
+        public static TweetReceived Map(ITweet tweet, string track, string endpointName, Guid sessionId)
         {
             return new TweetReceived
             {
                 EndpointName = endpointName,
                 SessionId = sessionId,
-                Track = track,
-                TweetId = tweet.Id,
-                TweetCreatedAt = tweet.CreatedAt,
-                TweetCreatedById = tweet.CreatedBy.Id,
-                TweetCreatedByIdStr = tweet.CreatedBy.IdStr,
-                TweetCreatedByName = tweet.CreatedBy.Name,
-                TweetCreatedByScreenName = tweet.CreatedBy.ScreenName,
-                TweetIsRetweet = tweet.IsRetweet,
-                TweetText = tweet.Text,
-                TweetUserMentions = tweet.UserMentions
-                    .Select(userMention => new UserMention
-                    {
-                        Id = userMention.Id,
-                        IdStr = userMention.IdStr,
-                        Indices = userMention.Indices,
-                        Name = userMention.Name,
-                        ScreenName = userMention.ScreenName,
-                    })
-                    .ToArray(),
-                RetweetedTweetId = tweet.IsRetweet ? tweet.RetweetedTweet.Id : default(long),
-                RetweetedTweetCreatedAt = tweet.IsRetweet ? tweet.RetweetedTweet.CreatedAt : default(DateTime),
-                RetweetedTweetCreatedById = tweet.IsRetweet ? tweet.RetweetedTweet.CreatedBy.Id : default(long),
-                RetweetedTweetCreatedByIdStr = tweet.IsRetweet ? tweet.RetweetedTweet.CreatedBy.IdStr : default(string),
-                RetweetedTweetCreatedByName = tweet.IsRetweet ? tweet.RetweetedTweet.CreatedBy.Name : default(string),
-                RetweetedTweetCreatedByScreenName = tweet.IsRetweet ? tweet.RetweetedTweet.CreatedBy.ScreenName : default(string),
-                TweetHashtags = tweet.Hashtags
-                    .Select(ht => new Hashtag
-                    {
-                        Text = ht.Text,
-                        Indices = ht.Indices,
-                    }).ToArray(),
+                Tweet = Map(tweet, track)
             };
+        }
+
+        private static Tweet Map(ITweet tweet, string track)
+        {
+            return tweet == null
+                ? null
+                : new Tweet
+                {
+                    Track = track,
+                    Id = tweet.Id,
+                    CreatedAt = tweet.CreatedAt,
+                    CreatedById = tweet.CreatedBy.Id,
+                    CreatedByIdStr = tweet.CreatedBy.IdStr,
+                    CreatedByName = tweet.CreatedBy.Name,
+                    CreatedByScreenName = tweet.CreatedBy.ScreenName,
+                    Text = tweet.Text,
+                    UserMentions = tweet.UserMentions
+                        .Where(userMention => userMention.Id.HasValue)
+                        .Select(userMention =>
+                            new UserMention
+                            {
+                                Id = userMention.Id.Value,
+                                IdStr = userMention.IdStr,
+                                Indices = userMention.Indices,
+                                Name = userMention.Name,
+                                ScreenName = userMention.ScreenName,
+                            })
+                        .ToList(),
+                    Hashtags = tweet.Hashtags
+                        .Select(hashtag =>
+                            new Hashtag
+                            {
+                                Text = hashtag.Text,
+                                Indices = hashtag.Indices,
+                            })
+                        .ToList(),
+                    RetweetedTweet = Map(tweet.RetweetedTweet, track),
+                };
         }
     }
 }

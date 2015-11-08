@@ -31,7 +31,7 @@
                 this.tweetsReceived.Get(message.Track, message.TweetId, message.EndpointName, message.SessionId))
             {
                 ++count;
-                Writer.Write(tweetReceived);
+                Writer.Write(tweetReceived.Tweet);
                 this.bus.Publish(tweetReceived);
             }
 

@@ -140,6 +140,10 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HashBus.Application.Events\HashBus.Application.Events.csproj">
+      <Project>{6991a5cf-25cb-4336-9f6d-2eb1e01efb75}</Project>
+      <Name>HashBus.Application.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
       <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>

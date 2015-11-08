@@ -9,7 +9,7 @@
     using LiteGuard;
     using NServiceBus;
 
-    public class MentionLeaderboardProjection : IHandleMessages<UserMentioned>
+    public class MentionLeaderboardProjection : IHandleMessages<TweetAnalyzed>
     {
         private readonly IRepository<string, IEnumerable<Mention>> mentions;
 
@@ -20,33 +20,44 @@
             this.mentions = mentions;
         }
 
-        public void Handle(UserMentioned message)
+        public void Handle(TweetAnalyzed message)
         {
-            var trackMentions = this.mentions.GetAsync(message.Track).GetAwaiter().GetResult().ToList();
-            if (!message.UserMentionId.HasValue ||
-                trackMentions.Any(mention => mention.TweetId == message.TweetId && mention.UserMentionId == message.UserMentionId))
+            if (!message.Tweet.UserMentions.Any())
             {
                 return;
             }
 
-            trackMentions.Add(new Mention
+            var trackMentions = this.mentions.GetAsync(message.Tweet.Track).GetAwaiter().GetResult().ToList();
+            if (trackMentions.Any(mention => mention.TweetId == message.Tweet.Id))
             {
-                TweetId = message.TweetId,
-                UserMentionId = message.UserMentionId,
-                UserMentionIdStr = message.UserMentionIdStr,
-                UserMentionName = message.UserMentionName,
-                UserMentionScreenName = message.UserMentionScreenName,
-            });
+                return;
+            }
 
-            this.mentions.SaveAsync(message.Track, trackMentions).GetAwaiter().GetResult();
+            var newMentions = message.Tweet.UserMentions.Select(userMention =>
+                    new Mention
+                    {
+                        TweetId = message.Tweet.Id,
+                        UserMentionId = userMention.Id,
+                        UserMentionIdStr = userMention.IdStr,
+                        UserMentionName = userMention.Name,
+                        UserMentionScreenName = userMention.ScreenName,
+                    })
+                .ToList();
 
-            ColorConsole.WriteLine(
-                $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray(),
-                " ",
-                "Added ".Gray(),
-                $"@{message.UserMentionScreenName}".Cyan(),
-                " mention to ".Gray(),
-                $" {message.Track} ".DarkCyan().On(ConsoleColor.White));
+            trackMentions.AddRange(newMentions);
+
+            this.mentions.SaveAsync(message.Tweet.Track, trackMentions).GetAwaiter().GetResult();
+
+            foreach (var mention in newMentions)
+            {
+                ColorConsole.WriteLine(
+                    $"{message.Tweet.CreatedAt.ToLocalTime()}".DarkGray(),
+                    " ",
+                    "Added ".Gray(),
+                    $"@{mention.UserMentionScreenName}".Cyan(),
+                    " mention to ".Gray(),
+                    $" {message.Tweet.Track} ".DarkCyan().On(ConsoleColor.White));
+            }
         }
     }
 }

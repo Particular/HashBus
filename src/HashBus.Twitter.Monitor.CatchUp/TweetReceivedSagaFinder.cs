@@ -14,7 +14,7 @@
         public TweetReceivedSagaData FindBy(TweetReceived message)
         {
             return this.storageContext.Session.QueryOver<TweetReceivedSagaData>()
-                .Where(d => d.Hashtag == message.Track).And(e => e.EndpointName == message.EndpointName)
+                .Where(d => d.Hashtag == message.Tweet.Track).And(e => e.EndpointName == message.EndpointName)
                 .SingleOrDefault();
         }
 

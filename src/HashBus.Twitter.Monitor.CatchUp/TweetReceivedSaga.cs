@@ -20,7 +20,7 @@
                         " ",
                         "for".Gray(),
                         " ",
-                        $" {message.Track} ".DarkCyan().OnWhite(),
+                        $" {message.Tweet.Track} ".DarkCyan().OnWhite(),
                         " ",
                         "is simulated and doesn't need catch up".Gray());
                 }
@@ -31,7 +31,7 @@
                         " ",
                         "for".Gray(),
                         " ",
-                        $" {message.Track} ".DarkCyan().OnWhite(),
+                        $" {message.Tweet.Track} ".DarkCyan().OnWhite(),
                         " ",
                         "needs catch up from tweet".Gray(),
                         " ",
@@ -41,16 +41,16 @@
                     {
                         TweetId = Data.PreviousTweetId,
                         EndpointName = message.EndpointName,
-                        Track = message.Track,
+                        Track = message.Tweet.Track,
                         SessionId = message.SessionId,
                     });
                 }
             }
 
             Data.PreviousSessionId = message.SessionId;
-            Data.Hashtag = message.Track;
+            Data.Hashtag = message.Tweet.Track;
             Data.EndpointName = message.EndpointName;
-            Data.PreviousTweetId = message.TweetId;
+            Data.PreviousTweetId = message.Tweet.Id;
         }
 
         /// <remarks>

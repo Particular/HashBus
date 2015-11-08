@@ -4,12 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using ColoredConsole;
-    using HashBus.Application.Events;
     using HashBus.ReadModel;
     using LiteGuard;
     using NServiceBus;
 
-    public class TweetLeaderboardProjection : IHandleMessages<UserTweeted>
+    public class TweetLeaderboardProjection : IHandleMessages<Application.Events.TweetAnalyzed>
     {
         private readonly IRepository<string, IEnumerable<Tweet>> tweets;
 
@@ -20,32 +19,37 @@
             this.tweets = tweets;
         }
 
-        public void Handle(UserTweeted message)
+        public void Handle(Application.Events.TweetAnalyzed message)
         {
-            var trackTweets = this.tweets.GetAsync(message.Track).GetAwaiter().GetResult().ToList();
-            if (trackTweets.Any(mention => mention.TweetId == message.TweetId))
+            if (message.Tweet.RetweetedTweet != null)
+            {
+                return;
+            }
+
+            var trackTweets = this.tweets.GetAsync(message.Tweet.Track).GetAwaiter().GetResult().ToList();
+            if (trackTweets.Any(tweet => tweet.TweetId == message.Tweet.Id))
             {
                 return;
             }
 
             trackTweets.Add(new Tweet
             {
-                TweetId = message.TweetId,
-                UserId = message.TweetCreatedById,
-                UserIdStr = message.TweetCreatedByIdStr,
-                UserName = message.TweetCreatedByName,
-                UserScreenName = message.TweetCreatedByScreenName,
+                TweetId = message.Tweet.Id,
+                UserId = message.Tweet.CreatedById,
+                UserIdStr = message.Tweet.CreatedByIdStr,
+                UserName = message.Tweet.CreatedByName,
+                UserScreenName = message.Tweet.CreatedByScreenName,
             });
 
-            this.tweets.SaveAsync(message.Track, trackTweets).GetAwaiter().GetResult();
+            this.tweets.SaveAsync(message.Tweet.Track, trackTweets).GetAwaiter().GetResult();
 
             ColorConsole.WriteLine(
-                $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray(),
+                $"{message.Tweet.CreatedAt.ToLocalTime()}".DarkGray(),
                 " ",
                 "Added ".Gray(),
-                $"@{message.TweetCreatedByScreenName}".Cyan(),
+                $"@{message.Tweet.CreatedByScreenName}".Cyan(),
                 " tweet to ".Gray(),
-                $" {message.Track} ".DarkCyan().On(ConsoleColor.White));
+                $" {message.Tweet.Track} ".DarkCyan().On(ConsoleColor.White));
         }
     }
 }

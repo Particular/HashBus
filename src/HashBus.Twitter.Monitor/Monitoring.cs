@@ -49,8 +49,8 @@ namespace HashBus.Twitter.Monitor
 
                     stream.MatchingTweetReceived += (sender, e) =>
                     {
-                        var tweetReceived = TweetMapper.Map(e.Tweet, endpointName, sessionId, track);
-                        Writer.Write(tweetReceived);
+                        var tweetReceived = TweetMapper.Map(e.Tweet, track, endpointName, sessionId);
+                        Writer.Write(tweetReceived.Tweet);
                         bus.Publish(tweetReceived);
                     };
 
