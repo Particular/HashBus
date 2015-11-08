@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC4B11B8-4DC3-4DFF-B3D3-B091B54E1277}</ProjectGuid>
+    <ProjectGuid>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HashBus.NServiceBusConfiguration</RootNamespace>
