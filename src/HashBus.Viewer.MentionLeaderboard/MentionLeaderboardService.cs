@@ -7,7 +7,7 @@
     using Newtonsoft.Json;
     using RestSharp;
 
-    class MentionLeaderboardService : IService<string, WebApi.MentionLeaderboard>
+    class MentionLeaderboardService : IService<string, WebApi.Leaderboard<WebApi.UserEntry>>
     {
         private readonly IRestClient client;
 
@@ -18,7 +18,7 @@
             this.client = client;
         }
 
-        public async Task<WebApi.MentionLeaderboard> GetAsync(string key)
+        public async Task<WebApi.Leaderboard<WebApi.UserEntry>> GetAsync(string key)
         {
             // see https://github.com/NancyFx/Nancy/issues/1154
             var request = new RestRequest($"/mention-leaderboards/{Uri.EscapeDataString(key.Replace("#", "해시"))}");
@@ -28,7 +28,7 @@
                 throw new Exception($"The server returned {(int)response.StatusCode} ({response.StatusCode}).");
             }
 
-            return JsonConvert.DeserializeObject<WebApi.MentionLeaderboard>(response.Content);
+            return JsonConvert.DeserializeObject<WebApi.Leaderboard<WebApi.UserEntry>>(response.Content);
         }
     }
 }

@@ -65,8 +65,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\HashBus.WebApi\MentionLeaderboard.cs">
-      <Link>MentionLeaderboard.cs</Link>
+    <Compile Include="..\HashBus.WebApi\Leaderboard.cs">
+      <Link>Leaderboard.cs</Link>
+    </Compile>
+    <Compile Include="..\HashBus.WebApi\UserEntry.cs">
+      <Link>UserEntry.cs</Link>
     </Compile>
     <Compile Include="IService.cs" />
     <Compile Include="MentionLeaderboardService.cs" />

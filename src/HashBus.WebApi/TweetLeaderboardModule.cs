@@ -16,22 +16,22 @@
                 var trackTweets = (await tweets.GetAsync(track)).ToList();
                 var entries = trackTweets
                     .GroupBy(tweet => tweet.UserId)
-                    .Select(g => new TweetLeaderboard.Entry
+                    .Select(g => new UserEntry
                     {
-                        UserId = g.Key,
-                        UserIdStr = g.First().UserIdStr,
-                        UserName = g.First().UserName,
-                        UserScreenName = g.First().UserScreenName,
+                        Id = g.Key,
+                        IdStr = g.First().UserIdStr,
+                        Name = g.First().UserName,
+                        ScreenName = g.First().UserScreenName,
                         Count = g.Count(),
                     })
                     .OrderByDescending(entry => entry.Count)
                     .Take(10)
                     .ToList();
 
-                return new TweetLeaderboard
+                return new Leaderboard<UserEntry>
                 {
                     Entries = entries,
-                    TweetsCount = trackTweets.Count,
+                    Count = trackTweets.Count,
                 };
             };
         }

@@ -7,7 +7,7 @@
     using Newtonsoft.Json;
     using RestSharp;
 
-    class TweetLeaderboardService : IService<string, WebApi.TweetLeaderboard>
+    class TweetLeaderboardService : IService<string, WebApi.Leaderboard<WebApi.UserEntry>>
     {
         private readonly IRestClient client;
 
@@ -18,7 +18,7 @@
             this.client = client;
         }
 
-        public async Task<WebApi.TweetLeaderboard> GetAsync(string key)
+        public async Task<WebApi.Leaderboard<WebApi.UserEntry>> GetAsync(string key)
         {
             // see https://github.com/NancyFx/Nancy/issues/1154
             var request = new RestRequest($"/tweet-leaderboards/{Uri.EscapeDataString(key.Replace("#", "해시"))}");
@@ -28,7 +28,7 @@
                 throw new Exception($"The server returned {(int)response.StatusCode} ({response.StatusCode}).");
             }
 
-            return JsonConvert.DeserializeObject<WebApi.TweetLeaderboard>(response.Content);
+            return JsonConvert.DeserializeObject<WebApi.Leaderboard<WebApi.UserEntry>>(response.Content);
         }
     }
 }

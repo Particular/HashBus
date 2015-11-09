@@ -40,16 +40,16 @@
         public static async Task StartAsync(
             string track,
             int refreshInterval,
-            IService<string, WebApi.MentionLeaderboard> leaderboards,
+            IService<string, WebApi.Leaderboard<WebApi.UserEntry>> leaderboards,
             bool showPercentages,
             int verticalPadding,
             int horizontalPadding)
         {
             Console.CursorVisible = false;
-            var previousLeaderboard = new WebApi.MentionLeaderboard();
+            var previousLeaderboard = new WebApi.Leaderboard<WebApi.UserEntry>();
             while (true)
             {
-                WebApi.MentionLeaderboard currentLeaderboard;
+                WebApi.Leaderboard<WebApi.UserEntry> currentLeaderboard;
                 try
                 {
                     currentLeaderboard = await leaderboards.GetAsync(track);
@@ -64,17 +64,17 @@
                 var position = 0;
                 var lines = new List<IEnumerable<ColorToken>>();
                 foreach (var currentEntry in currentLeaderboard?.Entries ??
-                    Enumerable.Empty<WebApi.MentionLeaderboard.Entry>())
+                    Enumerable.Empty<WebApi.UserEntry>())
                 {
                     ++position;
                     var previousEntry = (previousLeaderboard?.Entries ??
-                            Enumerable.Empty<WebApi.MentionLeaderboard.Entry>())
+                            Enumerable.Empty<WebApi.UserEntry>())
                         .Select((entry, index) => new
                         {
                             Entry = entry,
                             Position = index + 1
                         })
-                        .FirstOrDefault(e => e.Entry.UserMentionId == currentEntry.UserMentionId);
+                        .FirstOrDefault(e => e.Entry.Id == currentEntry.Id);
 
                     var movement = previousEntry == null
                         ? int.MinValue
@@ -85,14 +85,14 @@
                     var tokens = new List<ColorToken>
                     {
                         $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]),
-                        $" {currentEntry.UserMentionName}".White(),
-                        $" @{currentEntry.UserMentionScreenName}".Cyan(),
+                        $" {currentEntry.Name}".White(),
+                        $" @{currentEntry.ScreenName}".Cyan(),
                         $" {currentEntry.Count:N0}".Color(movementColors[countMovement]),
                     };
 
                     if (showPercentages)
                     {
-                        tokens.Add($" ({currentEntry.Count / (double)currentLeaderboard.MentionsCount:P0})".DarkGray());
+                        tokens.Add($" ({currentEntry.Count / (double)currentLeaderboard.Count:P0})".DarkGray());
                     }
 
                     var maxWidth = Console.WindowWidth - (horizontalPadding * 2);
@@ -130,8 +130,8 @@
                     padding,
                     $"Total mentions:".Gray(),
                     " ",
-                    $"{currentLeaderboard?.MentionsCount ?? 0:N0}"
-                        .Color(currentLeaderboard?.MentionsCount - previousLeaderboard?.MentionsCount > 0 ? movementColors[-1] : movementColors[0]),
+                    $"{currentLeaderboard?.Count ?? 0:N0}"
+                        .Color(currentLeaderboard?.Count - previousLeaderboard?.Count > 0 ? movementColors[-1] : movementColors[0]),
                     $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
 
                 var maxMessageLength = 0;

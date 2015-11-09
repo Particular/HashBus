@@ -74,9 +74,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Leaderboard.cs" />
     <Compile Include="TweetLeaderboardModule.cs" />
-    <Compile Include="TweetLeaderboard.cs" />
-    <Compile Include="MentionLeaderboard.cs" />
+    <Compile Include="UserEntry.cs" />
     <Compile Include="MentionLeaderboardModule.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />

@@ -16,22 +16,22 @@
                 var trackMentions = (await mentions.GetAsync(track)).ToList();
                 var entries = trackMentions
                     .GroupBy(mention => mention.UserMentionId)
-                    .Select(g => new MentionLeaderboard.Entry
+                    .Select(g => new UserEntry
                     {
-                        UserMentionId = g.Key,
-                        UserMentionIdStr = g.First().UserMentionIdStr,
-                        UserMentionName = g.First().UserMentionName,
-                        UserMentionScreenName = g.First().UserMentionScreenName,
+                        Id = g.Key,
+                        IdStr = g.First().UserMentionIdStr,
+                        Name = g.First().UserMentionName,
+                        ScreenName = g.First().UserMentionScreenName,
                         Count = g.Count(),
                     })
                     .OrderByDescending(entry => entry.Count)
                     .Take(10)
                     .ToList();
 
-                return new MentionLeaderboard
+                return new Leaderboard<UserEntry>
                 {
                     Entries = entries,
-                    MentionsCount = trackMentions.Count,
+                    Count = trackMentions.Count,
                 };
             };
         }
