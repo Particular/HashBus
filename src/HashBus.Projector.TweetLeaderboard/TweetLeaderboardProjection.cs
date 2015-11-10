@@ -40,11 +40,12 @@
             this.tweets.SaveAsync(message.Track, trackTweets).GetAwaiter().GetResult();
 
             ColorConsole.WriteLine(
+                $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray(),
+                " ",
                 "Added ".Gray(),
                 $"@{message.TweetCreatedByScreenName}".Cyan(),
                 " tweet to ".Gray(),
-                $" {message.Track} ".DarkCyan().On(ConsoleColor.White),
-                $" · {message.TweetCreatedAt.ToLocalTime()}".DarkGray());
+                $" {message.Track} ".DarkCyan().On(ConsoleColor.White));
         }
     }
 }

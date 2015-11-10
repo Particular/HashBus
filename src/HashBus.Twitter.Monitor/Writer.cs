@@ -11,10 +11,10 @@ namespace HashBus.Twitter.Monitor
         public static void Write(TweetReceived message)
         {
             var trackString = $" {message.Track} ";
-            ColorConsole.Write(
-                new string(' ', (int)Math.Floor(Math.Max(0, Console.WindowWidth - trackString.Length) / 2d)).OnDarkGray(),
+            ColorConsole.WriteLine(
+                new string(' ', (int)Math.Floor(Math.Max(0, Console.WindowWidth - trackString.Length - 1) / 2d)).OnDarkGray(),
                 trackString.DarkCyan().OnWhite(),
-                new string(' ', (int)Math.Ceiling(Math.Max(0, Console.WindowWidth - trackString.Length) / 2d)).OnDarkGray());
+                new string(' ', (int)Math.Ceiling(Math.Max(0, Console.WindowWidth - trackString.Length - 1) / 2d)).OnDarkGray());
 
             if (message.TweetIsRetweet)
             {
@@ -28,7 +28,7 @@ namespace HashBus.Twitter.Monitor
             {
                 ColorConsole.WriteLine(
                     $"{message.TweetCreatedByName} ".White(),
-                    $"{message.TweetCreatedByScreenName} · ".DarkGray(),
+                    $"@{message.TweetCreatedByScreenName} · ".DarkGray(),
                     $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray());
             }
 

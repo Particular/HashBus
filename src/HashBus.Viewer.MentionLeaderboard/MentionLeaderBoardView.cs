@@ -38,10 +38,14 @@
             };
 
         public static async Task StartAsync(
-            string track, int refreshInterval, IService<string, WebApi.MentionLeaderboard> leaderboards, bool showPercentages)
+            string track,
+            int refreshInterval,
+            IService<string, WebApi.MentionLeaderboard> leaderboards,
+            bool showPercentages,
+            int verticalPadding,
+            int horizontalPadding)
         {
-            var start = DateTime.UtcNow;
-            var initialCount = (int?)null;
+            Console.CursorVisible = false;
             var previousLeaderboard = new WebApi.MentionLeaderboard();
             while (true)
             {
@@ -58,7 +62,7 @@
                 }
 
                 var position = 0;
-                var lines = new List<ColorToken[]>();
+                var lines = new List<IEnumerable<ColorToken>>();
                 foreach (var currentEntry in currentLeaderboard?.Entries ??
                     Enumerable.Empty<WebApi.MentionLeaderboard.Entry>())
                 {
@@ -78,44 +82,64 @@
 
                     var countMovement = Math.Sign(Math.Min(previousEntry?.Entry.Count - currentEntry.Count ?? 0, movement));
 
-                    lines.Add(new[]
+                    var tokens = new List<ColorToken>
                     {
-                        $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]).On(movementBackgroundColors[movement]),
-                        $" {currentEntry.UserMentionName}".White().On(movementBackgroundColors[movement]),
-                        $" @{currentEntry.UserMentionScreenName}".Cyan().On(movementBackgroundColors[movement]),
-                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]).On(movementBackgroundColors[movement]),
-                        showPercentages ? $" ({currentEntry.Count / (double)currentLeaderboard.MentionsCount:P0})".DarkGray().On(movementBackgroundColors[movement]) : null,
-                    });
+                        $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]),
+                        $" {currentEntry.UserMentionName}".White(),
+                        $" @{currentEntry.UserMentionScreenName}".Cyan(),
+                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]),
+                    };
+
+                    if (showPercentages)
+                    {
+                        tokens.Add($" ({currentEntry.Count / (double)currentLeaderboard.MentionsCount:P0})".DarkGray());
+                    }
+
+                    var maxWidth = Console.WindowWidth - (horizontalPadding * 2);
+                    tokens.Add(new string(' ', Math.Max(0, maxWidth - tokens.Sum(token => token.Text.Length))));
+
+                    lines.Add(tokens.Trim(maxWidth).Select(token => token.On(movementBackgroundColors[movement])));
                 }
 
                 Console.Clear();
+                for (var newLine = verticalPadding - 1; newLine >= 0; newLine--)
+                {
+                    ColorConsole.WriteLine();
+                }
+
+                var padding = new string(' ', horizontalPadding);
                 ColorConsole.WriteLine(
+                    padding,
                     $" {track} ".DarkCyan().On(ConsoleColor.White),
-                    " mentions".Gray(),
-                    $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
+                    " Most Mentioned".White());
 
                 ColorConsole.WriteLine(
+                    padding,
                     "Powered by ".DarkGray(),
                     " NServiceBus ".White().OnDarkBlue(),
                     " from ".DarkGray(),
                     "Particular Software".White());
 
+                ColorConsole.WriteLine();
                 foreach (var line in lines)
                 {
-                    ColorConsole.WriteLine(line);
+                    ColorConsole.WriteLine(new ColorToken[] { padding }.Concat(line).ToArray());
                 }
 
-                ColorConsole.Write($"Total mentions: {currentLeaderboard?.MentionsCount ?? 0:N0}".DarkGray());
-                ColorConsole.WriteLine(initialCount.HasValue
-                    ? $" ({(currentLeaderboard?.MentionsCount - initialCount) / (DateTime.UtcNow - start).TotalMinutes:N2} per minute)".DarkGray()
-                    : string.Empty);
+                ColorConsole.WriteLine(
+                    padding,
+                    $"Total mentions:".Gray(),
+                    " ",
+                    $"{currentLeaderboard?.MentionsCount ?? 0:N0}"
+                        .Color(currentLeaderboard?.MentionsCount - previousLeaderboard?.MentionsCount > 0 ? movementColors[-1] : movementColors[0]),
+                    $" · {DateTime.UtcNow.ToLocalTime()}".DarkGray());
 
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);
                 using (var timer = new Timer(c =>
                 {
                     var timeLeft = new TimeSpan(0, 0, 0, (int)Math.Round((refreshTime - DateTime.UtcNow).TotalSeconds));
-                    var message = $"\rRefreshing in {timeLeft.Humanize()}...";
+                    var message = $"\r{padding}Refreshing in {timeLeft.Humanize()}...";
                     maxMessageLength = Math.Max(maxMessageLength, message.Length);
                     ColorConsole.Write(message.PadRight(maxMessageLength).DarkGray());
                 }))
@@ -124,7 +148,6 @@
                     Thread.Sleep(refreshInterval);
                 }
 
-                initialCount = initialCount ?? currentLeaderboard?.MentionsCount;
                 previousLeaderboard = currentLeaderboard;
             }
         }

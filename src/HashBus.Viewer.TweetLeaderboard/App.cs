@@ -6,7 +6,12 @@
     class App
     {
         public static async Task RunAsync(
-            string webApiBaseUrl, string track, int refreshInterval, bool showPercentages)
+            string webApiBaseUrl,
+            string track,
+            int refreshInterval,
+            bool showPercentages,
+            int verticalPadding,
+            int horizontalPadding)
         {
             var client = new RestClient(webApiBaseUrl);
 
@@ -14,7 +19,9 @@
                 track,
                 refreshInterval,
                 new TweetLeaderboardService(client),
-                showPercentages);
+                showPercentages,
+                verticalPadding,
+                horizontalPadding);
         }
     }
 }

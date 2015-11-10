@@ -6,15 +6,22 @@
     class App
     {
         public static async Task RunAsync(
-            string webApiBaseUrl, string track, int refreshInterval, bool showPercentages)
+            string webApiBaseUrl,
+            string track,
+            int refreshInterval,
+            bool showPercentages,
+            int verticalPadding,
+            int horizontalPadding)
         {
             var client = new RestClient(webApiBaseUrl);
 
             await MentionLeaderboardView.StartAsync(
                 track,
                 refreshInterval,
-                new MentionLeaderboardService(client), 
-                showPercentages);
+                new MentionLeaderboardService(client),
+                showPercentages,
+                verticalPadding,
+                horizontalPadding);
         }
     }
 }

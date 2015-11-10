@@ -65,6 +65,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\HashBus.Viewer.MentionLeaderboard\ColorTokenExtensions.cs">
+      <Link>ColorTokenExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\HashBus.Viewer.MentionLeaderboard\IService.cs">
       <Link>IService.cs</Link>
     </Compile>
