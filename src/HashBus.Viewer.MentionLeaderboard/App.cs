@@ -1,6 +1,8 @@
 ﻿namespace HashBus.Viewer.MentionLeaderboard
 {
     using System.Threading.Tasks;
+    using ColoredConsole;
+    using HashBus.WebApi;
     using RestSharp;
 
     class App
@@ -15,13 +17,17 @@
         {
             var client = new RestClient(webApiBaseUrl);
 
-            await MentionLeaderboardView.StartAsync(
+            await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
                 new MentionLeaderboardService(client),
                 showPercentages,
                 verticalPadding,
-                horizontalPadding);
+                horizontalPadding,
+                (entry1, entry2) => entry1.Id == entry2.Id,
+                entry => new[] { $" {entry.Name}".White(), $" @{entry.ScreenName}".Cyan(), },
+                "Most mentioned",
+                "mentions");
         }
     }
 }

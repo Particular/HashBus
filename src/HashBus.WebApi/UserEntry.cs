@@ -1,6 +1,6 @@
 namespace HashBus.WebApi
 {
-    public class UserEntry
+    public class UserEntry : IEntry
     {
         public int Position { get; set; }
 

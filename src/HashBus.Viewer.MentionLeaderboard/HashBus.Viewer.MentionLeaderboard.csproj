@@ -65,6 +65,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\HashBus.WebApi\IEntry.cs">
+      <Link>IEntry.cs</Link>
+    </Compile>
     <Compile Include="..\HashBus.WebApi\Leaderboard.cs">
       <Link>Leaderboard.cs</Link>
     </Compile>
@@ -72,9 +75,9 @@
       <Link>UserEntry.cs</Link>
     </Compile>
     <Compile Include="IService.cs" />
+    <Compile Include="LeaderboardView.cs" />
     <Compile Include="MentionLeaderboardService.cs" />
     <Compile Include="ColorTokenExtensions.cs" />
-    <Compile Include="MentionLeaderboardView.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

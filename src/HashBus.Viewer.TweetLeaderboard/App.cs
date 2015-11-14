@@ -1,6 +1,8 @@
 ﻿namespace HashBus.Viewer.TweetLeaderboard
 {
     using System.Threading.Tasks;
+    using ColoredConsole;
+    using HashBus.WebApi;
     using RestSharp;
 
     class App
@@ -15,13 +17,18 @@
         {
             var client = new RestClient(webApiBaseUrl);
 
-            await TweetLeaderboardView.StartAsync(
+            await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
                 new TweetLeaderboardService(client),
                 showPercentages,
                 verticalPadding,
-                horizontalPadding);
+                horizontalPadding,
+                (entry1, entry2) => entry1.Id == entry2.Id,
+                entry => new[] { $" {entry.Name}".White(), $" @{entry.ScreenName}".Cyan(), },
+                "Top Tweeters",
+                "tweets");
+
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer.MentionLeaderboard
+﻿namespace HashBus.Viewer
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using ColoredConsole;
     using Humanizer;
 
-    class MentionLeaderboardView
+    static class LeaderboardView<TEntry> where TEntry : WebApi.IEntry
     {
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>
@@ -40,16 +40,20 @@
         public static async Task StartAsync(
             string track,
             int refreshInterval,
-            IService<string, WebApi.Leaderboard<WebApi.UserEntry>> leaderboards,
+            IService<string, WebApi.Leaderboard<TEntry>> leaderboards,
             bool showPercentages,
             int verticalPadding,
-            int horizontalPadding)
+            int horizontalPadding,
+            Func<TEntry, TEntry, bool> matchEntries,
+            Func<TEntry, IEnumerable<ColorToken>> getText,
+            string name,
+            string itemsName)
         {
             Console.CursorVisible = false;
-            var previousLeaderboard = new WebApi.Leaderboard<WebApi.UserEntry>();
+            var previousLeaderboard = new WebApi.Leaderboard<TEntry>();
             while (true)
             {
-                WebApi.Leaderboard<WebApi.UserEntry> currentLeaderboard;
+                WebApi.Leaderboard<TEntry> currentLeaderboard;
                 try
                 {
                     currentLeaderboard = await leaderboards.GetAsync(track);
@@ -63,11 +67,11 @@
 
                 var lines = new List<IEnumerable<ColorToken>>();
                 foreach (var currentEntry in currentLeaderboard?.Entries ??
-                    Enumerable.Empty<WebApi.UserEntry>())
+                    Enumerable.Empty<TEntry>())
                 {
                     var previousEntry = (previousLeaderboard?.Entries ??
-                            Enumerable.Empty<WebApi.UserEntry>())
-                        .FirstOrDefault(e => e.Id == currentEntry.Id);
+                            Enumerable.Empty<TEntry>())
+                        .FirstOrDefault(e => matchEntries(e, currentEntry));
 
                     var movement = previousEntry == null
                         ? int.MinValue
@@ -78,10 +82,10 @@
                     var tokens = new List<ColorToken>
                     {
                         $"{movementTokens[movement]} {currentEntry.Position.ToString().PadLeft(2)}".Color(movementColors[movement]),
-                        $" {currentEntry.Name}".White(),
-                        $" @{currentEntry.ScreenName}".Cyan(),
-                        $" {currentEntry.Count:N0}".Color(movementColors[countMovement]),
                     };
+
+                    tokens.AddRange(getText(currentEntry));
+                    tokens.Add($" {currentEntry.Count:N0}".Color(movementColors[countMovement]));
 
                     if (showPercentages)
                     {
@@ -104,7 +108,8 @@
                 ColorConsole.WriteLine(
                     padding,
                     $" {track} ".DarkCyan().On(ConsoleColor.White),
-                    " Most Mentioned".White());
+                    " ",
+                    name.White());
 
                 ColorConsole.WriteLine(
                     padding,
@@ -121,7 +126,7 @@
 
                 ColorConsole.WriteLine(
                     padding,
-                    $"Total mentions:".Gray(),
+                    $"Total {itemsName}:".Gray(),
                     " ",
                     $"{currentLeaderboard?.Count ?? 0:N0}"
                         .Color(currentLeaderboard?.Count - previousLeaderboard?.Count > 0 ? movementColors[-1] : movementColors[0]),
