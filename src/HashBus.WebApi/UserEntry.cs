@@ -2,6 +2,8 @@ namespace HashBus.WebApi
 {
     public class UserEntry
     {
+        public int Position { get; set; }
+
         public long? Id { get; set; }
 
         public string IdStr { get; set; }

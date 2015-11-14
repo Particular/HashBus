@@ -25,6 +25,11 @@
                         Count = g.Count(),
                     })
                     .OrderByDescending(entry => entry.Count)
+                    .Select((entry, index) =>
+                    {
+                        entry.Position = index + 1;
+                        return entry;
+                    })
                     .Take(10)
                     .ToList();
 

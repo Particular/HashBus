@@ -61,30 +61,23 @@
                     continue;
                 }
 
-                var position = 0;
                 var lines = new List<IEnumerable<ColorToken>>();
                 foreach (var currentEntry in currentLeaderboard?.Entries ??
                     Enumerable.Empty<WebApi.UserEntry>())
                 {
-                    ++position;
                     var previousEntry = (previousLeaderboard?.Entries ??
                             Enumerable.Empty<WebApi.UserEntry>())
-                        .Select((entry, index) => new
-                        {
-                            Entry = entry,
-                            Position = index + 1
-                        })
-                        .FirstOrDefault(e => e.Entry.Id == currentEntry.Id);
+                        .FirstOrDefault(e => e.Id == currentEntry.Id);
 
                     var movement = previousEntry == null
                         ? int.MinValue
-                        : Math.Sign(position - previousEntry.Position);
+                        : Math.Sign(currentEntry.Position - previousEntry.Position);
 
-                    var countMovement = Math.Sign(Math.Min(previousEntry?.Entry.Count - currentEntry.Count ?? 0, movement));
+                    var countMovement = Math.Sign(Math.Min(previousEntry?.Count - currentEntry.Count ?? 0, movement));
 
                     var tokens = new List<ColorToken>
                     {
-                        $"{movementTokens[movement]} {position.ToString().PadLeft(2)}".Color(movementColors[movement]),
+                        $"{movementTokens[movement]} {currentEntry.Position.ToString().PadLeft(2)}".Color(movementColors[movement]),
                         $" {currentEntry.Name}".White(),
                         $" @{currentEntry.ScreenName}".Cyan(),
                         $" {currentEntry.Count:N0}".Color(movementColors[countMovement]),
