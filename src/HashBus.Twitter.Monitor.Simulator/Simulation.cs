@@ -21,10 +21,12 @@ namespace HashBus.Twitter.Monitor.Simulator
                 var hashtag = "Simulated";
                 var track = $"#{hashtag}";
                 var hashtagText = track;
+                var secondaryHashtag = new string(char.ConvertFromUtf32(random.Next(65, 80)).ElementAt(0), 6);
                 if (now.Millisecond % 3 == 0)
                 {
                     hashtag = hashtag.ToLowerInvariant();
                     hashtagText = hashtagText.ToLowerInvariant();
+                    secondaryHashtag = secondaryHashtag.ToLowerInvariant();
                 }
 
                 var userId = random.Next(countOfUsers);
@@ -38,7 +40,8 @@ namespace HashBus.Twitter.Monitor.Simulator
                     string.Join(
                         string.Empty,
                         Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                    $" {hashtagText}";
+                    $" {hashtagText}" +
+                    $" #{secondaryHashtag}";
 
                 var message = new TweetReceived
                 {
@@ -71,7 +74,12 @@ namespace HashBus.Twitter.Monitor.Simulator
                             new Hashtag
                             {
                                 Text = hashtag,
-                                Indices = new[] { text.Length - $"{hashtagText}".Length, text.Length, },
+                                Indices = new[] { text.Length - $"{hashtagText} #{secondaryHashtag}".Length, text.Length - $" #{secondaryHashtag}".Length, },
+                            },
+                            new Hashtag
+                            {
+                                Text = secondaryHashtag,
+                                Indices = new[] { text.Length - $"#{secondaryHashtag}".Length, text.Length, },
                             },
                         },
                         RetweetedTweet = now.Millisecond % 3 == 0
