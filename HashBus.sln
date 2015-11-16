@@ -45,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Cat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Commands", "src\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj", "{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TopTweetersRetweeters", "src\HashBus.Projector.TopTweetersRetweeters\HashBus.Projector.TopTweetersRetweeters.csproj", "{BAD64799-5E68-4EA5-B117-1F0B3582392B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.TopTweetersRetweeters", "src\HashBus.Viewer.TopTweetersRetweeters\HashBus.Viewer.TopTweetersRetweeters.csproj", "{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +115,14 @@ Global
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,5 +143,7 @@ Global
 		{F302F223-C0CD-46A6-8BB6-01F1213BDD58} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{63B64572-B72C-4BCE-BB3D-C3F7635A6858} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal
