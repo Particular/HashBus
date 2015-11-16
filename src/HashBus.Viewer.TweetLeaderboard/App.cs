@@ -20,7 +20,7 @@
             await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
-                new LeaderboardService(client, "/tweet-leaderboards/{0}"),
+                new LeaderboardService<UserEntry>(client, "/tweet-leaderboards/{0}"),
                 showPercentages,
                 verticalPadding,
                 horizontalPadding,

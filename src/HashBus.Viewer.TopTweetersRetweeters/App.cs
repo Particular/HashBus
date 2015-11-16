@@ -20,7 +20,7 @@
             await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
-                new LeaderboardService(client, "/top-tweeters-retweeters/{0}"),
+                new LeaderboardService<UserEntry>(client, "/top-tweeters-retweeters/{0}"),
                 showPercentages,
                 verticalPadding,
                 horizontalPadding,

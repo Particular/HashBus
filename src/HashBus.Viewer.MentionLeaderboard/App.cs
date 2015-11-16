@@ -20,7 +20,7 @@
             await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
-                new LeaderboardService(client, "/mention-leaderboards/{0}"),
+                new LeaderboardService<UserEntry>(client, "/mention-leaderboards/{0}"),
                 showPercentages,
                 verticalPadding,
                 horizontalPadding,
