@@ -58,6 +58,9 @@
 
                 container.Register<IRepository<string, IEnumerable<TweetRetweet>>>(
                         new MongoDBListRepository<TweetRetweet>(this.mongoDatabase, "top_tweeters_retweeters__tweet_retweets"));
+
+                container.Register<IRepository<string, IEnumerable<Retweet>>>(
+                        new MongoDBListRepository<Retweet>(this.mongoDatabase, "top_retweeters__retweets"));
             }
         }
     }
