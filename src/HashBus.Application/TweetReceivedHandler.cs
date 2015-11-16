@@ -1,5 +1,6 @@
 ﻿namespace HashBus.Application
 {
+    using System;
     using System.Linq;
     using HashBus.Application.Events;
     using HashBus.Twitter.Events;
@@ -29,6 +30,10 @@
                         message.Tweet.RetweetedTweet.CreatedByIdStr != userMention.IdStr &&
                         message.Tweet.RetweetedTweet.CreatedByScreenName != userMention.ScreenName)) &&
                     message.Tweet.Text.Substring(0, userMention.Indices[0]).Trim().ToUpperInvariant() != "RT")
+                .ToList();
+
+            message.Tweet.Hashtags = message.Tweet.Hashtags
+                .Where(hashtag => !string.Equals($"#{hashtag.Text}", message.Tweet.Track, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             Writer.Write(message.Tweet);

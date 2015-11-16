@@ -39,6 +39,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Retweetee.cs" />
     <Compile Include="Retweet.cs" />
+    <Compile Include="Hashtag.cs" />
     <Compile Include="TweetRetweet.cs" />
     <Compile Include="Tweet.cs" />
     <Compile Include="Mention.cs" />

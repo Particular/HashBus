@@ -64,6 +64,9 @@
 
                 container.Register<IRepository<string, IEnumerable<Retweetee>>>(
                         new MongoDBListRepository<Retweetee>(this.mongoDatabase, "most_retweeted__retweetees"));
+
+                container.Register<IRepository<string, IEnumerable<Hashtag>>>(
+                        new MongoDBListRepository<Hashtag>(this.mongoDatabase, "most_hashtagged__hashtags"));
             }
         }
     }
