@@ -1,27 +1,32 @@
-﻿namespace HashBus.Viewer.TweetLeaderboard
+﻿namespace HashBus.Viewer
 {
     using System;
+    using System.Globalization;
     using System.Net;
     using System.Threading.Tasks;
     using LiteGuard;
     using Newtonsoft.Json;
     using RestSharp;
 
-    class TweetLeaderboardService : IService<string, WebApi.Leaderboard<WebApi.UserEntry>>
+    class LeaderboardService : IService<string, WebApi.Leaderboard<WebApi.UserEntry>>
     {
         private readonly IRestClient client;
+        private readonly string resource;
 
-        public TweetLeaderboardService(IRestClient client)
+        public LeaderboardService(IRestClient client, string resource)
         {
             Guard.AgainstNullArgument(nameof(client), client);
+            Guard.AgainstNullArgument(nameof(resource), resource);
 
             this.client = client;
+            this.resource = resource;
         }
 
         public async Task<WebApi.Leaderboard<WebApi.UserEntry>> GetAsync(string key)
         {
             // see https://github.com/NancyFx/Nancy/issues/1154
-            var request = new RestRequest($"/tweet-leaderboards/{Uri.EscapeDataString(key.Replace("#", "해시"))}");
+            key = Uri.EscapeDataString(key.Replace("#", "해시"));
+            var request = new RestRequest(string.Format(CultureInfo.InvariantCulture, this.resource, key));
             var response = await this.client.ExecuteGetTaskAsync(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {

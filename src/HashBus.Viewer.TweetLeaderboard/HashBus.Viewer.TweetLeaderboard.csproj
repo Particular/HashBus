@@ -71,6 +71,9 @@
     <Compile Include="..\HashBus.Viewer.MentionLeaderboard\IService.cs">
       <Link>IService.cs</Link>
     </Compile>
+    <Compile Include="..\HashBus.Viewer.MentionLeaderboard\LeaderboardService.cs">
+      <Link>LeaderboardService.cs</Link>
+    </Compile>
     <Compile Include="..\HashBus.Viewer.MentionLeaderboard\LeaderboardView.cs">
       <Link>LeaderboardView.cs</Link>
     </Compile>
@@ -83,7 +86,6 @@
     <Compile Include="..\HashBus.WebApi\UserEntry.cs">
       <Link>UserEntry.cs</Link>
     </Compile>
-    <Compile Include="TweetLeaderboardService.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

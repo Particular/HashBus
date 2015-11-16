@@ -75,8 +75,8 @@
       <Link>UserEntry.cs</Link>
     </Compile>
     <Compile Include="IService.cs" />
+    <Compile Include="LeaderboardService.cs" />
     <Compile Include="LeaderboardView.cs" />
-    <Compile Include="MentionLeaderboardService.cs" />
     <Compile Include="ColorTokenExtensions.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />

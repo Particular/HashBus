@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer.MentionLeaderboard
+﻿namespace HashBus.Viewer
 {
     using System.Threading.Tasks;
     using ColoredConsole;
@@ -20,7 +20,7 @@
             await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
-                new MentionLeaderboardService(client),
+                new LeaderboardService(client, "/mention-leaderboards/{0}"),
                 showPercentages,
                 verticalPadding,
                 horizontalPadding,
