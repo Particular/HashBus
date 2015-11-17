@@ -3,6 +3,7 @@ namespace HashBus.Twitter.Monitor.Simulator
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using HashBus.Application.Events;
     using HashBus.Twitter.Events;
     using NServiceBus;
     using System.Linq;
@@ -20,10 +21,12 @@ namespace HashBus.Twitter.Monitor.Simulator
                 var hashtag = "Simulated";
                 var track = $"#{hashtag}";
                 var hashtagText = track;
+                var secondaryHashtag = new string(char.ConvertFromUtf32(random.Next(65, 80)).ElementAt(0), 6);
                 if (now.Millisecond % 3 == 0)
                 {
                     hashtag = hashtag.ToLowerInvariant();
                     hashtagText = hashtagText.ToLowerInvariant();
+                    secondaryHashtag = secondaryHashtag.ToLowerInvariant();
                 }
 
                 var userId = random.Next(countOfUsers);
@@ -37,50 +40,68 @@ namespace HashBus.Twitter.Monitor.Simulator
                     string.Join(
                         string.Empty,
                         Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                    $" {hashtagText}";
+                    $" {hashtagText}" +
+                    $" #{secondaryHashtag}";
 
                 var message = new TweetReceived
                 {
                     IsSimulated = true,
                     EndpointName = endpointName,
                     SessionId = sessionId,
-                    Track = track,
-                    TweetId = now.Ticks,
-                    TweetCreatedAt = now,
-                    TweetCreatedById = userId,
-                    TweetCreatedByIdStr = $"{userId}",
-                    TweetCreatedByName = $"John Smith{userId}",
-                    TweetCreatedByScreenName = $"johnsmith{userId}",
-                    TweetIsRetweet = now.Millisecond % 3 == 0,
-                    TweetText = text,
-                    TweetUserMentions = new List<UserMention>
+                    Tweet = new Tweet
                     {
-                        new UserMention
+                        Track = track,
+                        Id = now.Ticks,
+                        CreatedAt = now,
+                        CreatedById = userId,
+                        CreatedByIdStr = $"{userId}",
+                        CreatedByName = $"John Smith{userId}",
+                        CreatedByScreenName = $"johnsmith{userId}",
+                        Text = text,
+                        UserMentions = new List<UserMention>
                         {
-                            Id=userMentionId,
-                            IdStr= $"{userMentionId}",
-                            Indices = new List<int> { userMentionIndex, userMentionIndex + $"@johnsmith{userMentionId}".Length, },
-                            Name = $"John Smith{userMentionId}",
-                            ScreenName = $"johnsmith{userMentionId}",
+                            new UserMention
+                            {
+                                Id=userMentionId,
+                                IdStr= $"{userMentionId}",
+                                Indices = new List<int> { userMentionIndex, userMentionIndex + $"@johnsmith{userMentionId}".Length, },
+                                Name = $"John Smith{userMentionId}",
+                                ScreenName = $"johnsmith{userMentionId}",
+                            },
                         },
-                    },
-                    TweetHashtags = new List<Hashtag>
-                    {
-                        new Hashtag
+                        Hashtags = new List<Hashtag>
                         {
-                            Text = hashtag,
-                            Indices = new[] { text.Length - $"{hashtagText}".Length, text.Length, },
+                            new Hashtag
+                            {
+                                Text = hashtag,
+                                Indices = new[] { text.Length - $"{hashtagText} #{secondaryHashtag}".Length, text.Length - $" #{secondaryHashtag}".Length, },
+                            },
+                            new Hashtag
+                            {
+                                Text = secondaryHashtag,
+                                Indices = new[] { text.Length - $"#{secondaryHashtag}".Length, text.Length, },
+                            },
                         },
-                    },
-                    RetweetedTweetId = now.AddDays(-1000).Ticks,
-                    RetweetedTweetCreatedAt = now.AddDays(-1000),
-                    RetweetedTweetCreatedById = retweetedUserId,
-                    RetweetedTweetCreatedByIdStr = $"{retweetedUserId}",
-                    RetweetedTweetCreatedByName = $"John Smith{retweetedUserId}",
-                    RetweetedTweetCreatedByScreenName = $"johnsmith{retweetedUserId}",
+                        RetweetedTweet = now.Millisecond % 3 == 0
+                            ? new Tweet
+                            {
+                                Track = track,
+                                Id = now.AddDays(-1000).Ticks,
+                                CreatedAt = now.AddDays(-1000),
+                                CreatedById = retweetedUserId,
+                                CreatedByIdStr = $"{retweetedUserId}",
+                                CreatedByName = $"John Smith{retweetedUserId}",
+                                CreatedByScreenName = $"johnsmith{retweetedUserId}",
+                                Text = text,
+                                UserMentions = new List<UserMention>(),
+                                Hashtags = new List<Hashtag>(),
+                                RetweetedTweet = null,
+                            }
+                            : null,
+                    }
                 };
 
-                Writer.Write(message);
+                Writer.Write(message.Tweet);
                 bus.Publish(message);
             }
         }

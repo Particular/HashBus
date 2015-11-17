@@ -74,10 +74,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TweetLeaderboardModule.cs" />
-    <Compile Include="TweetLeaderboard.cs" />
-    <Compile Include="MentionLeaderboard.cs" />
-    <Compile Include="MentionLeaderboardModule.cs" />
+    <Compile Include="IEntry.cs" />
+    <Compile Include="Leaderboard.cs" />
+    <Compile Include="MostHashtaggedModule.cs" />
+    <Compile Include="MostRetweetedModule.cs" />
+    <Compile Include="TopRetweetersModule.cs" />
+    <Compile Include="TopTweetersRetweetersModule.cs" />
+    <Compile Include="TopTweetersModule.cs" />
+    <Compile Include="HashtagEntry.cs" />
+    <Compile Include="UserEntry.cs" />
+    <Compile Include="MostMentionedModule.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

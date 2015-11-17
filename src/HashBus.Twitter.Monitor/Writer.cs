@@ -1,14 +1,14 @@
-namespace HashBus.Twitter.Monitor
+namespace HashBus
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using ColoredConsole;
-    using HashBus.Twitter.Events;
+    using HashBus.Application.Events;
 
     class Writer
     {
-        public static void Write(TweetReceived message)
+        public static void Write(Tweet message)
         {
             var trackString = $" {message.Track} ";
             ColorConsole.WriteLine(
@@ -16,44 +16,44 @@ namespace HashBus.Twitter.Monitor
                 trackString.DarkCyan().OnWhite(),
                 new string(' ', (int)Math.Ceiling(Math.Max(0, Console.WindowWidth - trackString.Length - 1) / 2d)).OnDarkGray());
 
-            if (message.TweetIsRetweet)
+            if (message.RetweetedTweet != null)
             {
                 ColorConsole.WriteLine(
-                    $"{message.RetweetedTweetCreatedByName} ".White(),
-                    $"@{message.RetweetedTweetCreatedByScreenName} · ".DarkGray(),
-                    $"{message.RetweetedTweetCreatedAt.ToLocalTime()}".DarkGray(),
-                    $" § {message.TweetCreatedByName} Retweeted ".DarkGray());
+                    $"{message.RetweetedTweet.CreatedByName} ".White(),
+                    $"@{message.RetweetedTweet.CreatedByScreenName} · ".DarkGray(),
+                    $"{message.RetweetedTweet.CreatedAt.ToLocalTime()}".DarkGray(),
+                    $" § {message.CreatedByName} Retweeted ".DarkGray());
             }
             else
             {
                 ColorConsole.WriteLine(
-                    $"{message.TweetCreatedByName} ".White(),
-                    $"@{message.TweetCreatedByScreenName} · ".DarkGray(),
-                    $"{message.TweetCreatedAt.ToLocalTime()}".DarkGray());
+                    $"{message.CreatedByName} ".White(),
+                    $"@{message.CreatedByScreenName} · ".DarkGray(),
+                    $"{message.CreatedAt.ToLocalTime()}".DarkGray());
             }
 
             var messageTokens = new List<ColorToken>();
-            for (var index = 0; index < message.TweetText.Length; ++index)
+            for (var index = 0; index < message.Text.Length; ++index)
             {
-                var userMention = message.TweetUserMentions.FirstOrDefault(m => m.Indices.First() == index);
+                var userMention = message.UserMentions.FirstOrDefault(m => m.Indices.First() == index);
                 if (userMention == null)
                 {
-                    var hashTag = message.TweetHashtags.FirstOrDefault(m => m.Indices.First() == index);
+                    var hashTag = message.Hashtags.FirstOrDefault(m => m.Indices.First() == index);
                     if (hashTag == null)
                     {
-                        messageTokens.Add(message.TweetText.Substring(index, 1).Gray());
+                        messageTokens.Add(message.Text.Substring(index, 1).Gray());
                         continue;
                     }
 
                     var hashTaglength = hashTag.Indices.Last() - index;
-                    messageTokens.Add(message.TweetText.Substring(index, hashTaglength).Cyan());
+                    messageTokens.Add(message.Text.Substring(index, hashTaglength).Cyan());
 
                     index += hashTaglength - 1;
                     continue;
                 }
 
                 var userMentionLength = userMention.Indices.Last() - index;
-                messageTokens.Add(message.TweetText.Substring(index, userMentionLength).Cyan());
+                messageTokens.Add(message.Text.Substring(index, userMentionLength).Cyan());
                 index += userMentionLength - 1;
             }
 

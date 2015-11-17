@@ -51,10 +51,22 @@
                 base.ConfigureApplicationContainer(container);
 
                 container.Register<IRepository<string, IEnumerable<Mention>>>(
-                        new MongoDBListRepository<Mention>(this.mongoDatabase, "mention_leaderboard__mentions"));
+                        new MongoDBListRepository<Mention>(this.mongoDatabase, "most_mentioned__mentions"));
 
                 container.Register<IRepository<string, IEnumerable<Tweet>>>(
-                        new MongoDBListRepository<Tweet>(this.mongoDatabase, "tweet_leaderboard__tweets"));
+                        new MongoDBListRepository<Tweet>(this.mongoDatabase, "top_tweeters__tweets"));
+
+                container.Register<IRepository<string, IEnumerable<TweetRetweet>>>(
+                        new MongoDBListRepository<TweetRetweet>(this.mongoDatabase, "top_tweeters_retweeters__tweets_retweets"));
+
+                container.Register<IRepository<string, IEnumerable<Retweet>>>(
+                        new MongoDBListRepository<Retweet>(this.mongoDatabase, "top_retweeters__retweets"));
+
+                container.Register<IRepository<string, IEnumerable<Retweetee>>>(
+                        new MongoDBListRepository<Retweetee>(this.mongoDatabase, "most_retweeted__retweetees"));
+
+                container.Register<IRepository<string, IEnumerable<Hashtag>>>(
+                        new MongoDBListRepository<Hashtag>(this.mongoDatabase, "most_hashtagged__hashtags"));
             }
         }
     }

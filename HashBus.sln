@@ -25,17 +25,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application.Events", "src\HashBus.Application.Events\HashBus.Application.Events.csproj", "{6991A5CF-25CB-4336-9F6D-2EB1E01EFB75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.MentionLeaderboard", "src\HashBus.Projector.MentionLeaderboard\HashBus.Projector.MentionLeaderboard.csproj", "{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.MostMentioned", "src\HashBus.Projector.MostMentioned\HashBus.Projector.MostMentioned.csproj", "{718D4969-A6F7-4B0B-8FD2-DE13F23F5860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.MentionLeaderboard", "src\HashBus.Viewer.MentionLeaderboard\HashBus.Viewer.MentionLeaderboard.csproj", "{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.MostMentioned", "src\HashBus.Viewer.MostMentioned\HashBus.Viewer.MostMentioned.csproj", "{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.ReadModel", "src\HashBus.ReadModel\HashBus.ReadModel.csproj", "{1709F0A9-F797-44FD-94C0-18A0D75442F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.ReadModel.MongoDB", "src\HashBus.ReadModel.MongoDB\HashBus.ReadModel.MongoDB.csproj", "{34C86079-CCAB-4312-98FC-F64F4A97D3A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TweetLeaderboard", "src\HashBus.Projector.TweetLeaderboard\HashBus.Projector.TweetLeaderboard.csproj", "{501F4158-CF10-4C25-AAA3-7BE827924926}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TopTweeters", "src\HashBus.Projector.TopTweeters\HashBus.Projector.TopTweeters.csproj", "{501F4158-CF10-4C25-AAA3-7BE827924926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.TweetLeaderboard", "src\HashBus.Viewer.TweetLeaderboard\HashBus.Viewer.TweetLeaderboard.csproj", "{36508ED8-DA6A-45AB-ABF6-4AD98F696009}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.TopTweeters", "src\HashBus.Viewer.TopTweeters\HashBus.Viewer.TopTweeters.csproj", "{36508ED8-DA6A-45AB-ABF6-4AD98F696009}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.WebApi", "src\HashBus.WebApi\HashBus.WebApi.csproj", "{4EC0F237-1CF1-4A0F-B849-E8B75A18CEEB}"
 EndProject
@@ -44,6 +44,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.CatchUp", "src\HashBus.Twitter.Monitor.CatchUp\HashBus.Twitter.Monitor.CatchUp.csproj", "{63B64572-B72C-4BCE-BB3D-C3F7635A6858}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Commands", "src\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj", "{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TopTweetersRetweeters", "src\HashBus.Projector.TopTweetersRetweeters\HashBus.Projector.TopTweetersRetweeters.csproj", "{BAD64799-5E68-4EA5-B117-1F0B3582392B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.TopTweetersRetweeters", "src\HashBus.Viewer.TopTweetersRetweeters\HashBus.Viewer.TopTweetersRetweeters.csproj", "{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TopRetweeters", "src\HashBus.Projector.TopRetweeters\HashBus.Projector.TopRetweeters.csproj", "{82A07696-48E6-4EA7-9DF6-3422157E861F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.TopRetweeters", "src\HashBus.Viewer.TopRetweeters\HashBus.Viewer.TopRetweeters.csproj", "{D2C63E63-7076-4EA1-933C-520776D6F9B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.MostRetweeted", "src\HashBus.Projector.MostRetweeted\HashBus.Projector.MostRetweeted.csproj", "{C345A6AA-A562-447F-8A2B-63645B4FE56F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.MostRetweeted", "src\HashBus.Viewer.MostRetweeted\HashBus.Viewer.MostRetweeted.csproj", "{72D04C50-1CEA-4B3D-8BA4-159DD20AAA6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.MostHashtagged", "src\HashBus.Projector.MostHashtagged\HashBus.Projector.MostHashtagged.csproj", "{ADADC124-AF03-428D-ADD5-9CB2DF88E81C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.MostHashtagged", "src\HashBus.Viewer.MostHashtagged\HashBus.Viewer.MostHashtagged.csproj", "{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +127,38 @@ Global
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82A07696-48E6-4EA7-9DF6-3422157E861F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82A07696-48E6-4EA7-9DF6-3422157E861F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82A07696-48E6-4EA7-9DF6-3422157E861F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82A07696-48E6-4EA7-9DF6-3422157E861F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C63E63-7076-4EA1-933C-520776D6F9B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C63E63-7076-4EA1-933C-520776D6F9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C63E63-7076-4EA1-933C-520776D6F9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C63E63-7076-4EA1-933C-520776D6F9B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C345A6AA-A562-447F-8A2B-63645B4FE56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C345A6AA-A562-447F-8A2B-63645B4FE56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C345A6AA-A562-447F-8A2B-63645B4FE56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C345A6AA-A562-447F-8A2B-63645B4FE56F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D04C50-1CEA-4B3D-8BA4-159DD20AAA6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D04C50-1CEA-4B3D-8BA4-159DD20AAA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D04C50-1CEA-4B3D-8BA4-159DD20AAA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D04C50-1CEA-4B3D-8BA4-159DD20AAA6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADADC124-AF03-428D-ADD5-9CB2DF88E81C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADADC124-AF03-428D-ADD5-9CB2DF88E81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADADC124-AF03-428D-ADD5-9CB2DF88E81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADADC124-AF03-428D-ADD5-9CB2DF88E81C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,5 +179,13 @@ Global
 		{F302F223-C0CD-46A6-8BB6-01F1213BDD58} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{63B64572-B72C-4BCE-BB3D-C3F7635A6858} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{BAD64799-5E68-4EA5-B117-1F0B3582392B} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{1AE89008-DCAF-4CBA-83AD-4819E4CA7F4B} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{82A07696-48E6-4EA7-9DF6-3422157E861F} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{D2C63E63-7076-4EA1-933C-520776D6F9B5} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{C345A6AA-A562-447F-8A2B-63645B4FE56F} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{72D04C50-1CEA-4B3D-8BA4-159DD20AAA6C} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{ADADC124-AF03-428D-ADD5-9CB2DF88E81C} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal

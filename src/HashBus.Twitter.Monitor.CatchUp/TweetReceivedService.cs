@@ -22,7 +22,7 @@
         {
             return Search
                 .SearchTweets(new TweetSearchParameters(track) { SinceId = sinceTweetId, MaximumNumberOfResults = this.maximumNumberOfTweets })
-                .Select(tweet => TweetMapper.Map(tweet, endpointName, sessionId, track));
+                .Select(tweet => TweetMapper.Map(tweet, track, endpointName, sessionId));
         }
     }
 }

@@ -68,6 +68,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\HashBus.Twitter.Monitor\Writer.cs">
+      <Link>Writer.cs</Link>
+    </Compile>
     <Compile Include="TweetReceivedHandler.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
