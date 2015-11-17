@@ -131,7 +131,7 @@
                     $"{currentLeaderboard?.Count ?? 0:N0}"
                         .Color(currentLeaderboard?.Count - previousLeaderboard?.Count > 0 ? movementColors[-1] : movementColors[0]),
                     $" since ".Gray(),
-                    $"{currentLeaderboard.Since.ToLocalTime()}".Gray());
+                    $"{currentLeaderboard.Since?.ToLocalTime().ToString() ?? ("started")}".Gray());
 
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);

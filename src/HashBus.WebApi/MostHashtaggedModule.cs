@@ -35,7 +35,7 @@
                 {
                     Entries = entries,
                     Count = trackHashtags.Count,
-                    Since = trackHashtags.First().HashtaggedAt,
+                    Since = trackHashtags.FirstOrDefault()?.HashtaggedAt,
                 };
             };
         }
