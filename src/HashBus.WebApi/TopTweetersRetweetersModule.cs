@@ -37,7 +37,7 @@
                 {
                     Entries = entries,
                     Count = trackTweets.Count,
-                    Since = trackTweets.First().TweetedRetweetedAt,
+                    Since = trackTweets.FirstOrDefault()?.TweetedRetweetedAt,
                 };
             };
         }
