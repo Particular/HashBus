@@ -21,7 +21,7 @@ namespace HashBus.Projector.TopTweetersRetweeters
             busConfiguration.UsePersistence<InMemoryPersistence>();
             busConfiguration.RegisterComponents(c =>
                 c.RegisterSingleton<IRepository<string, IEnumerable<TweetRetweet>>>(
-                    new MongoDBListRepository<TweetRetweet>(mongoDatabase, "top_tweeters_retweeters__tweet_retweets")));
+                    new MongoDBListRepository<TweetRetweet>(mongoDatabase, "top_tweeters_retweeters__tweets_retweets")));
             busConfiguration.ApplyMessageConventions();
 
             using (Bus.Create(busConfiguration).Start())

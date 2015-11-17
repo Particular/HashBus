@@ -1,4 +1,4 @@
-namespace HashBus.Projector.TweetLeaderboard
+namespace HashBus.Projector.TopTweeters
 {
     using System.Configuration;
 

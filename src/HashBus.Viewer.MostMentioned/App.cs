@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer
+﻿namespace HashBus.Viewer.MostMentioned
 {
     using System.Threading.Tasks;
     using ColoredConsole;
@@ -20,13 +20,13 @@
             await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
-                new LeaderboardService<UserEntry>(client, "/mention-leaderboards/{0}"),
+                new LeaderboardService<UserEntry>(client, "/most-mentioned/{0}"),
                 showPercentages,
                 verticalPadding,
                 horizontalPadding,
                 (entry1, entry2) => entry1.Id == entry2.Id,
                 entry => new[] { $" {entry.Name}".White(), $" @{entry.ScreenName}".Cyan(), },
-                "Most mentioned",
+                "Most Mentioned",
                 "mentions");
         }
     }

@@ -1,4 +1,4 @@
-namespace HashBus.Projector.MentionLeaderboard
+namespace HashBus.Projector.MostMentioned
 {
     using System.Configuration;
 

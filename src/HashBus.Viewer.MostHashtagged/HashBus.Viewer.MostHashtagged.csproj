@@ -65,16 +65,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\HashBus.Viewer.MentionLeaderboard\ColorTokenExtensions.cs">
+    <Compile Include="..\HashBus.Viewer.MostMentioned\ColorTokenExtensions.cs">
       <Link>ColorTokenExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\HashBus.Viewer.MentionLeaderboard\IService.cs">
+    <Compile Include="..\HashBus.Viewer.MostMentioned\IService.cs">
       <Link>IService.cs</Link>
     </Compile>
-    <Compile Include="..\HashBus.Viewer.MentionLeaderboard\LeaderboardService.cs">
+    <Compile Include="..\HashBus.Viewer.MostMentioned\LeaderboardService.cs">
       <Link>LeaderboardService.cs</Link>
     </Compile>
-    <Compile Include="..\HashBus.Viewer.MentionLeaderboard\LeaderboardView.cs">
+    <Compile Include="..\HashBus.Viewer.MostMentioned\LeaderboardView.cs">
       <Link>LeaderboardView.cs</Link>
     </Compile>
     <Compile Include="..\HashBus.WebApi\HashtagEntry.cs">

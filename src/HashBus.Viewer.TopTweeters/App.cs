@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer.TweetLeaderboard
+﻿namespace HashBus.Viewer.TopTweeters
 {
     using System.Threading.Tasks;
     using ColoredConsole;
@@ -20,7 +20,7 @@
             await LeaderboardView<UserEntry>.StartAsync(
                 track,
                 refreshInterval,
-                new LeaderboardService<UserEntry>(client, "/tweet-leaderboards/{0}"),
+                new LeaderboardService<UserEntry>(client, "/top-tweeters/{0}"),
                 showPercentages,
                 verticalPadding,
                 horizontalPadding,

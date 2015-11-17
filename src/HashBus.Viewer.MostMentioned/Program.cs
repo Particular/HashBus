@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer.TweetLeaderboard
+﻿namespace HashBus.Viewer.MostMentioned
 {
     using System.Configuration;
 

@@ -80,10 +80,10 @@
     <Compile Include="MostRetweetedModule.cs" />
     <Compile Include="TopRetweetersModule.cs" />
     <Compile Include="TopTweetersRetweetersModule.cs" />
-    <Compile Include="TweetLeaderboardModule.cs" />
+    <Compile Include="TopTweetersModule.cs" />
     <Compile Include="HashtagEntry.cs" />
     <Compile Include="UserEntry.cs" />
-    <Compile Include="MentionLeaderboardModule.cs" />
+    <Compile Include="MostMentionedModule.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

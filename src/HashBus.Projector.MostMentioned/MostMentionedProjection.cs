@@ -1,4 +1,4 @@
-﻿namespace HashBus.Projector.MentionLeaderboard
+﻿namespace HashBus.Projector.MostMentioned
 {
     using System;
     using System.Collections.Generic;
@@ -9,11 +9,11 @@
     using LiteGuard;
     using NServiceBus;
 
-    public class MentionLeaderboardProjection : IHandleMessages<TweetAnalyzed>
+    public class MostMentionedProjection : IHandleMessages<TweetAnalyzed>
     {
         private readonly IRepository<string, IEnumerable<Mention>> mentions;
 
-        public MentionLeaderboardProjection(IRepository<string, IEnumerable<Mention>> mentions)
+        public MostMentionedProjection(IRepository<string, IEnumerable<Mention>> mentions)
         {
             Guard.AgainstNullArgument(nameof(mentions), mentions);
 

@@ -1,4 +1,4 @@
-namespace HashBus.Projector.TweetLeaderboard
+namespace HashBus.Projector.MostMentioned
 {
     using System.Collections.Generic;
     using System.Threading;
@@ -15,13 +15,13 @@ namespace HashBus.Projector.TweetLeaderboard
             var mongoDatabase = new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase);
 
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Projection.TweetLeaderboard");
+            busConfiguration.EndpointName("HashBus.Projector.MostMentioned");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
             busConfiguration.RegisterComponents(c =>
-                c.RegisterSingleton<IRepository<string, IEnumerable<Tweet>>>(
-                    new MongoDBListRepository<Tweet>(mongoDatabase, "tweet_leaderboard__tweets")));
+                c.RegisterSingleton<IRepository<string, IEnumerable<Mention>>>(
+                    new MongoDBListRepository<Mention>(mongoDatabase, "most_mentioned__mentions")));
             busConfiguration.ApplyMessageConventions();
 
             using (Bus.Create(busConfiguration).Start())

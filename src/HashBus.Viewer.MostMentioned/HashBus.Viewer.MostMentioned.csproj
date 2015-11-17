@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{501F4158-CF10-4C25-AAA3-7BE827924926}</ProjectGuid>
+    <ProjectGuid>{F2EBC6E5-CA6D-49C3-B863-2C0A8C7E9956}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Projector.TweetLeaderboard</RootNamespace>
-    <AssemblyName>HashBus.Projector.TweetLeaderboard</AssemblyName>
+    <RootNamespace>HashBus.Viewer.MostMentioned</RootNamespace>
+    <AssemblyName>HashBus.Viewer.MostMentioned</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -43,24 +43,20 @@
       <HintPath>..\..\packages\ColoredConsole.0.4.0\lib\net45\ColoredConsole.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer, Version=1.37.7.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Humanizer.1.37.7\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LiteGuard, Version=0.10.0.0, Culture=neutral, PublicKeyToken=d38e0b7ae24b08a1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LiteGuard.0.10.0\lib\net35\LiteGuard.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Bson, Version=2.1.0.145, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MongoDB.Bson.2.1.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.1.0.145, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MongoDB.Driver.2.1.0\lib\net45\MongoDB.Driver.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.1.0.145, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MongoDB.Driver.Core.2.1.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NServiceBus.5.2.9\lib\net45\NServiceBus.Core.dll</HintPath>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -69,7 +65,19 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TweetLeaderboardProjection.cs" />
+    <Compile Include="..\HashBus.WebApi\IEntry.cs">
+      <Link>IEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\HashBus.WebApi\Leaderboard.cs">
+      <Link>Leaderboard.cs</Link>
+    </Compile>
+    <Compile Include="..\HashBus.WebApi\UserEntry.cs">
+      <Link>UserEntry.cs</Link>
+    </Compile>
+    <Compile Include="IService.cs" />
+    <Compile Include="LeaderboardService.cs" />
+    <Compile Include="LeaderboardView.cs" />
+    <Compile Include="ColorTokenExtensions.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
@@ -78,24 +86,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HashBus.Application.Events\HashBus.Application.Events.csproj">
-      <Project>{6991a5cf-25cb-4336-9f6d-2eb1e01efb75}</Project>
-      <Name>HashBus.Application.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
-      <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
-      <Name>HashBus.NServiceBusConfiguration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HashBus.ReadModel.MongoDB\HashBus.ReadModel.MongoDB.csproj">
-      <Project>{34c86079-ccab-4312-98fc-f64f4a97d3a4}</Project>
-      <Name>HashBus.ReadModel.MongoDB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HashBus.ReadModel\HashBus.ReadModel.csproj">
-      <Project>{1709F0A9-F797-44FD-94C0-18A0D75442F8}</Project>
-      <Name>HashBus.ReadModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

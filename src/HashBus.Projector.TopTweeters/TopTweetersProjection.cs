@@ -1,4 +1,4 @@
-﻿namespace HashBus.Projector.TweetLeaderboard
+﻿namespace HashBus.Projector.TopTweeters
 {
     using System;
     using System.Collections.Generic;
@@ -8,11 +8,11 @@
     using LiteGuard;
     using NServiceBus;
 
-    public class TweetLeaderboardProjection : IHandleMessages<Application.Events.TweetAnalyzed>
+    public class TopTweetersProjection : IHandleMessages<Application.Events.TweetAnalyzed>
     {
         private readonly IRepository<string, IEnumerable<Tweet>> tweets;
 
-        public TweetLeaderboardProjection(IRepository<string, IEnumerable<Tweet>> tweets)
+        public TopTweetersProjection(IRepository<string, IEnumerable<Tweet>> tweets)
         {
             Guard.AgainstNullArgument(nameof(tweets), tweets);
 
