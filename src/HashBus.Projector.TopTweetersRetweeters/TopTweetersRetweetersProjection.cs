@@ -29,6 +29,7 @@
 
             trackTweets.Add(new TweetRetweet
             {
+                TweetedRetweetedAt = message.Tweet.CreatedAt,
                 TweetId = message.Tweet.Id,
                 UserId = message.Tweet.CreatedById,
                 UserIdStr = message.Tweet.CreatedByIdStr,

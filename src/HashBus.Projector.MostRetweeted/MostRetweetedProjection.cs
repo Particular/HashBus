@@ -38,6 +38,7 @@
             {
                 rewRetweetees.Add(new Retweetee
                 {
+                    RetweetedAt = message.Tweet.CreatedAt,
                     TweetId = retweet.Id,
                     UserId = retweet.CreatedById,
                     UserIdStr = retweet.CreatedByIdStr,

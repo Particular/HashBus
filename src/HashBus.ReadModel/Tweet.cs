@@ -1,7 +1,11 @@
 ﻿namespace HashBus.ReadModel
 {
+    using System;
+
     public class Tweet
     {
+        public DateTime TweetedAt { get; set; }
+
         public long TweetId { get; set; }
 
         public long UserId { get; set; }

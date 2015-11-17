@@ -37,6 +37,7 @@
                 {
                     Entries = entries,
                     Count = trackMentions.Count,
+                    Since = trackMentions.First().MentionedAt,
                 };
             };
         }

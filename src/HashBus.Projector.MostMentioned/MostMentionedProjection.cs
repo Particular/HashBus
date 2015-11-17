@@ -36,6 +36,7 @@
             var newMentions = message.Tweet.UserMentions.Select(userMention =>
                     new Mention
                     {
+                        MentionedAt = message.Tweet.CreatedAt,
                         TweetId = message.Tweet.Id,
                         UserMentionId = userMention.Id,
                         UserMentionIdStr = userMention.IdStr,

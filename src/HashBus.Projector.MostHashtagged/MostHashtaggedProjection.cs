@@ -35,6 +35,7 @@
             var newHashtags = message.Tweet.Hashtags.Select(hashtag =>
                     new Hashtag
                     {
+                        HashtaggedAt = message.Tweet.CreatedAt,
                         TweetId = message.Tweet.Id,
                         Text = hashtag.Text,
                     })
