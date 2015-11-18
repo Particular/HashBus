@@ -51,7 +51,7 @@
                     $"{message.Tweet.CreatedAt.ToLocalTime()}".DarkGray(),
                     " ",
                     "Added ".Gray(),
-                    $"@{hashtag.Text}".Cyan(),
+                    $"#{hashtag.Text}".Cyan(),
                     " usage to ".Gray(),
                     $" {message.Tweet.Track} ".DarkCyan().On(ConsoleColor.White));
             }
