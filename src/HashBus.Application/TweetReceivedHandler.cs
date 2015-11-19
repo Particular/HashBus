@@ -30,10 +30,14 @@
                         message.Tweet.RetweetedTweet.CreatedByIdStr != userMention.IdStr &&
                         message.Tweet.RetweetedTweet.CreatedByScreenName != userMention.ScreenName)) &&
                     message.Tweet.Text.Substring(0, userMention.Indices[0]).Trim().ToUpperInvariant() != "RT")
+                .GroupBy(userMention => userMention.Id)
+                .Select(group => group.First())
                 .ToList();
 
             message.Tweet.Hashtags = message.Tweet.Hashtags
                 .Where(hashtag => !string.Equals($"#{hashtag.Text}", message.Tweet.Track, StringComparison.OrdinalIgnoreCase))
+                .GroupBy(hashtag => hashtag.Text.ToUpperInvariant())
+                .Select(group => group.First())
                 .ToList();
 
             Writer.Write(message.Tweet);
