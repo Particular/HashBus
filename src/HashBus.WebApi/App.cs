@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using ColoredConsole;
     using HashBus.ReadModel;
@@ -67,6 +68,32 @@
 
                 container.Register<IRepository<string, IEnumerable<Hashtag>>>(
                         new MongoDBListRepository<Hashtag>(this.mongoDatabase, "most_hashtagged__hashtags"));
+            }
+
+            protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+            {
+                base.RequestStartup(container, pipelines, context);
+
+                pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
+                {
+                    if (ctx.Request.Headers.Keys.Contains("Origin"))
+                    {
+                        ctx.Response.Headers["Access-Control-Allow-Origin"] =
+                            string.Join(" ", ctx.Request.Headers["Origin"]);
+
+                        if (ctx.Request.Method == "OPTIONS")
+                        {
+                            ctx.Response.Headers["Access-Control-Allow-Methods"] =
+                                "GET, POST, PUT, DELETE, OPTIONS";
+
+                            if (ctx.Request.Headers.Keys.Contains("Access-Control-Request-Headers"))
+                            {
+                                ctx.Response.Headers["Access-Control-Allow-Headers"] =
+                                    string.Join(", ", ctx.Request.Headers["Access-Control-Request-Headers"]);
+                            }
+                        }
+                    }
+                });
             }
         }
     }
