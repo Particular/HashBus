@@ -1,0 +1,187 @@
+
+<div class="container">
+    <div class="container-left">
+        <h3>Top Tweeters/Retweeters</h3>
+        <table class="table-entrys">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Count (Share)</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in topTweetersRetweeters" ng-class="{'positive-change': entry.positiveChange, 'negative-change': entry.negativeChange}">
+                    <td ng-if="entry.positiveChange">&#x25B2;</td>
+                    <td ng-if="entry.negativeChange">&#x25BC;</td>
+                    <td ng-if="!entry.positiveChange && !entry.negativeChange">-</td>
+                    <td>{{ entry.position }}</td>
+                    <td>{{ entry.name }}<a target="_blank" href="http://twitter.com/{{entry.screenName}}"> @{{ entry.screenName }}</a></td>
+                    <td>{{ entry.count }} ({{ entry.share }}%)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>since {{ topTweetersRetweetersSince | date:"yyyy/MM/dd HH:mm:ss" }}</p>
+    </div>
+    <div class="container-right">
+        <h3>Most Mentioned</h3>
+        <table class="table-entrys">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Count (Share)</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in mostMentioned" ng-class="{'positive-change': entry.positiveChange, 'negative-change': entry.negativeChange}">
+                    <td ng-if="entry.positiveChange">&#x25B2;</td>
+                    <td ng-if="entry.negativeChange">&#x25BC;</td>
+                    <td ng-if="!entry.positiveChange && !entry.negativeChange">-</td>
+                    <td>{{ entry.position }}</td>
+                    <td>{{ entry.name }}<a target="_blank" href="http://twitter.com/{{entry.screenName}}"> @{{ entry.screenName }}</a></td>
+                    <td>{{ entry.count }} ({{ entry.share }}%)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>since {{ mostMentionedSince | date:"yyyy/MM/dd HH:mm:ss" }}</p>
+    </div>
+</div>
+<div class="container">
+    <div class="container-left">
+        <h3>Top Retweeters</h3>
+        <table class="table-entrys">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Count (Share)</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in topRetweeters" ng-class="{'positive-change': entry.positiveChange, 'negative-change': entry.negativeChange}">
+                    <td ng-if="entry.positiveChange">&#x25B2;</td>
+                    <td ng-if="entry.negativeChange">&#x25BC;</td>
+                    <td ng-if="!entry.positiveChange && !entry.negativeChange">-</td>
+                    <td>{{ entry.position }}</td>
+                    <td>{{ entry.name }}<a target="_blank" href="http://twitter.com/{{entry.screenName}}"> @{{ entry.screenName }}</a></td>
+                    <td>{{ entry.count }} ({{ entry.share }}%)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>since {{ topTweetersRetweetersSince | date:"yyyy/MM/dd HH:mm:ss" }}</p>
+    </div>
+    <div class="container-right">
+        <h3>Most Retweeted</h3>
+        <table class="table-entrys">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Count (Share)</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in mostRetweeted" ng-class="{'positive-change': entry.positiveChange, 'negative-change': entry.negativeChange}">
+                    <td ng-if="entry.positiveChange">&#x25B2;</td>
+                    <td ng-if="entry.negativeChange">&#x25BC;</td>
+                    <td ng-if="!entry.positiveChange && !entry.negativeChange">-</td>
+                    <td>{{ entry.position }}</td>
+                    <td>{{ entry.name }}<a target="_blank" href="http://twitter.com/{{entry.screenName}}"> @{{ entry.screenName }}</a></td>
+                    <td>{{ entry.count }} ({{ entry.share }}%)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>since {{ mostMentionedSince | date:"yyyy/MM/dd HH:mm:ss" }}</p>
+    </div>
+</div>
+<div class="container">
+    <div class="container-left">
+        <h3>Most Hashtagged</h3>
+        <table class="table-entrys">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Position</th>
+                    <th>Text</th>
+                    <th>Count (Share)</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in mostHashtagged" ng-class="{'positive-change': entry.positiveChange, 'negative-change': entry.negativeChange}">
+                    <td ng-if="entry.positiveChange">&#x25B2;</td>
+                    <td ng-if="entry.negativeChange">&#x25BC;</td>
+                    <td ng-if="!entry.positiveChange && !entry.negativeChange">-</td>
+                    <td>{{ entry.position }}</td>
+                    <td>{{ entry.text }}</td>
+                    <td>{{ entry.count }} ({{ entry.share }}%)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>since {{ topTweetersRetweetersSince | date:"yyyy/MM/dd HH:mm:ss" }}</p>
+    </div>
+    <div class="container-right">
+        <h3>Top Tweeters</h3>
+        <table class="table-entrys">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Count (Share)</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in topTweeters" ng-class="{'positive-change': entry.positiveChange, 'negative-change': entry.negativeChange}">
+                    <td ng-if="entry.positiveChange">&#x25B2;</td>
+                    <td ng-if="entry.negativeChange">&#x25BC;</td>
+                    <td ng-if="!entry.positiveChange && !entry.negativeChange">-</td>
+                    <td>{{ entry.position }}</td>
+                    <td>{{ entry.name }}<a target="_blank" href="http://twitter.com/{{entry.screenName}}"> @{{ entry.screenName }}</a></td>
+                    <td>{{ entry.count }} ({{ entry.share }}%)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>since {{ mostMentionedSince | date:"yyyy/MM/dd HH:mm:ss" }}</p>
+    </div>
+</div>
