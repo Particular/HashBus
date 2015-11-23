@@ -1,6 +1,7 @@
 angular.module('hashBusUI')
-	.controller('leaderboardsCtrl', ['$scope', '$http', 'urls', 'poller', '$interval',
-		function leaderboardsCtrl($scope, $http, urls, poller, $interval) {
+	.controller('leaderboardsCtrl', ['$scope', '$http', '$stateParams', 'urls', 'poller', '$interval',
+		function leaderboardsCtrl($scope, $http, $stateParams, urls, poller, $interval) {
+            var hashtag = $stateParams.hashtag || "BuildStuffUA";
 			var interval = 10000;
             function map(idProperty, count, previousResults, newResults){
                 if(!previousResults){
@@ -37,7 +38,7 @@ angular.module('hashBusUI')
 		    var topTweetersRetweeters = poller.create({
 		        interval: interval,
 		        action: function () {
-		            return $http.get(urls.topTweetersRetweeters)
+		            return $http.get(urls.topTweetersRetweeters + hashtag)
 		        }
 		    });
 		    topTweetersRetweeters.start();
@@ -54,7 +55,7 @@ angular.module('hashBusUI')
 		    var mostMentioned = poller.create({
 		        interval: interval,
 		        action: function () {
-		            return $http.get(urls.mostMentioned)
+		            return $http.get(urls.mostMentioned + hashtag)
 		        }
 		    });
 		    mostMentioned.start();
@@ -71,7 +72,7 @@ angular.module('hashBusUI')
 		    var topRetweeters = poller.create({
 		        interval: interval,
 		        action: function () {
-		            return $http.get(urls.topRetweeters)
+		            return $http.get(urls.topRetweeters + hashtag)
 		        }
 		    });
 		    topRetweeters.start();
@@ -88,7 +89,7 @@ angular.module('hashBusUI')
 		    var mostRetweeted = poller.create({
 		        interval: interval,
 		        action: function () {
-		            return $http.get(urls.mostRetweeted)
+		            return $http.get(urls.mostRetweeted + hashtag)
 		        }
 		    });
 		    mostRetweeted.start();
@@ -105,7 +106,7 @@ angular.module('hashBusUI')
 		    var topTweeters = poller.create({
 		        interval: interval,
 		        action: function () {
-		            return $http.get(urls.topTweeters)
+		            return $http.get(urls.topTweeters + hashtag)
 		        }
 		    });
 		    topTweeters.start();
@@ -122,7 +123,7 @@ angular.module('hashBusUI')
 		    var mostHashtagged = poller.create({
 		        interval: interval,
 		        action: function () {
-		            return $http.get(urls.mostHashTagged)
+		            return $http.get(urls.mostHashTagged + hashtag)
 		        }
 		    });
 		    mostHashtagged.start();
