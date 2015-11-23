@@ -259,6 +259,14 @@ a.powered-by:hover {
 	color: #0DB3C8;
 }
 
+a.powered-by:active {
+	color: #0DB3C8;
+}
+
+a.powered-by:visited {
+	color: #0DB3C8;
+}
+
 a.powered-by span {
 	background: url('../img/powered-by-particular.png') no-repeat right top;
 	background-size: 112px 40px;
