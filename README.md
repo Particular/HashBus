@@ -4,17 +4,6 @@
 * SQL Server
   * You must create the database before running the apps (see the connection string in the config files)
 
-### HashBus.Twitter.Monitor configuration [Optional]
-
-The `HashBus.Twitter.Monitor.Simulator` allows to test all the HashBus functionalities without using the public Twitter API/Feed. In order to run against the public Twitter API/Feed the following steps must be accomplished:
-
-* Go to https://apps.twitter.com/ and create a new application;
-* On the machine where the `HashBus.Twitter.Monitor` needs to run create the following `environment variables`:
-   * `HASHBUS_TWITTER_CONSUMER_KEY`: the created Twitter app consumer key;
-   * `HASHBUS_TWITTER_CONSUMER_SECRET`: the created Twitter app consumer secret;
-   * `HASHBUS_TWITTER_ACCESS_TOKEN`: the created Twitter app access token;
-   * `HASHBUS_TWITTER_ACCESS_TOKEN_SECRET`: the created Twitter app token secret;
-
 ### Web API
 
 The web API is hosted at http://hashbus-demo.cloudapp.net:8080/
