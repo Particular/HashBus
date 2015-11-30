@@ -17,9 +17,12 @@
     class App
     {
         public static void Run(
-            Uri baseUri, string mongoConnectionString, string mongoDBDatabase)
+            Uri baseUri, string mongoConnectionString, string mongoDBDatabase, IEnumerable<string> ignoredUserNames)
         {
-            var bootstrapper = new Bootstrapper(new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase));
+            var bootstrapper = new Bootstrapper(
+                new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase),
+                new IgnoredUserNamesService(ignoredUserNames));
+
             using (var host = new NancyHost(bootstrapper, baseUri))
             {
                 host.Start();
@@ -32,10 +35,12 @@
         private class Bootstrapper : DefaultNancyBootstrapper
         {
             private readonly IMongoDatabase mongoDatabase;
+            private readonly IIgnoredUserNamesService ignoredUserNamesService;
 
-            public Bootstrapper(IMongoDatabase mongoDatabase)
+            public Bootstrapper(IMongoDatabase mongoDatabase, IIgnoredUserNamesService ignoredUserNamesService)
             {
                 this.mongoDatabase = mongoDatabase;
+                this.ignoredUserNamesService = ignoredUserNamesService;
             }
 
             protected override NancyInternalConfiguration InternalConfiguration
@@ -50,6 +55,8 @@
             protected override void ConfigureApplicationContainer(TinyIoCContainer container)
             {
                 base.ConfigureApplicationContainer(container);
+
+                container.Register(this.ignoredUserNamesService);
 
                 container.Register<IRepository<string, IEnumerable<Mention>>>(
                         new MongoDBListRepository<Mention>(this.mongoDatabase, "most_mentioned__mentions"));

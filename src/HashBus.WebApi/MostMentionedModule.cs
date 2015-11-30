@@ -7,7 +7,8 @@
 
     public class MostMentionedModule : NancyModule
     {
-        public MostMentionedModule(IRepository<string, IEnumerable<Mention>> mentions)
+        public MostMentionedModule(
+            IRepository<string, IEnumerable<Mention>> mentions, IIgnoredUserNamesService ignoredUserNamesService)
         {
             this.Get["/most-mentioned/{track}", true] = async (parameters, __) =>
             {
@@ -15,6 +16,7 @@
                 var track = ((string)parameters.track).Replace("해시", "#");
                 var trackMentions = (await mentions.GetAsync(track)).ToList();
                 var entries = trackMentions
+                    .Where(item => !ignoredUserNamesService.Get().Contains(item.UserMentionScreenName))
                     .GroupBy(mention => mention.UserMentionId)
                     .Select(g => new UserEntry
                     {
