@@ -37,7 +37,7 @@
                 {
                     Entries = entries,
                     Count = trackTweets.Count,
-                    Since = trackTweets.FirstOrDefault()?.TweetedRetweetedAt,
+                    Since = trackTweets.Min(tweet => tweet.TweetedRetweetedAt),
                 };
             };
         }
