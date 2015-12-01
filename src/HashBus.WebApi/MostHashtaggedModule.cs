@@ -35,7 +35,7 @@
                 {
                     Entries = entries,
                     Count = trackHashtags.Count,
-                    Since = trackHashtags.FirstOrDefault()?.HashtaggedAt,
+                    Since = trackHashtags.Min(hashtag => hashtag.HashtaggedAt),
                 };
             };
         }
