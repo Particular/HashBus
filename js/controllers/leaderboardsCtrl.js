@@ -1,7 +1,7 @@
 angular.module('hashBusUI')
 	.controller('leaderboardsCtrl', ['$rootScope', '$scope', '$http', '$stateParams', 'urls', 'poller', '$interval',
 		function leaderboardsCtrl($rootScope, $scope, $http, $stateParams, urls, poller, $interval) {
-            var hashtag = $stateParams.hashtag || "BuildStuffUA";
+            var hashtag = $stateParams.hashtag || "NSBCon";
             $rootScope.title = hashtag;
 			var interval = 10000;
             function map(idProperty, count, previousResults, newResults){
