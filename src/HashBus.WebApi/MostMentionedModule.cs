@@ -38,6 +38,7 @@
                     Entries = entries,
                     Count = trackMentions.Count,
                     Since = trackMentions.Min(mention => mention.MentionedAt),
+                    LastActivityDateTime = trackMentions.Max(mention => mention.MentionedAt),
                 };
             };
         }

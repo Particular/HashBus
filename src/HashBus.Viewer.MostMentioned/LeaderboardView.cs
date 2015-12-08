@@ -124,23 +124,31 @@
                     ColorConsole.WriteLine(new ColorToken[] { padding }.Concat(line).ToArray());
                 }
 
-                ColorConsole.WriteLine(
-                    padding,
-                    $"Total {itemsName}:".Gray(),
-                    " ",
-                    $"{currentLeaderboard?.Count ?? 0:N0}"
-                        .Color(currentLeaderboard?.Count - previousLeaderboard?.Count > 0 ? movementColors[-1] : movementColors[0]),
-                    $" since ".Gray(),
-                    $"{currentLeaderboard.Since?.ToLocalTime().ToString() ?? ("started")}".Gray());
+                if (currentLeaderboard.Since.HasValue)
+                {
+                    ColorConsole.WriteLine(
+                        padding,
+                        $"{currentLeaderboard.Since?.ToLocalTime()} to {currentLeaderboard.LastActivityDateTime?.ToLocalTime()}".Gray());
+                }
 
+                var totalColor = currentLeaderboard?.Count - previousLeaderboard?.Count > 0 ? movementColors[-1] : movementColors[0];
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);
                 using (var timer = new Timer(c =>
                 {
                     var timeLeft = new TimeSpan(0, 0, 0, (int)Math.Round((refreshTime - DateTime.UtcNow).TotalSeconds));
-                    var message = $"\r{padding}{DateTime.UtcNow.ToLocalTime()} · Refreshing in {timeLeft.Humanize()}...";
-                    maxMessageLength = Math.Max(maxMessageLength, message.Length);
-                    ColorConsole.Write(message.PadRight(maxMessageLength).DarkGray());
+
+                    var tokens = new []
+                    {
+                        $"\r{padding}Total {itemsName}: ".DarkGray(),
+                        $"{currentLeaderboard?.Count ?? 0:N0}".Color(totalColor),
+                        $" · Refreshing in {timeLeft.Humanize()}...".DarkGray()
+                    };
+
+                    var currentLength = tokens.Sum(x => x.Text.Length);
+                    maxMessageLength = Math.Max(maxMessageLength, currentLength);
+                    tokens = tokens.Concat(new ColorToken[] { new string(' ', maxMessageLength - currentLength) }).ToArray();
+                    ColorConsole.Write(tokens);
                 }))
                 {
                     timer.Change(0, 1000);

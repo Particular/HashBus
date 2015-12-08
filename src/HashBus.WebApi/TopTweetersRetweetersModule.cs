@@ -38,6 +38,7 @@
                     Entries = entries,
                     Count = trackTweets.Count,
                     Since = trackTweets.Min(tweet => tweet.TweetedRetweetedAt),
+                    LastActivityDateTime = trackTweets.Max(tweet => tweet.TweetedRetweetedAt),
                 };
             };
         }
