@@ -3,14 +3,13 @@ namespace HashBus.Twitter.Monitor.Simulator
     using System;
     using System.Collections.Generic;
     using System.Threading;
-    using HashBus.Application.Events;
-    using HashBus.Twitter.Monitor.Events;
     using NServiceBus;
     using System.Linq;
+    using HashBus.Application.Commands;
 
     class Simulation
     {
-        public static void Start(ISendOnlyBus bus, string endpointName, Guid sessionId)
+        public static void Start(ISendOnlyBus bus)
         {
             var random = new Random();
             var countOfUsers = 15;
@@ -43,11 +42,8 @@ namespace HashBus.Twitter.Monitor.Simulator
                     $" {hashtagText}" +
                     $" #{secondaryHashtag}";
 
-                var message = new TweetReceived
+                var message = new AnalyzeTweet
                 {
-                    IsSimulated = true,
-                    EndpointName = endpointName,
-                    SessionId = sessionId,
                     Tweet = new Tweet
                     {
                         Track = track,
@@ -102,7 +98,7 @@ namespace HashBus.Twitter.Monitor.Simulator
                 };
 
                 Writer.Write(message.Tweet);
-                bus.Publish(message);
+                bus.Send(message);
             }
         }
     }

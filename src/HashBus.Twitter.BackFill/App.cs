@@ -1,6 +1,5 @@
 ﻿namespace HashBus.Twitter.BackFill
 {
-    using System;
     using HashBus.NServiceBusConfiguration;
     using HashBus.Twitter.Monitor.Commands;
     using NServiceBus;
@@ -26,7 +25,6 @@
                 var command = new StartCatchUp
                 {
                     EndpointName = endpointName,
-                    SessionId = Guid.NewGuid(),
                     Track = track,
                     TweetId = tweetId,
                 };

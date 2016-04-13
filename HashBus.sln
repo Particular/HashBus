@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.MostHashtagg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.BackFill", "src\HashBus.Twitter.BackFill\HashBus.Twitter.BackFill.csproj", "{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application.Commands", "src\HashBus.Application.Commands\HashBus.Application.Commands.csproj", "{293F96F9-7E15-4969-B8ED-595D06FD7AA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,5 +200,6 @@ Global
 		{ADADC124-AF03-428D-ADD5-9CB2DF88E81C} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal
