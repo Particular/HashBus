@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using HashBus.Application.Events;
-    using HashBus.Twitter.Events;
+    using HashBus.Twitter.Monitor.Events;
     using LiteGuard;
     using NServiceBus;
 

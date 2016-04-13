@@ -3,7 +3,7 @@
     using System;
     using ColoredConsole;
     using Commands;
-    using Events;
+    using HashBus.Twitter.Monitor.Events;
     using NServiceBus.Saga;
 
     public class TweetReceivedSaga : Saga<TweetReceivedSagaData>,

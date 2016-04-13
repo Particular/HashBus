@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Events", "src\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Events", "src\HashBus.Twitter.Monitor.Events\HashBus.Twitter.Monitor.Events.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Simulator", "src\HashBus.Twitter.Monitor.Simulator\HashBus.Twitter.Monitor.Simulator.csproj", "{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5}"
 EndProject

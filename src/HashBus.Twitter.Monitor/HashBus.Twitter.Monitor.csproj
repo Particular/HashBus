@@ -148,9 +148,9 @@
       <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Monitor.Events\HashBus.Twitter.Monitor.Events.csproj">
       <Project>{5728de02-c264-4697-b554-dda5fad10a47}</Project>
-      <Name>HashBus.Twitter.Events</Name>
+      <Name>HashBus.Twitter.Monitor.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

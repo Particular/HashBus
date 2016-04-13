@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using HashBus.Twitter.Events;
+    using HashBus.Twitter.Monitor.Events;
 
     public interface ITweetReceivedService
     {

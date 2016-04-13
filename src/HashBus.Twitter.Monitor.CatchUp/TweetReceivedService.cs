@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using HashBus.Twitter.Events;
+    using HashBus.Twitter.Monitor.Events;
     using Tweetinvi;
     using Tweetinvi.Core.Credentials;
     using Tweetinvi.Core.Parameters;

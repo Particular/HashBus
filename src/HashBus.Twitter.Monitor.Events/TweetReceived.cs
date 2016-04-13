@@ -1,4 +1,4 @@
-﻿namespace HashBus.Twitter.Events
+﻿namespace HashBus.Twitter.Monitor.Events
 {
     using System;
     using HashBus.Application.Events;

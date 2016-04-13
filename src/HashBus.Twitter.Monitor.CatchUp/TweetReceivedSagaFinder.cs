@@ -1,6 +1,6 @@
 ﻿namespace HashBus.Twitter.Monitor.CatchUp
 {
-    using Events;
+    using HashBus.Twitter.Monitor.Events;
     using NServiceBus.Persistence.NHibernate;
     using NServiceBus.Saga;
 

@@ -3,7 +3,7 @@ namespace HashBus.Twitter.Monitor
     using System;
     using System.Linq;
     using HashBus.Application.Events;
-    using HashBus.Twitter.Events;
+    using HashBus.Twitter.Monitor.Events;
     using Tweetinvi.Core.Interfaces;
 
     static class TweetMapper

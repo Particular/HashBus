@@ -4,7 +4,7 @@ namespace HashBus.Twitter.Monitor.Simulator
     using System.Collections.Generic;
     using System.Threading;
     using HashBus.Application.Events;
-    using HashBus.Twitter.Events;
+    using HashBus.Twitter.Monitor.Events;
     using NServiceBus;
     using System.Linq;
 
