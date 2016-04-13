@@ -158,9 +158,9 @@
       <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Monitor.CatchUp.Commands\HashBus.Twitter.Monitor.CatchUp.Commands.csproj">
       <Project>{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}</Project>
-      <Name>HashBus.Twitter.Monitor.Commands</Name>
+      <Name>HashBus.Twitter.Monitor.CatchUp.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.Twitter.Monitor.Events\HashBus.Twitter.Monitor.Events.csproj">
       <Project>{5728DE02-C264-4697-B554-DDA5FAD10A47}</Project>

@@ -2,7 +2,7 @@
 {
     using System;
     using ColoredConsole;
-    using Commands;
+    using HashBus.Twitter.Monitor.CatchUp.Commands;
     using HashBus.Twitter.Monitor.Events;
     using NServiceBus.Saga;
 

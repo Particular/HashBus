@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using ColoredConsole;
-    using HashBus.Twitter.Monitor.Commands;
+    using HashBus.Twitter.Monitor.CatchUp.Commands;
     using NServiceBus;
 
     public class StartCatchUpHandler : IHandleMessages<StartCatchUp>

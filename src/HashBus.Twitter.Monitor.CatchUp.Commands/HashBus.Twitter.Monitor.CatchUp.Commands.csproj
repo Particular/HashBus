@@ -7,8 +7,8 @@
     <ProjectGuid>{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Twitter.Monitor.Commands</RootNamespace>
-    <AssemblyName>HashBus.Twitter.Monitor.Commands</AssemblyName>
+    <RootNamespace>HashBus.Twitter.Monitor.CatchUp.Commands</RootNamespace>
+    <AssemblyName>HashBus.Twitter.Monitor.CatchUp.Commands</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

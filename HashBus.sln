@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.NServiceBusConfigur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.CatchUp", "src\HashBus.Twitter.Monitor.CatchUp\HashBus.Twitter.Monitor.CatchUp.csproj", "{63B64572-B72C-4BCE-BB3D-C3F7635A6858}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Commands", "src\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj", "{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.CatchUp.Commands", "src\HashBus.Twitter.Monitor.CatchUp.Commands\HashBus.Twitter.Monitor.CatchUp.Commands.csproj", "{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TopTweetersRetweeters", "src\HashBus.Projector.TopTweetersRetweeters\HashBus.Projector.TopTweetersRetweeters.csproj", "{BAD64799-5E68-4EA5-B117-1F0B3582392B}"
 EndProject

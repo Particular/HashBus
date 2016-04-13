@@ -1,4 +1,4 @@
-﻿namespace HashBus.Twitter.Monitor.Commands
+﻿namespace HashBus.Twitter.Monitor.CatchUp.Commands
 {
     public class StartCatchUp
     {
