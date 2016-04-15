@@ -10,7 +10,7 @@
         public virtual string Originator { get; set; }
 
         public virtual string OriginalMessageId { get; set; }
-        
+
         public virtual string Hashtag { get; set; }
 
         public virtual Guid PreviousSessionId { get; set; }
