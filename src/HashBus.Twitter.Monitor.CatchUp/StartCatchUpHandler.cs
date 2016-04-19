@@ -1,18 +1,19 @@
 ﻿namespace HashBus.Twitter.Monitor.CatchUp
 {
+    using System.Linq;
     using ColoredConsole;
-    using HashBus.Twitter.Monitor.Commands;
+    using HashBus.Twitter.Monitor.CatchUp.Commands;
     using NServiceBus;
 
     public class StartCatchUpHandler : IHandleMessages<StartCatchUp>
     {
         private readonly ISendOnlyBus bus;
-        private readonly ITweetReceivedService tweetsReceived;
+        private readonly ITweetService tweetService;
 
-        public StartCatchUpHandler(ISendOnlyBus bus, ITweetReceivedService tweetsReceived)
+        public StartCatchUpHandler(ISendOnlyBus bus, ITweetService tweetService)
         {
             this.bus = bus;
-            this.tweetsReceived = tweetsReceived;
+            this.tweetService = tweetService;
         }
 
         public void Handle(StartCatchUp message)
@@ -27,12 +28,12 @@
                 $"{message.TweetId}".White());
 
             var count = 0;
-            foreach(var tweetReceived in
-                this.tweetsReceived.Get(message.Track, message.TweetId, message.EndpointName, message.SessionId))
+            foreach(var analyzeTweet in
+                this.tweetService.Get(message.Track, message.TweetId).Select(tweet => TweetMapper.Map(tweet, message.Track)))
             {
                 ++count;
-                Writer.Write(tweetReceived.Tweet);
-                this.bus.Publish(tweetReceived);
+                Writer.Write(analyzeTweet.Tweet);
+                this.bus.Send(analyzeTweet);
             }
 
             ColorConsole.WriteLine(

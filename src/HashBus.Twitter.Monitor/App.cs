@@ -31,8 +31,7 @@ namespace HashBus.Twitter.Monitor
                     consumerKey,
                     consumerSecret,
                     accessToken,
-                    accessTokenSecret,
-                    endpointName);
+                    accessTokenSecret);
             }
         }
     }

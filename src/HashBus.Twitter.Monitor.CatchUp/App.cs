@@ -25,8 +25,8 @@
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
             busConfiguration.ApplyMessageConventions();
-            busConfiguration.RegisterComponents(c=>c.RegisterSingleton<ITweetReceivedService>(
-                new TweetReceivedService(maximumNumberOfTweetsPerCatchUp, consumerKey, consumerSecret, accessToken, accessTokenSecret)));
+            busConfiguration.RegisterComponents(c=>c.RegisterSingleton<ITweetService>(
+                new TweetService(maximumNumberOfTweetsPerCatchUp, consumerKey, consumerSecret, accessToken, accessTokenSecret)));
 
             using (Bus.Create(busConfiguration).Start())
             {

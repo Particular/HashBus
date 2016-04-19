@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Events", "src\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Events", "src\HashBus.Twitter.Monitor.Events\HashBus.Twitter.Monitor.Events.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Simulator", "src\HashBus.Twitter.Monitor.Simulator\HashBus.Twitter.Monitor.Simulator.csproj", "{1BEFE50E-24CA-4CAA-8B2C-7F8CD1771CB5}"
 EndProject
@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.NServiceBusConfigur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.CatchUp", "src\HashBus.Twitter.Monitor.CatchUp\HashBus.Twitter.Monitor.CatchUp.csproj", "{63B64572-B72C-4BCE-BB3D-C3F7635A6858}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Commands", "src\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj", "{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.CatchUp.Commands", "src\HashBus.Twitter.Monitor.CatchUp.Commands\HashBus.Twitter.Monitor.CatchUp.Commands.csproj", "{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Projector.TopTweetersRetweeters", "src\HashBus.Projector.TopTweetersRetweeters\HashBus.Projector.TopTweetersRetweeters.csproj", "{BAD64799-5E68-4EA5-B117-1F0B3582392B}"
 EndProject
@@ -62,6 +62,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.MostHashtagged", "src\HashBus.Viewer.MostHashtagged\HashBus.Viewer.MostHashtagged.csproj", "{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.BackFill", "src\HashBus.Twitter.BackFill\HashBus.Twitter.BackFill.csproj", "{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application.Commands", "src\HashBus.Application.Commands\HashBus.Application.Commands.csproj", "{293F96F9-7E15-4969-B8ED-595D06FD7AA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +167,10 @@ Global
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,5 +200,6 @@ Global
 		{ADADC124-AF03-428D-ADD5-9CB2DF88E81C} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{293F96F9-7E15-4969-B8ED-595D06FD7AA5} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal

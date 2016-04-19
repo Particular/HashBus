@@ -1,6 +1,5 @@
 namespace HashBus.Twitter.Monitor.Simulator
 {
-    using System;
     using HashBus.NServiceBusConfiguration;
     using NServiceBus;
     using NServiceBus.Persistence;
@@ -18,7 +17,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
-                Simulation.Start(bus, endpointName, Guid.NewGuid());
+                Simulation.Start(bus);
             }
         }
     }

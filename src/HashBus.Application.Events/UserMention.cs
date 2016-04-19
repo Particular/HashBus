@@ -1,4 +1,8 @@
-﻿namespace HashBus.Application.Events
+﻿#if APPLICATION_EVENTS
+namespace HashBus.Application.Events
+#elif APPLICATION_COMMANDS
+namespace HashBus.Application.Commands
+#endif
 {
     using System.Collections.Generic;
 

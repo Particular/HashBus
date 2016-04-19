@@ -137,34 +137,34 @@
       <Link>Writer.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
-    <Compile Include="ITweetReceivedService.cs" />
+    <Compile Include="ITweetService.cs" />
     <Compile Include="TweetReceivedSagaFinder.cs" />
     <Compile Include="TweetReceivedSaga.cs" />
     <Compile Include="TweetReceivedSagaData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="StartCatchUpHandler.cs" />
-    <Compile Include="TweetReceivedService.cs" />
+    <Compile Include="TweetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HashBus.Application.Events\HashBus.Application.Events.csproj">
-      <Project>{6991a5cf-25cb-4336-9f6d-2eb1e01efb75}</Project>
-      <Name>HashBus.Application.Events</Name>
+    <ProjectReference Include="..\HashBus.Application.Commands\HashBus.Application.Commands.csproj">
+      <Project>{293f96f9-7e15-4969-b8ed-595d06fd7aa5}</Project>
+      <Name>HashBus.Application.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
       <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HashBus.Twitter.Monitor.Commands\HashBus.Twitter.Monitor.Commands.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Monitor.CatchUp.Commands\HashBus.Twitter.Monitor.CatchUp.Commands.csproj">
       <Project>{89C81FA0-A06B-4FB9-A3FC-4DAB2A93AA2C}</Project>
-      <Name>HashBus.Twitter.Monitor.Commands</Name>
+      <Name>HashBus.Twitter.Monitor.CatchUp.Commands</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Monitor.Events\HashBus.Twitter.Monitor.Events.csproj">
       <Project>{5728DE02-C264-4697-B554-DDA5FAD10A47}</Project>
-      <Name>HashBus.Twitter.Events</Name>
+      <Name>HashBus.Twitter.Monitor.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿namespace HashBus.Twitter.Monitor.CatchUp
 {
-    using Events;
+    using HashBus.Twitter.Monitor.Events;
     using NServiceBus.Persistence.NHibernate;
     using NServiceBus.Saga;
 
@@ -14,7 +14,7 @@
         public TweetReceivedSagaData FindBy(TweetReceived message)
         {
             return this.storageContext.Session.QueryOver<TweetReceivedSagaData>()
-                .Where(d => d.Hashtag == message.Tweet.Track).And(e => e.EndpointName == message.EndpointName)
+                .Where(d => d.Hashtag == message.Track)
                 .SingleOrDefault();
         }
 

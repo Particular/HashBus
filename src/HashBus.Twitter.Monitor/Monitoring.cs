@@ -4,6 +4,7 @@ namespace HashBus.Twitter.Monitor
     using System.Threading;
     using System.Threading.Tasks;
     using ColoredConsole;
+    using HashBus.Twitter.Monitor.Events;
     using NServiceBus;
     using Tweetinvi;
     using Tweetinvi.Core.Credentials;
@@ -16,8 +17,7 @@ namespace HashBus.Twitter.Monitor
             string consumerKey,
             string consumerSecret,
             string accessToken,
-            string accessTokenSecret,
-            string endpointName)
+            string accessTokenSecret)
         {
             var credentials = new TwitterCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);
             while (true)
@@ -49,8 +49,16 @@ namespace HashBus.Twitter.Monitor
 
                     stream.MatchingTweetReceived += (sender, e) =>
                     {
-                        var tweetReceived = TweetMapper.Map(e.Tweet, track, endpointName, sessionId);
-                        Writer.Write(tweetReceived.Tweet);
+                        var analyzeTweet = TweetMapper.Map(e.Tweet, track);
+                        Writer.Write(analyzeTweet.Tweet);
+                        bus.Send(analyzeTweet);
+
+                        var tweetReceived = new TweetReceived()
+                        {
+                            SessionId = sessionId,
+                            Track = track,
+                            TweetId = e.Tweet.Id
+                        };
                         bus.Publish(tweetReceived);
                     };
 

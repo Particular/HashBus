@@ -1,24 +1,20 @@
 namespace HashBus.Twitter.Monitor
 {
-    using System;
     using System.Linq;
-    using HashBus.Application.Events;
-    using HashBus.Twitter.Events;
+    using HashBus.Application.Commands;
     using Tweetinvi.Core.Interfaces;
 
     static class TweetMapper
     {
-        public static TweetReceived Map(ITweet tweet, string track, string endpointName, Guid sessionId)
+        public static AnalyzeTweet Map(ITweet tweet, string track)
         {
-            return new TweetReceived
+            return new AnalyzeTweet
             {
-                EndpointName = endpointName,
-                SessionId = sessionId,
-                Tweet = Map(tweet, track)
+                Tweet = MapTweet(tweet, track)
             };
         }
 
-        private static Tweet Map(ITweet tweet, string track)
+        private static Tweet MapTweet(ITweet tweet, string track)
         {
             return tweet == null
                 ? null
@@ -52,7 +48,7 @@ namespace HashBus.Twitter.Monitor
                                 Indices = hashtag.Indices,
                             })
                         .ToList(),
-                    RetweetedTweet = Map(tweet.RetweetedTweet, track),
+                    RetweetedTweet = MapTweet(tweet.RetweetedTweet, track),
                 };
         }
     }

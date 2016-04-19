@@ -2,8 +2,8 @@
 {
     using System;
     using ColoredConsole;
-    using Commands;
-    using Events;
+    using HashBus.Twitter.Monitor.CatchUp.Commands;
+    using HashBus.Twitter.Monitor.Events;
     using NServiceBus.Saga;
 
     public class TweetReceivedSaga : Saga<TweetReceivedSagaData>,
@@ -13,44 +13,24 @@
         {
             if (Data.PreviousSessionId != Guid.Empty && Data.PreviousSessionId != message.SessionId)
             {
-                if (message.IsSimulated)
-                {
-                    ColorConsole.WriteLine(
-                        $"{message.EndpointName}".White(),
-                        " ",
-                        "for".Gray(),
-                        " ",
-                        $" {message.Tweet.Track} ".DarkCyan().OnWhite(),
-                        " ",
-                        "is simulated and doesn't need catch up".Gray());
-                }
-                else
-                {
-                    ColorConsole.WriteLine(
-                        $"{message.EndpointName}".White(),
-                        " ",
-                        "for".Gray(),
-                        " ",
-                        $" {message.Tweet.Track} ".DarkCyan().OnWhite(),
-                        " ",
-                        "needs catch up from tweet".Gray(),
-                        " ",
-                        $"{Data.PreviousTweetId}".White());
+                ColorConsole.WriteLine(
+                    $" {message.Track} ".DarkCyan().OnWhite(),
+                    " ",
+                    "needs catch up from tweet".Gray(),
+                    " ",
+                    $"{Data.PreviousTweetId}".White());
 
-                    Bus.Send(new StartCatchUp
-                    {
-                        TweetId = Data.PreviousTweetId,
-                        EndpointName = message.EndpointName,
-                        Track = message.Tweet.Track,
-                        SessionId = message.SessionId,
-                    });
-                }
+                Bus.Send(new StartCatchUp
+                {
+                    TweetId = Data.PreviousTweetId,
+                    Track = message.Track,
+                });
+
             }
 
             Data.PreviousSessionId = message.SessionId;
-            Data.Hashtag = message.Tweet.Track;
-            Data.EndpointName = message.EndpointName;
-            Data.PreviousTweetId = message.Tweet.Id;
+            Data.Hashtag = message.Track;
+            Data.PreviousTweetId = message.TweetId;
         }
 
         /// <remarks>

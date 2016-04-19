@@ -72,17 +72,13 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HashBus.Application.Events\HashBus.Application.Events.csproj">
-      <Project>{6991a5cf-25cb-4336-9f6d-2eb1e01efb75}</Project>
-      <Name>HashBus.Application.Events</Name>
+    <ProjectReference Include="..\HashBus.Application.Commands\HashBus.Application.Commands.csproj">
+      <Project>{293f96f9-7e15-4969-b8ed-595d06fd7aa5}</Project>
+      <Name>HashBus.Application.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
       <Project>{f302f223-c0cd-46a6-8bb6-01f1213bdd58}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HashBus.Twitter.Events\HashBus.Twitter.Events.csproj">
-      <Project>{5728de02-c264-4697-b554-dda5fad10a47}</Project>
-      <Name>HashBus.Twitter.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
