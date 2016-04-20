@@ -20,14 +20,23 @@ namespace HashBus.Twitter.Monitor
                 ? null
                 : new Tweet
                 {
-                    Track = track,
-                    Id = tweet.Id,
                     CreatedAt = tweet.CreatedAt,
                     CreatedById = tweet.CreatedBy.Id,
                     CreatedByIdStr = tweet.CreatedBy.IdStr,
                     CreatedByName = tweet.CreatedBy.Name,
                     CreatedByScreenName = tweet.CreatedBy.ScreenName,
+                    Hashtags = tweet.Hashtags
+                        .Select(hashtag =>
+                            new Hashtag
+                            {
+                                Text = hashtag.Text,
+                                Indices = hashtag.Indices,
+                            })
+                        .ToList(),
+                    Id = tweet.Id,
+                    RetweetedTweet = MapTweet(tweet.RetweetedTweet, track),
                     Text = tweet.Text,
+                    Track = track,
                     UserMentions = tweet.UserMentions
                         .Where(userMention => userMention.Id.HasValue)
                         .Select(userMention =>
@@ -40,15 +49,6 @@ namespace HashBus.Twitter.Monitor
                                 ScreenName = userMention.ScreenName,
                             })
                         .ToList(),
-                    Hashtags = tweet.Hashtags
-                        .Select(hashtag =>
-                            new Hashtag
-                            {
-                                Text = hashtag.Text,
-                                Indices = hashtag.Indices,
-                            })
-                        .ToList(),
-                    RetweetedTweet = MapTweet(tweet.RetweetedTweet, track),
                 };
         }
     }
