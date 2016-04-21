@@ -7,7 +7,8 @@
 
     public class TopRetweetersModule : NancyModule
     {
-        public TopRetweetersModule(IRepository<string, IEnumerable<Retweet>> tweets)
+        public TopRetweetersModule
+            (IRepository<string, IEnumerable<Retweet>> tweets, IIgnoredUserNamesService ignoredUserNamesService)
         {
             this.Get["/top-retweeters/{track}", true] = async (parameters, __) =>
             {
@@ -15,6 +16,7 @@
                 var track = ((string)parameters.track).Replace("해시", "#");
                 var trackTweets = (await tweets.GetAsync(track)).ToList();
                 var entries = trackTweets
+                    .Where(item => !ignoredUserNamesService.Get().Contains(item.UserScreenName))
                     .GroupBy(tweet => tweet.UserId)
                     .Select(g => new UserEntry
                     {

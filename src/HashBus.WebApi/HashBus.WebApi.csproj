@@ -75,6 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IEntry.cs" />
+    <Compile Include="IgnoredUserNamesService.cs" />
+    <Compile Include="IIgnoredUserNamesService.cs" />
     <Compile Include="Leaderboard.cs" />
     <Compile Include="MostHashtaggedModule.cs" />
     <Compile Include="MostRetweetedModule.cs" />
