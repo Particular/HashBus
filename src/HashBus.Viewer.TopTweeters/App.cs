@@ -17,7 +17,7 @@
         {
             var client = new RestClient(webApiBaseUrl);
 
-            await LeaderboardView<UserEntry>.StartAsync(
+            await new LeaderboardView<UserEntry>().StartAsync(
                 track,
                 refreshInterval,
                 new LeaderboardService<UserEntry>(client, "/top-tweeters/{0}"),
@@ -28,7 +28,6 @@
                 entry => new[] { $" {entry.Name}".White(), $" @{entry.ScreenName}".Cyan(), },
                 "Top Tweeters",
                 "tweets");
-
         }
     }
 }

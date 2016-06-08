@@ -17,7 +17,7 @@
         {
             var client = new RestClient(webApiBaseUrl);
 
-            await LeaderboardView<HashtagEntry>.StartAsync(
+            await new LeaderboardView<HashtagEntry>().StartAsync(
                 track,
                 refreshInterval,
                 new LeaderboardService<HashtagEntry>(client, "/most-hashtagged/{0}"),
@@ -28,7 +28,6 @@
                 entry => new[] { $" #{entry.Text}".Cyan(), },
                 "Most Hashtagged",
                 "hashtag usages");
-
         }
     }
 }

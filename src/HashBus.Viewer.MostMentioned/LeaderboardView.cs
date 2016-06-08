@@ -8,7 +8,7 @@
     using ColoredConsole;
     using Humanizer;
 
-    static class LeaderboardView<TEntry> where TEntry : WebApi.IEntry
+    class LeaderboardView<TEntry> where TEntry : WebApi.IEntry
     {
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>
@@ -37,7 +37,9 @@
                 { 1, ConsoleColor.DarkRed },
             };
 
-        public static async Task StartAsync(
+        public bool Visible { get; set; } = true;
+
+        public async Task StartAsync(
             string track,
             int refreshInterval,
             IService<string, WebApi.Leaderboard<TEntry>> leaderboards,
@@ -53,6 +55,12 @@
             var previousLeaderboard = new WebApi.Leaderboard<TEntry>();
             while (true)
             {
+                if(!Visible)
+                {
+                    await Task.Delay(1000);
+                    continue;
+                }
+
                 WebApi.Leaderboard<TEntry> currentLeaderboard;
                 try
                 {

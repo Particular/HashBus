@@ -17,7 +17,7 @@
         {
             var client = new RestClient(webApiBaseUrl);
 
-            await LeaderboardView<UserEntry>.StartAsync(
+            await new LeaderboardView<UserEntry>().StartAsync(
                 track,
                 refreshInterval,
                 new LeaderboardService<UserEntry>(client, "/most-mentioned/{0}"),
