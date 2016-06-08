@@ -74,11 +74,13 @@
     <Compile Include="..\HashBus.WebApi\UserEntry.cs">
       <Link>UserEntry.cs</Link>
     </Compile>
+    <Compile Include="IRunAsync.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="LeaderboardService.cs" />
     <Compile Include="LeaderboardView.cs" />
     <Compile Include="ColorTokenExtensions.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="MostMentionedLeaderBoardViewFactory.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

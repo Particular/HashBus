@@ -1,8 +1,6 @@
 ﻿namespace HashBus.Viewer.TopTweeters
 {
     using System.Threading.Tasks;
-    using ColoredConsole;
-    using HashBus.WebApi;
     using RestSharp;
 
     class App
@@ -15,20 +13,13 @@
             int verticalPadding,
             int horizontalPadding)
         {
-            var client = new RestClient(webApiBaseUrl);
-
-            await LeaderboardView<UserEntry>.StartAsync(
-                track,
-                refreshInterval,
-                new LeaderboardService<UserEntry>(client, "/top-tweeters/{0}"),
-                showPercentages,
-                verticalPadding,
-                horizontalPadding,
-                (entry1, entry2) => entry1.Id == entry2.Id,
-                entry => new[] { $" {entry.Name}".White(), $" @{entry.ScreenName}".Cyan(), },
-                "Top Tweeters",
-                "tweets");
-
+            await TopTweetersLeaderBoardViewFactory.Create(
+                    track, refreshInterval,
+                    showPercentages,
+                    verticalPadding,
+                    horizontalPadding,
+                    new RestClient(webApiBaseUrl))
+                .RunAsync();
         }
     }
 }
