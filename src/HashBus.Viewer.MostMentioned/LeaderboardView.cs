@@ -91,8 +91,8 @@
                 }
                 catch (Exception ex)
                 {
-                    ColorConsole.WriteLine("Failed to get leaderboard. ".Red(), ex.Message.DarkRed());
-                    await Task.Delay(1000, cancellationToken);
+                    ColorConsole.WriteLine($"{DateTime.Now} Failed to get leaderboard. ".Red(), ex.Message.DarkRed());
+                    await Task.Delay(250);
                     continue;
                 }
 
