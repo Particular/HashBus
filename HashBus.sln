@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.Monitor.Events", "src\HashBus.Twitter.Monitor.Events\HashBus.Twitter.Monitor.Events.csproj", "{5728DE02-C264-4697-B554-DDA5FAD10A47}"
 EndProject
@@ -63,6 +63,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Twitter.BackFill", "src\HashBus.Twitter.BackFill\HashBus.Twitter.BackFill.csproj", "{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Application.Commands", "src\HashBus.Application.Commands\HashBus.Application.Commands.csproj", "{293F96F9-7E15-4969-B8ED-595D06FD7AA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashBus.Viewer.Multiple", "src\HashBus.Viewer.Multiple\HashBus.Viewer.Multiple.csproj", "{8E09CB51-03C5-413A-8570-1A121A01B0A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -170,6 +172,10 @@ Global
 		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{293F96F9-7E15-4969-B8ED-595D06FD7AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E09CB51-03C5-413A-8570-1A121A01B0A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E09CB51-03C5-413A-8570-1A121A01B0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E09CB51-03C5-413A-8570-1A121A01B0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E09CB51-03C5-413A-8570-1A121A01B0A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,5 +206,6 @@ Global
 		{DE2B49AC-CFBE-4E91-A77D-F55707ADB9D3} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 		{293F96F9-7E15-4969-B8ED-595D06FD7AA5} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
+		{8E09CB51-03C5-413A-8570-1A121A01B0A4} = {B34C7F0A-2903-47F2-A087-06D3136C9A1F}
 	EndGlobalSection
 EndGlobal

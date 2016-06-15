@@ -8,7 +8,7 @@
     using ColoredConsole;
     using Humanizer;
 
-    static class LeaderboardView<TEntry> where TEntry : WebApi.IEntry
+    class LeaderboardView<TEntry> : IRunAsync where TEntry : WebApi.IEntry
     {
         private static readonly Dictionary<int, string> movementTokens =
             new Dictionary<int, string>
@@ -37,7 +37,20 @@
                 { 1, ConsoleColor.DarkRed },
             };
 
-        public static async Task StartAsync(
+        private readonly string track;
+        private readonly int refreshInterval;
+        private readonly IService<string, WebApi.Leaderboard<TEntry>> leaderboards;
+        private readonly bool showPercentages;
+        private readonly int verticalPadding;
+        private readonly int horizontalPadding;
+        private readonly Func<TEntry, TEntry, bool> matchEntries;
+        private readonly Func<TEntry, IEnumerable<ColorToken>> getText;
+        private readonly string name;
+        private readonly string itemsName;
+
+        private WebApi.Leaderboard<TEntry> previousLeaderboard = new WebApi.Leaderboard<TEntry>();
+
+        public LeaderboardView(
             string track,
             int refreshInterval,
             IService<string, WebApi.Leaderboard<TEntry>> leaderboards,
@@ -49,9 +62,27 @@
             string name,
             string itemsName)
         {
+            this.track = track;
+            this.refreshInterval = refreshInterval;
+            this.leaderboards = leaderboards;
+            this.showPercentages = showPercentages;
+            this.verticalPadding = verticalPadding;
+            this.horizontalPadding = horizontalPadding;
+            this.matchEntries = matchEntries;
+            this.getText = getText;
+            this.name = name;
+            this.itemsName = itemsName;
+        }
+
+        public Task RunAsync()
+        {
+            return this.RunAsync(new CancellationTokenSource().Token);
+        }
+
+        public async Task RunAsync(CancellationToken cancellationToken)
+        {
             Console.CursorVisible = false;
-            var previousLeaderboard = new WebApi.Leaderboard<TEntry>();
-            while (true)
+            while (!cancellationToken.IsCancellationRequested)
             {
                 WebApi.Leaderboard<TEntry> currentLeaderboard;
                 try
@@ -60,8 +91,8 @@
                 }
                 catch (Exception ex)
                 {
-                    ColorConsole.WriteLine("Failed to get leaderboard. ".Red(), ex.Message.DarkRed());
-                    Thread.Sleep(1000);
+                    ColorConsole.WriteLine($"{DateTime.Now} Failed to get leaderboard. ".Red(), ex.Message.DarkRed());
+                    await Task.Delay(250);
                     continue;
                 }
 
@@ -137,8 +168,12 @@
                 using (var timer = new Timer(c =>
                 {
                     var timeLeft = new TimeSpan(0, 0, 0, (int)Math.Round((refreshTime - DateTime.UtcNow).TotalSeconds));
+                    if (timeLeft.TotalSeconds == 0)
+                    {
+                        return;
+                    }
 
-                    var tokens = new []
+                    var tokens = new[]
                     {
                         $"\r{padding}Total {itemsName}: ".DarkGray(),
                         $"{currentLeaderboard?.Count ?? 0:N0}".Color(totalColor),
@@ -152,7 +187,7 @@
                 }))
                 {
                     timer.Change(0, 1000);
-                    Thread.Sleep(refreshInterval);
+                    await Task.Delay(refreshInterval);
                 }
 
                 previousLeaderboard = currentLeaderboard;

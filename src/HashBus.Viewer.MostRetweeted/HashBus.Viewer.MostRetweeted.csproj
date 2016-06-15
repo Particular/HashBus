@@ -68,6 +68,9 @@
     <Compile Include="..\HashBus.Viewer.MostMentioned\ColorTokenExtensions.cs">
       <Link>ColorTokenExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\HashBus.Viewer.MostMentioned\IRunAsync.cs">
+      <Link>IRunAsync.cs</Link>
+    </Compile>
     <Compile Include="..\HashBus.Viewer.MostMentioned\IService.cs">
       <Link>IService.cs</Link>
     </Compile>
@@ -87,6 +90,7 @@
       <Link>UserEntry.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="MostRetweetedLeaderBoardViewFactory.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
