@@ -2,10 +2,8 @@
 The purpose of this document is to describe how to set up HashBus to monitor tweets and display leaderboard.
 
 ## Projects
-Below is a brief description of existing executables
-
 ### HashBus.Twitter.Monitor
-This project uses tweeter streaming API to receive notifications whenever a tweet with given hashtag was written. When it happens it create `TweetReceived` and publish it. At the same time it send a command `AnalyzeTweet` to `HashBus.Application`.
+This project uses tweeter streaming API to receive tweets which match the specified track (typically a hashtag). When it happens it create `TweetReceived` and publish it. At the same time it send a command `AnalyzeTweet` to `HashBus.Application`.
 
 ### HashBus.Twitter.Monitor.CatchUp
 This project uses tweeter pull API to catch up when the `HashBus.Twitter.Monitor` was down. It subscribes for `TweetReceived` event and analyze SessionId that is included in that event. When the SessionId changes it means that `HashBus.Twitter.Monitor` was down. In which case it pulls all the tweets that have happened during the down period and for each one of them sends `AnalyzeTweet` command.
@@ -54,4 +52,4 @@ This config file holds address to MongoDb instance that should be set up correct
 ### HashBus.Viewer.* App.config
 This configuration file holds:
  - address to WebApi that will be consumed
- - hashtag for which the data will be asked from WebApi 
+ - hashtag for which the data will be asked from WebApi
