@@ -1,5 +1,6 @@
 ﻿namespace HashBus.WebApi
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using HashBus.ReadModel;
@@ -39,8 +40,8 @@
                 {
                     Entries = entries,
                     Count = trackTweets.Count,
-                    Since = trackTweets.Min(tweet => tweet.TweetedAt),
-                    LastActivityDateTime = trackTweets.Max(tweet => tweet.TweetedAt),
+                    Since = trackTweets.Any() ? trackTweets.Min(tweet => tweet.TweetedAt) : (DateTime?)null,
+                    LastActivityDateTime = trackTweets.Any() ? trackTweets.Max(tweet => tweet.TweetedAt) : (DateTime?)null,
                 };
             };
         }
