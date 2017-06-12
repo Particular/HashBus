@@ -1,5 +1,6 @@
 ﻿namespace HashBus.Twitter.BackFill
 {
+    using System.Threading.Tasks;
     using HashBus.NServiceBusConfiguration;
     using HashBus.Twitter.CatchUp.Commands;
     using NServiceBus;
@@ -7,29 +8,45 @@
 
     class App
     {
-        public static void Run(
+        public static async Task Run(
             string nserviceBusConnectionString,
             string endpointName,
             string track,
-            long tweetId)
+            long tweetId,
+            string catchUpAddress)
         {
-            var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName(endpointName);
-            busConfiguration.UseSerialization<JsonSerializer>();
-            busConfiguration.EnableInstallers();
-            busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
-            busConfiguration.ApplyMessageConventions();
+            var endpointConfiguration = new EndpointConfiguration(endpointName);
+            endpointConfiguration.UseSerialization<JsonSerializer>();
+            endpointConfiguration.EnableInstallers();
+            endpointConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
+            endpointConfiguration.ApplyMessageConventions();
+            endpointConfiguration.ApplyErrorAndAuditQueueSettings();
 
-            using (var bus = Bus.Create(busConfiguration).Start())
+            var transportExtensions = endpointConfiguration.UseTransport<MsmqTransport>();
+
+            var routing = transportExtensions.Routing();
+            routing.RouteToEndpoint(typeof(StartCatchUp), catchUpAddress);
+
+            var command = new StartCatchUp
             {
-                var command = new StartCatchUp
-                {
-                    EndpointName = endpointName,
-                    Track = track,
-                    TweetId = tweetId,
-                };
+                EndpointName = endpointName,
+                Track = track,
+                TweetId = tweetId,
+            };
 
-                bus.Send(command);
+            var endpointInstance = await Endpoint.Start(endpointConfiguration)
+                .ConfigureAwait(false);
+
+            try
+            {
+
+                await endpointInstance.Send(command)
+                    .ConfigureAwait(false);
+            }
+            finally
+            {
+                await endpointInstance.Stop()
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using ColoredConsole;
     using HashBus.Twitter.Analyzer.Events;
     using HashBus.ReadModel;
@@ -20,14 +21,16 @@
             this.mentions = mentions;
         }
 
-        public void Handle(TweetAnalyzed message)
+        public async Task Handle(TweetAnalyzed message, IMessageHandlerContext context)
         {
             if (!message.Tweet.UserMentions.Any())
             {
                 return;
             }
 
-            var trackMentions = this.mentions.GetAsync(message.Tweet.Track).GetAwaiter().GetResult().ToList();
+            var trackMentions = (await this.mentions.GetAsync(message.Tweet.Track)
+                .ConfigureAwait(false)).ToList();
+
             if (trackMentions.Any(mention => mention.TweetId == message.Tweet.Id))
             {
                 return;
@@ -47,7 +50,8 @@
 
             trackMentions.AddRange(newMentions);
 
-            this.mentions.SaveAsync(message.Tweet.Track, trackMentions).GetAwaiter().GetResult();
+            await this.mentions.SaveAsync(message.Tweet.Track, trackMentions)
+                .ConfigureAwait(false);
 
             foreach (var mention in newMentions)
             {

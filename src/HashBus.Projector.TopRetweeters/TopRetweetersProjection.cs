@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using ColoredConsole;
     using HashBus.ReadModel;
     using LiteGuard;
@@ -19,14 +20,16 @@
             this.tweets = tweets;
         }
 
-        public void Handle(Twitter.Analyzer.Events.TweetAnalyzed message)
+        public async Task Handle(Twitter.Analyzer.Events.TweetAnalyzed message, IMessageHandlerContext context)
         {
             if (message.Tweet.RetweetedTweet == null)
             {
                 return;
             }
 
-            var trackTweets = this.tweets.GetAsync(message.Tweet.Track).GetAwaiter().GetResult().ToList();
+            var trackTweets = (await this.tweets.GetAsync(message.Tweet.Track)
+                .ConfigureAwait(false)).ToList();
+
             if (trackTweets.Any(tweet => tweet.TweetId == message.Tweet.Id))
             {
                 return;
@@ -42,7 +45,8 @@
                 UserScreenName = message.Tweet.CreatedByScreenName,
             });
 
-            this.tweets.SaveAsync(message.Tweet.Track, trackTweets).GetAwaiter().GetResult();
+            await this.tweets.SaveAsync(message.Tweet.Track, trackTweets)
+                .ConfigureAwait(false);
 
             ColorConsole.WriteLine(
                 $"{message.Tweet.CreatedAt.ToLocalTime()}".DarkGray(),

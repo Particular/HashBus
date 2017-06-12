@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using ColoredConsole;
     using HashBus.ReadModel;
     using LiteGuard;
@@ -19,14 +20,16 @@
             this.hashtags = hashtags;
         }
 
-        public void Handle(Twitter.Analyzer.Events.TweetAnalyzed message)
+        public async Task Handle(Twitter.Analyzer.Events.TweetAnalyzed message, IMessageHandlerContext context)
         {
             if (!message.Tweet.Hashtags.Any())
             {
                 return;
             }
 
-            var trackHashtags = this.hashtags.GetAsync(message.Tweet.Track).GetAwaiter().GetResult().ToList();
+            var trackHashtags = (await this.hashtags.GetAsync(message.Tweet.Track)
+                .ConfigureAwait(false)).ToList();
+
             if (trackHashtags.Any(hashtag => hashtag.TweetId == message.Tweet.Id))
             {
                 return;
@@ -43,7 +46,8 @@
 
             trackHashtags.AddRange(newHashtags);
 
-            this.hashtags.SaveAsync(message.Tweet.Track, trackHashtags).GetAwaiter().GetResult();
+            await this.hashtags.SaveAsync(message.Tweet.Track, trackHashtags)
+                .ConfigureAwait(false);
 
             foreach (var hashtag in newHashtags)
             {

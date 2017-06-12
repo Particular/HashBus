@@ -1,23 +1,21 @@
 ﻿namespace HashBus.Twitter.CatchUp
 {
+    using System.Threading.Tasks;
     using HashBus.Twitter.Monitor.Events;
-    using NServiceBus.Persistence.NHibernate;
-    using NServiceBus.Saga;
+    using NServiceBus;
+    using NServiceBus.Extensibility;
+    using NServiceBus.Persistence;
+    using NServiceBus.Sagas;
 
     class TweetReceivedSagaFinder : IFindSagas<TweetReceivedSagaData>.Using<TweetReceived>
     {
-        public TweetReceivedSagaFinder(NHibernateStorageContext storageContext)
+        public Task<TweetReceivedSagaData> FindBy(TweetReceived message, SynchronizedStorageSession storageSession, ReadOnlyContextBag context)
         {
-            this.storageContext = storageContext;
-        }
-
-        public TweetReceivedSagaData FindBy(TweetReceived message)
-        {
-            return this.storageContext.Session.QueryOver<TweetReceivedSagaData>()
+            var tweetReceivedSagaData = storageSession.Session().QueryOver<TweetReceivedSagaData>()
                 .Where(d => d.Hashtag == message.Track)
                 .SingleOrDefault();
-        }
 
-        NHibernateStorageContext storageContext;
+            return Task.FromResult(tweetReceivedSagaData);
+        }
     }
 }

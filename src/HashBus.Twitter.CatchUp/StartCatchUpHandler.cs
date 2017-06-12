@@ -1,22 +1,21 @@
 ﻿namespace HashBus.Twitter.CatchUp
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using ColoredConsole;
     using HashBus.Twitter.CatchUp.Commands;
     using NServiceBus;
 
     public class StartCatchUpHandler : IHandleMessages<StartCatchUp>
     {
-        private readonly ISendOnlyBus bus;
         private readonly ITweetService tweetService;
 
-        public StartCatchUpHandler(ISendOnlyBus bus, ITweetService tweetService)
+        public StartCatchUpHandler(ITweetService tweetService)
         {
-            this.bus = bus;
             this.tweetService = tweetService;
         }
 
-        public void Handle(StartCatchUp message)
+        public async Task Handle(StartCatchUp message, IMessageHandlerContext context)
         {
             ColorConsole.WriteLine(
                 "Catching up on".Gray(),
@@ -33,7 +32,8 @@
             {
                 ++count;
                 Writer.Write(analyzeTweet.Tweet);
-                this.bus.Send(analyzeTweet);
+                await context.Send(analyzeTweet)
+                    .ConfigureAwait(false);
             }
 
             ColorConsole.WriteLine(

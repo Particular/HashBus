@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using ColoredConsole;
     using HashBus.ReadModel;
     using LiteGuard;
@@ -19,14 +20,16 @@
             this.retweetees = retweetees;
         }
 
-        public void Handle(Twitter.Analyzer.Events.TweetAnalyzed message)
+        public async Task Handle(Twitter.Analyzer.Events.TweetAnalyzed message, IMessageHandlerContext context)
         {
             if (message.Tweet.RetweetedTweet == null)
             {
                 return;
             }
 
-            var trackRetweetees = this.retweetees.GetAsync(message.Tweet.Track).GetAwaiter().GetResult().ToList();
+            var trackRetweetees = (await this.retweetees.GetAsync(message.Tweet.Track)
+                .ConfigureAwait(false)).ToList();
+
             if (trackRetweetees.Any(tweet => tweet.TweetId == message.Tweet.Id))
             {
                 return;
@@ -50,7 +53,8 @@
             }
 
             trackRetweetees.AddRange(rewRetweetees);
-            this.retweetees.SaveAsync(message.Tweet.Track, trackRetweetees).GetAwaiter().GetResult();
+            await this.retweetees.SaveAsync(message.Tweet.Track, trackRetweetees)
+                .ConfigureAwait(false);
 
             foreach (var retweetee in rewRetweetees)
             {

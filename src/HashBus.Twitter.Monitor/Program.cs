@@ -10,6 +10,7 @@ namespace HashBus.Twitter.Monitor
             var track = ConfigurationManager.AppSettings["Track"];
             var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
             var endpointName = ConfigurationManager.AppSettings["EndpointName"];
+            var analyzerAddress = ConfigurationManager.AppSettings["AnalyzerAddress"];
 
             var consumerKeyName = "HASHBUS_TWITTER_CONSUMER_KEY";
             var consumerSecretKeyName = "HASHBUS_TWITTER_CONSUMER_SECRET";
@@ -49,7 +50,8 @@ namespace HashBus.Twitter.Monitor
                     consumerSecret,
                     accessToken,
                     accessTokenSecret,
-                    endpointName)
+                    endpointName,
+                    analyzerAddress)
                 .GetAwaiter().GetResult();
         }
     }

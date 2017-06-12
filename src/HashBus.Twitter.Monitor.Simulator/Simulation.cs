@@ -5,11 +5,12 @@ namespace HashBus.Twitter.Monitor.Simulator
     using System.Threading;
     using NServiceBus;
     using System.Linq;
+    using System.Threading.Tasks;
     using HashBus.Twitter.Analyzer.Commands;
 
     class Simulation
     {
-        public static void Start(ISendOnlyBus bus, string hashtag)
+        public static async Task Start(IEndpointInstance endpointInstance, string hashtag)
         {
             var userNames = new[]
             {
@@ -139,7 +140,8 @@ namespace HashBus.Twitter.Monitor.Simulator
                 };
 
                 Writer.Write(message.Tweet);
-                bus.Send(message);
+                await endpointInstance.Send(message)
+                    .ConfigureAwait(false);
             }
         }
     }

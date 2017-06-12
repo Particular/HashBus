@@ -2,15 +2,19 @@
 {
     using System;
     using System.Configuration;
+    using System.Threading.Tasks;
 
     class Program
     {
-        static void Main()
+        static Task Main()
         {
             var maximumNumberOfTweetsPerCatchUp = int.Parse(ConfigurationManager.AppSettings["MaximumNumberOfTweetsPerCatchUp"]);
             var defaultTransactionTimeout = TimeSpan.Parse(ConfigurationManager.AppSettings["defaultTransactionTimeout"]);
             var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
             var endpointName = ConfigurationManager.AppSettings["EndpointName"];
+            var catchUpAddress = ConfigurationManager.AppSettings["CatchUpAddress"];
+            var analyzerAddress = ConfigurationManager.AppSettings["AnalyzerAddress"];
+            var monitorAddress = ConfigurationManager.AppSettings["MonitorAddress"];
 
             var consumerKeyName = "HASHBUS_TWITTER_CONSUMER_KEY";
             var consumerSecretKeyName = "HASHBUS_TWITTER_CONSUMER_SECRET";
@@ -43,7 +47,7 @@
 
             Console.Title = typeof(Program).Assembly.GetName().Name;
 
-            App.Run(
+            return App.Run(
                 maximumNumberOfTweetsPerCatchUp,
                 defaultTransactionTimeout,
                 nserviceBusConnectionString, 
@@ -51,7 +55,10 @@
                 consumerKey, 
                 consumerSecret,
                 accessToken,
-                accessTokenSecret);
+                accessTokenSecret,
+                catchUpAddress,
+                analyzerAddress, 
+                monitorAddress);
         }
     }
 }

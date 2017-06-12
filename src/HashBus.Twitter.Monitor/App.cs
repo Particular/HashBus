@@ -2,6 +2,7 @@ namespace HashBus.Twitter.Monitor
 {
     using System.Threading.Tasks;
     using HashBus.NServiceBusConfiguration;
+    using HashBus.Twitter.Analyzer.Commands;
     using NServiceBus;
     using NServiceBus.Persistence;
 
@@ -14,24 +15,39 @@ namespace HashBus.Twitter.Monitor
             string consumerSecret,
             string accessToken,
             string accessTokenSecret,
-            string endpointName)
+            string endpointName,
+            string analyzerAddress)
         {
-            var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName(endpointName);
-            busConfiguration.UseSerialization<JsonSerializer>();
-            busConfiguration.EnableInstallers();
-            busConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
-            busConfiguration.ApplyMessageConventions();
+            var endpointConfiguration = new EndpointConfiguration(endpointName);
+            endpointConfiguration.UseSerialization<JsonSerializer>();
+            endpointConfiguration.EnableInstallers();
+            endpointConfiguration.UsePersistence<NHibernatePersistence>().ConnectionString(nserviceBusConnectionString);
+            endpointConfiguration.ApplyMessageConventions();
+            endpointConfiguration.ApplyErrorAndAuditQueueSettings();
 
-            using (var bus = Bus.Create(busConfiguration).Start())
+            var transportExtensions = endpointConfiguration.UseTransport<MsmqTransport>();
+
+            var routing = transportExtensions.Routing();
+            routing.RouteToEndpoint(typeof(AnalyzeTweet), analyzerAddress);
+
+            var endpointInstance = await Endpoint.Start(endpointConfiguration)
+                .ConfigureAwait(false);
+
+            try
             {
                 await Monitoring.StartAsync(
-                    bus,
-                    track,
-                    consumerKey,
-                    consumerSecret,
-                    accessToken,
-                    accessTokenSecret);
+                        endpointInstance,
+                        track,
+                        consumerKey,
+                        consumerSecret,
+                        accessToken,
+                        accessTokenSecret)
+                    .ConfigureAwait(false);
+            }
+            finally
+            {
+                await endpointInstance.Stop()
+                    .ConfigureAwait(false);
             }
         }
     }
