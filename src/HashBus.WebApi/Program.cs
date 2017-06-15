@@ -15,7 +15,11 @@
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(userName => userName.Trim());
 
-            App.Run(baseUri, mongoConnectionString, mongoDBDatabase, ignoredUserNames);
+            var ignoredHashtags = ConfigurationManager.AppSettings["IgnoredHashtags"]
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(hashtag => hashtag.Trim());
+
+            App.Run(baseUri, mongoConnectionString, mongoDBDatabase, ignoredUserNames, ignoredHashtags);
         }
     }
 }
