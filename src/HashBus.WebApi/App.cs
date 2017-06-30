@@ -17,11 +17,12 @@
     class App
     {
         public static void Run(
-            Uri baseUri, string mongoConnectionString, string mongoDBDatabase, IEnumerable<string> ignoredUserNames)
+            Uri baseUri, string mongoConnectionString, string mongoDBDatabase, IEnumerable<string> ignoredUserNames, IEnumerable<string> ignoredHashtags)
         {
             var bootstrapper = new Bootstrapper(
                 new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase),
-                new IgnoredUserNamesService(ignoredUserNames));
+                new IgnoredUserNamesService(ignoredUserNames),
+                new IgnoredHashtagsService(ignoredHashtags));
 
             using (var host = new NancyHost(bootstrapper, baseUri))
             {
@@ -36,11 +37,13 @@
         {
             private readonly IMongoDatabase mongoDatabase;
             private readonly IIgnoredUserNamesService ignoredUserNamesService;
+            private readonly IIgnoredHashtagsService ignoredHashtagsService;
 
-            public Bootstrapper(IMongoDatabase mongoDatabase, IIgnoredUserNamesService ignoredUserNamesService)
+            public Bootstrapper(IMongoDatabase mongoDatabase, IIgnoredUserNamesService ignoredUserNamesService, IIgnoredHashtagsService ignoredHashtagsService)
             {
                 this.mongoDatabase = mongoDatabase;
                 this.ignoredUserNamesService = ignoredUserNamesService;
+                this.ignoredHashtagsService = ignoredHashtagsService;
             }
 
             protected override NancyInternalConfiguration InternalConfiguration
@@ -57,6 +60,7 @@
                 base.ConfigureApplicationContainer(container);
 
                 container.Register(this.ignoredUserNamesService);
+                container.Register(this.ignoredHashtagsService);
 
                 container.Register<IRepository<string, IEnumerable<Mention>>>(
                         new MongoDBListRepository<Mention>(this.mongoDatabase, "most_mentioned__mentions"));

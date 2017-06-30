@@ -1,5 +1,6 @@
 ﻿namespace HashBus.WebApi
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using HashBus.ReadModel;
@@ -39,8 +40,8 @@
                 {
                     Entries = entries,
                     Count = trackMentions.Count,
-                    Since = trackMentions.Min(mention => mention.MentionedAt),
-                    LastActivityDateTime = trackMentions.Max(mention => mention.MentionedAt),
+                    Since = trackMentions.Any() ? trackMentions.Min(mention => mention.MentionedAt) : (DateTime?) null,
+                    LastActivityDateTime = trackMentions.Any()? trackMentions.Max(mention => mention.MentionedAt): (DateTime?) null,
                 };
             };
         }

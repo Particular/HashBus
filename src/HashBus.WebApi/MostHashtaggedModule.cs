@@ -8,7 +8,7 @@
 
     public class MostHashtaggedModule : NancyModule
     {
-        public MostHashtaggedModule(IRepository<string, IEnumerable<Hashtag>> hashtags)
+        public MostHashtaggedModule(IRepository<string, IEnumerable<Hashtag>> hashtags, IIgnoredHashtagsService ignoredHashtagsService)
         {
             this.Get["/most-hashtagged/{track}", true] = async (parameters, __) =>
             {
@@ -16,6 +16,7 @@
                 var track = ((string)parameters.track).Replace("해시", "#");
                 var trackHashtags = (await hashtags.GetAsync(track)).ToList();
                 var entries = trackHashtags
+                    .Where(item => !ignoredHashtagsService.Get().Contains(item.Text, StringComparer.OrdinalIgnoreCase))
                     .GroupBy(tweet => tweet.Text, StringComparer.InvariantCultureIgnoreCase)
                     .Select(g => new HashtagEntry
                     {
@@ -35,8 +36,8 @@
                 {
                     Entries = entries,
                     Count = trackHashtags.Count,
-                    Since = trackHashtags.Min(hashtag => hashtag.HashtaggedAt),
-                    LastActivityDateTime = trackHashtags.Max(hashtag => hashtag.HashtaggedAt),
+                    Since = trackHashtags.Any() ? trackHashtags.Min(hashtag => hashtag.HashtaggedAt) : (DateTime?)null,
+                    LastActivityDateTime = trackHashtags.Any() ? trackHashtags.Max(hashtag => hashtag.HashtaggedAt) : (DateTime?)null,
                 };
             };
         }
