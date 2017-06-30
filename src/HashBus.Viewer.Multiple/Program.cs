@@ -20,6 +20,7 @@
                 .Select(view => view.Trim())
                 .ToArray();
 
+            Console.Title = typeof(Program).Assembly.GetName().Name;
 
             App.RunAsync(
                     webApiBaseUrl,
