@@ -40,6 +40,8 @@ namespace HashBus.Twitter.Monitor
                 throw new Exception($"{accessTokenSecretKeyName} enviroment variable is not set.");
             }
 
+            Console.Title = typeof(Program).Assembly.GetName().Name;
+
             App.RunAsync(
                     nserviceBusConnectionString,
                     track,

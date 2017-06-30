@@ -19,6 +19,8 @@
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(hashtag => hashtag.Trim());
 
+			Console.Title = typeof(Program).Assembly.GetName().Name;
+			
             App.Run(baseUri, mongoConnectionString, mongoDBDatabase, ignoredUserNames, ignoredHashtags);
         }
     }

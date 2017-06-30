@@ -1,5 +1,6 @@
 namespace HashBus.Projector.MostHashtagged
 {
+    using System;
     using System.Configuration;
 
     class Program
@@ -8,6 +9,8 @@ namespace HashBus.Projector.MostHashtagged
         {
             var mongoConnectionString = ConfigurationManager.AppSettings["MongoConnectionString"];
             var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
+
+            Console.Title = typeof(Program).Assembly.GetName().Name;
 
             App.Run(mongoConnectionString, mongoDBDatabase);
         }

@@ -41,6 +41,8 @@
                 throw new Exception($"{accessTokenSecretKeyName} enviroment variable is not set.");
             }
 
+            Console.Title = typeof(Program).Assembly.GetName().Name;
+
             App.Run(
                 maximumNumberOfTweetsPerCatchUp,
                 defaultTransactionTimeout,
