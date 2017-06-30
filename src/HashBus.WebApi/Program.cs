@@ -15,13 +15,13 @@
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(userName => userName.Trim());
 
-            Console.Title = typeof(Program).Assembly.GetName().Name;
-
-            App.Run(baseUri, mongoConnectionString, mongoDBDatabase, ignoredUserNames);
-
             var ignoredHashtags = ConfigurationManager.AppSettings["IgnoredHashtags"]
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(hashtag => hashtag.Trim());
+
+			Console.Title = typeof(Program).Assembly.GetName().Name;
+			
+            App.Run(baseUri, mongoConnectionString, mongoDBDatabase, ignoredUserNames, ignoredHashtags);
         }
     }
 }
