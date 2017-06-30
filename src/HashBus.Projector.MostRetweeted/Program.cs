@@ -9,10 +9,11 @@ namespace HashBus.Projector.MostRetweeted
         {
             var mongoConnectionString = ConfigurationManager.AppSettings["MongoConnectionString"];
             var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
+            var endpointName = ConfigurationManager.AppSettings["EndpointName"];
 
             Console.Title = typeof(Program).Assembly.GetName().Name;
 
-            App.Run(mongoConnectionString, mongoDBDatabase);
+            App.Run(mongoConnectionString, mongoDBDatabase, endpointName);
         }
     }
 }

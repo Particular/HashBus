@@ -10,12 +10,12 @@ namespace HashBus.Projector.MostRetweeted
 
     class App
     {
-        public static void Run(string mongoConnectionString, string mongoDBDatabase)
+        public static void Run(string mongoConnectionString, string mongoDBDatabase, string endpointName)
         {
             var mongoDatabase = new MongoClient(mongoConnectionString).GetDatabase(mongoDBDatabase);
 
             var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("HashBus.Projector.MostRetweeted");
+            busConfiguration.EndpointName(endpointName);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
