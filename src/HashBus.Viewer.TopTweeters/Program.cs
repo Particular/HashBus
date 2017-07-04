@@ -1,5 +1,6 @@
 ﻿namespace HashBus.Viewer.TopTweeters
 {
+    using System;
     using System.Configuration;
 
     class Program
@@ -12,6 +13,8 @@
             var showPercentages = bool.Parse(ConfigurationManager.AppSettings["ShowPercentages"]);
             var verticalPadding = int.Parse(ConfigurationManager.AppSettings["VerticalPadding"]);
             var horizontalPadding = int.Parse(ConfigurationManager.AppSettings["HorizontalPadding"]);
+
+            Console.Title = typeof(Program).Assembly.GetName().Name;
 
             App.RunAsync(webApiBaseUrl, track, refreshInterval, showPercentages, verticalPadding, horizontalPadding)
                 .GetAwaiter().GetResult();
