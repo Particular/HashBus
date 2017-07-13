@@ -6,7 +6,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
     class App
     {
-        public static void Run(string nserviceBusConnectionString, string endpointName)
+        public static void Run(string nserviceBusConnectionString, string hashtag, string endpointName)
         {
             var busConfiguration = new BusConfiguration();
             busConfiguration.EndpointName(endpointName);
@@ -17,7 +17,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
             using (var bus = Bus.Create(busConfiguration).Start())
             {
-                Simulation.Start(bus);
+                Simulation.Start(bus, hashtag);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace HashBus.Twitter.Monitor.Simulator
 
     class Simulation
     {
-        public static void Start(ISendOnlyBus bus)
+        public static void Start(ISendOnlyBus bus, string hashtag)
         {
             var random = new Random();
             var countOfUsers = 15;
@@ -17,7 +17,6 @@ namespace HashBus.Twitter.Monitor.Simulator
             {
                 Thread.Sleep((int)Math.Pow(random.Next(6), 5));
                 var now = DateTime.UtcNow;
-                var hashtag = "Simulated";
                 var track = $"#{hashtag}";
                 var hashtagText = track;
                 var secondaryHashtag = new string(char.ConvertFromUtf32(random.Next(65, 80)).ElementAt(0), 6);
