@@ -24,7 +24,12 @@
                 new IgnoredUserNamesService(ignoredUserNames),
                 new IgnoredHashtagsService(ignoredHashtags));
 
-            using (var host = new NancyHost(bootstrapper, baseUri))
+            var hostConfiguration = new HostConfiguration
+            {
+                UrlReservations = new UrlReservations { CreateAutomatically = true },
+            };
+
+            using (var host = new NancyHost(bootstrapper, hostConfiguration, baseUri))
             {
                 host.Start();
                 ColorConsole.WriteLine("Web API hosted at ".Gray(), $"{baseUri}".White());
