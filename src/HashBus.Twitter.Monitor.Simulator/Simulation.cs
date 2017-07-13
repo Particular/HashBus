@@ -11,15 +11,49 @@ namespace HashBus.Twitter.Monitor.Simulator
     {
         public static void Start(ISendOnlyBus bus, string hashtag)
         {
+            var userNames = new[]
+            {
+                "Erik",
+                "ama",
+                "Karekin",
+                "cosima",
+                "Kamyrn",
+                "ajay",
+                "Timaios",
+                "mila",
+                "Odilia",
+                "randi",
+                "Kennard",
+                "ilike",
+                "Rab",
+                "yolonda",
+                "Ikaia",
+            };
+
+            var secondaryHashtags = new[]
+            {
+                "csharp",
+                "fsharp",
+                "nservicebus",
+                "azure",
+                "dotnet",
+                "oss",
+                "javascript",
+                "microservices",
+                "serverless",
+                "ddd",
+                "aspnetcore",
+            };
+
             var random = new Random();
-            var countOfUsers = 15;
+
             while (true)
             {
                 Thread.Sleep((int)Math.Pow(random.Next(6), 5));
                 var now = DateTime.UtcNow;
                 var track = $"#{hashtag}";
                 var hashtagText = track;
-                var secondaryHashtag = new string(char.ConvertFromUtf32(random.Next(65, 80)).ElementAt(0), 6);
+                var secondaryHashtag = secondaryHashtags[random.Next(secondaryHashtags.Length)];
 
                 if (now.Millisecond % 3 == 0)
                 {
@@ -35,14 +69,14 @@ namespace HashBus.Twitter.Monitor.Simulator
                     secondaryHashtag = secondaryHashtag.ToUpperInvariant();
                 }
 
-                var userId = random.Next(countOfUsers);
-                var userMentionId = random.Next(countOfUsers);
+                var userId = random.Next(userNames.Length);
+                var userMentionId = random.Next(userNames.Length);
                 var userMentionIndex = random.Next(31) + 1;
-                var retweetedUserId = random.Next(countOfUsers);
+                var retweetedUserId = random.Next(userNames.Length);
                 var text = string.Join(
                         string.Empty,
                         Enumerable.Range(0, userMentionIndex - 1).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
-                    $" @johnsmith{userMentionId} " +
+                    $" {userNames[userMentionId]} " +
                     string.Join(
                         string.Empty,
                         Enumerable.Range(0, random.Next(32)).Select(i => char.ConvertFromUtf32(random.Next(65, 128)))) +
@@ -58,8 +92,8 @@ namespace HashBus.Twitter.Monitor.Simulator
                         CreatedAt = now,
                         CreatedById = userId,
                         CreatedByIdStr = $"{userId}",
-                        CreatedByName = $"John Smith{userId}",
-                        CreatedByScreenName = $"johnsmith{userId}",
+                        CreatedByName = userNames[userId],
+                        CreatedByScreenName = userNames[userId],
                         Text = text,
                         UserMentions = new List<UserMention>
                         {
@@ -67,9 +101,9 @@ namespace HashBus.Twitter.Monitor.Simulator
                             {
                                 Id=userMentionId,
                                 IdStr= $"{userMentionId}",
-                                Indices = new List<int> { userMentionIndex, userMentionIndex + $"@johnsmith{userMentionId}".Length, },
-                                Name = $"John Smith{userMentionId}",
-                                ScreenName = $"johnsmith{userMentionId}",
+                                Indices = new List<int> { userMentionIndex, userMentionIndex + userNames[userMentionId].Length, },
+                                Name = userNames[userMentionId],
+                                ScreenName = userNames[userMentionId],
                             },
                         },
                         Hashtags = new List<Hashtag>
@@ -93,8 +127,8 @@ namespace HashBus.Twitter.Monitor.Simulator
                                 CreatedAt = now.AddDays(-1000),
                                 CreatedById = retweetedUserId,
                                 CreatedByIdStr = $"{retweetedUserId}",
-                                CreatedByName = $"John Smith{retweetedUserId}",
-                                CreatedByScreenName = $"johnsmith{retweetedUserId}",
+                                CreatedByName = userNames[retweetedUserId],
+                                CreatedByScreenName = userNames[retweetedUserId],
                                 Text = text,
                                 UserMentions = new List<UserMention>(),
                                 Hashtags = new List<Hashtag>(),
