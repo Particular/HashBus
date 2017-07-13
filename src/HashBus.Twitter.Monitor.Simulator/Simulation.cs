@@ -21,11 +21,19 @@ namespace HashBus.Twitter.Monitor.Simulator
                 var track = $"#{hashtag}";
                 var hashtagText = track;
                 var secondaryHashtag = new string(char.ConvertFromUtf32(random.Next(65, 80)).ElementAt(0), 6);
+
                 if (now.Millisecond % 3 == 0)
                 {
                     hashtag = hashtag.ToLowerInvariant();
                     hashtagText = hashtagText.ToLowerInvariant();
                     secondaryHashtag = secondaryHashtag.ToLowerInvariant();
+                }
+
+                if (now.Millisecond % 7 == 0)
+                {
+                    hashtag = hashtag.ToUpperInvariant();
+                    hashtagText = hashtagText.ToUpperInvariant();
+                    secondaryHashtag = secondaryHashtag.ToUpperInvariant();
                 }
 
                 var userId = random.Next(countOfUsers);
