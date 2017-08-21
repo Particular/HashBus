@@ -7,8 +7,8 @@
     <ProjectGuid>{6991A5CF-25CB-4336-9F6D-2EB1E01EFB75}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Application.Events</RootNamespace>
-    <AssemblyName>HashBus.Application.Events</AssemblyName>
+    <RootNamespace>HashBus.Twitter.Analyzer.Events</RootNamespace>
+    <AssemblyName>HashBus.Twitter.Analyzer.Events</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

@@ -140,9 +140,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HashBus.Application.Commands\HashBus.Application.Commands.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Analyzer.Commands\HashBus.Twitter.Analyzer.Commands.csproj">
       <Project>{293f96f9-7e15-4969-b8ed-595d06fd7aa5}</Project>
-      <Name>HashBus.Application.Commands</Name>
+      <Name>HashBus.Twitter.Analyzer.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
       <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
@@ -154,7 +154,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

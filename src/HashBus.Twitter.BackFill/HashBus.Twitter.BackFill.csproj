@@ -67,7 +67,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +77,9 @@
       <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
       <Name>HashBus.NServiceBusConfiguration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HashBus.Twitter.Monitor.CatchUp.Commands\HashBus.Twitter.Monitor.CatchUp.Commands.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.CatchUp.Commands\HashBus.Twitter.CatchUp.Commands.csproj">
       <Project>{89c81fa0-a06b-4fb9-a3fc-4dab2a93aa2c}</Project>
-      <Name>HashBus.Twitter.Monitor.CatchUp.Commands</Name>
+      <Name>HashBus.Twitter.CatchUp.Commands</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using ColoredConsole;
-    using HashBus.Application.Events;
+    using HashBus.Twitter.Analyzer.Events;
     using HashBus.ReadModel;
     using LiteGuard;
     using NServiceBus;

@@ -1,4 +1,4 @@
-namespace HashBus.Application
+namespace HashBus.Twitter.Analyzer
 {
     using System;
     using System.Configuration;

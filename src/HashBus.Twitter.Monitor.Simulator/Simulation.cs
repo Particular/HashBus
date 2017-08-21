@@ -5,7 +5,7 @@ namespace HashBus.Twitter.Monitor.Simulator
     using System.Threading;
     using NServiceBus;
     using System.Linq;
-    using HashBus.Application.Commands;
+    using HashBus.Twitter.Analyzer.Commands;
 
     class Simulation
     {

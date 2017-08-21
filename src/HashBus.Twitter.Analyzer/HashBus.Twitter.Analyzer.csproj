@@ -7,8 +7,8 @@
     <ProjectGuid>{EC04FD05-F3FE-439A-8791-D85856E3726A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Application</RootNamespace>
-    <AssemblyName>HashBus.Application</AssemblyName>
+    <RootNamespace>HashBus.Twitter.Analyzer</RootNamespace>
+    <AssemblyName>HashBus.Twitter.Analyzer</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -85,13 +85,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HashBus.Application.Commands\HashBus.Application.Commands.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Analyzer.Commands\HashBus.Twitter.Analyzer.Commands.csproj">
       <Project>{293f96f9-7e15-4969-b8ed-595d06fd7aa5}</Project>
-      <Name>HashBus.Application.Commands</Name>
+      <Name>HashBus.Twitter.Analyzer.Commands</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HashBus.Application.Events\HashBus.Application.Events.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Analyzer.Events\HashBus.Twitter.Analyzer.Events.csproj">
       <Project>{6991a5cf-25cb-4336-9f6d-2eb1e01efb75}</Project>
-      <Name>HashBus.Application.Events</Name>
+      <Name>HashBus.Twitter.Analyzer.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
       <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>

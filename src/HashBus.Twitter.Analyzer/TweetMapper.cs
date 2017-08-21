@@ -1,7 +1,7 @@
-﻿namespace HashBus.Application
+﻿namespace HashBus.Twitter.Analyzer
 {
     using System.Linq;
-    using HashBus.Application.Events;
+    using HashBus.Twitter.Analyzer.Events;
 
     static class TweetMapper
     {
