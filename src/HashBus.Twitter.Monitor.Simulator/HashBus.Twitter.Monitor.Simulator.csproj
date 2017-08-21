@@ -74,9 +74,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HashBus.Application.Commands\HashBus.Application.Commands.csproj">
+    <ProjectReference Include="..\HashBus.Twitter.Analyzer.Commands\HashBus.Twitter.Analyzer.Commands.csproj">
       <Project>{293f96f9-7e15-4969-b8ed-595d06fd7aa5}</Project>
-      <Name>HashBus.Application.Commands</Name>
+      <Name>HashBus.Twitter.Analyzer.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
       <Project>{f302f223-c0cd-46a6-8bb6-01f1213bdd58}</Project>

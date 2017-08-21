@@ -1,7 +1,7 @@
 ﻿#if APPLICATION_EVENTS
-namespace HashBus.Application.Events
+namespace HashBus.Twitter.Analyzer.Events
 #elif APPLICATION_COMMANDS
-namespace HashBus.Application.Commands
+namespace HashBus.Twitter.Analyzer.Commands
 #endif
 {
     using System.Collections.Generic;

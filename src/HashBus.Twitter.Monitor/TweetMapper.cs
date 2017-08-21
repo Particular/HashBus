@@ -1,7 +1,7 @@
-namespace HashBus.Twitter.Monitor
+namespace HashBus.Twitter
 {
     using System.Linq;
-    using HashBus.Application.Commands;
+    using HashBus.Twitter.Analyzer.Commands;
     using Tweetinvi.Core.Interfaces;
 
     static class TweetMapper

@@ -1,7 +1,7 @@
 ﻿namespace HashBus.Twitter.BackFill
 {
     using HashBus.NServiceBusConfiguration;
-    using HashBus.Twitter.Monitor.CatchUp.Commands;
+    using HashBus.Twitter.CatchUp.Commands;
     using NServiceBus;
     using NServiceBus.Persistence;
 

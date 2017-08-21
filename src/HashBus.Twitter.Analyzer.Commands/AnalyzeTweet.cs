@@ -1,4 +1,4 @@
-﻿namespace HashBus.Application.Commands
+﻿namespace HashBus.Twitter.Analyzer.Commands
 {
     public class AnalyzeTweet
     {

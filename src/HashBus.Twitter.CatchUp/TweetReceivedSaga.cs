@@ -1,8 +1,8 @@
-﻿namespace HashBus.Twitter.Monitor.CatchUp
+﻿namespace HashBus.Twitter.CatchUp
 {
     using System;
     using ColoredConsole;
-    using HashBus.Twitter.Monitor.CatchUp.Commands;
+    using HashBus.Twitter.CatchUp.Commands;
     using HashBus.Twitter.Monitor.Events;
     using NServiceBus.Saga;
 

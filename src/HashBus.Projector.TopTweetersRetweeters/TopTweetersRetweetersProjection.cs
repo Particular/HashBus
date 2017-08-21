@@ -8,7 +8,7 @@
     using LiteGuard;
     using NServiceBus;
 
-    public class TopTweetersRetweetersProjection : IHandleMessages<Application.Events.TweetAnalyzed>
+    public class TopTweetersRetweetersProjection : IHandleMessages<Twitter.Analyzer.Events.TweetAnalyzed>
     {
         private readonly IRepository<string, IEnumerable<TweetRetweet>> tweets;
 
@@ -19,7 +19,7 @@
             this.tweets = tweets;
         }
 
-        public void Handle(Application.Events.TweetAnalyzed message)
+        public void Handle(Twitter.Analyzer.Events.TweetAnalyzed message)
         {
             var trackTweets = this.tweets.GetAsync(message.Tweet.Track).GetAwaiter().GetResult().ToList();
             if (trackTweets.Any(tweet => tweet.TweetId == message.Tweet.Id))

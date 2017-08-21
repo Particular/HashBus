@@ -8,7 +8,7 @@
     using LiteGuard;
     using NServiceBus;
 
-    public class MostHashtaggedProjection : IHandleMessages<Application.Events.TweetAnalyzed>
+    public class MostHashtaggedProjection : IHandleMessages<Twitter.Analyzer.Events.TweetAnalyzed>
     {
         private readonly IRepository<string, IEnumerable<Hashtag>> hashtags;
 
@@ -19,7 +19,7 @@
             this.hashtags = hashtags;
         }
 
-        public void Handle(Application.Events.TweetAnalyzed message)
+        public void Handle(Twitter.Analyzer.Events.TweetAnalyzed message)
         {
             if (!message.Tweet.Hashtags.Any())
             {

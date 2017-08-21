@@ -4,7 +4,7 @@ namespace HashBus
     using System.Collections.Generic;
     using System.Linq;
     using ColoredConsole;
-    using HashBus.Application.Commands;
+    using HashBus.Twitter.Analyzer.Commands;
 
     class Writer
     {
