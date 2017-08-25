@@ -93,7 +93,8 @@
                 catch (Exception ex)
                 {
                     ColorConsole.WriteLine(
-                        $"{DateTime.Now} Failed to get leaderboard. ".Red(),
+                        $"{DateTime.Now} ".DarkGray(),
+                        "Failed to get leaderboard. ".Red(),
                         ex is ServerException ? "Could not communicate with the web API.".Yellow() : ex.Message.DarkRed());
 
                     await Task.Delay(250);
