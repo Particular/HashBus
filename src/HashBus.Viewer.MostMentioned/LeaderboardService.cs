@@ -37,7 +37,7 @@
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception($"The server returned {(int)response.StatusCode} ({response.StatusCode}).");
+                throw new Exception($"The server returned {(int)response.StatusCode} ({response.StatusCode}).", response.ErrorException);
             }
 
             return JsonConvert.DeserializeObject<WebApi.Leaderboard<TEntry>>(response.Content);
