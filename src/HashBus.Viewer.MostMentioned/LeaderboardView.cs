@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Remoting;
     using System.Threading;
     using System.Threading.Tasks;
     using ColoredConsole;
@@ -91,7 +92,10 @@
                 }
                 catch (Exception ex)
                 {
-                    ColorConsole.WriteLine($"{DateTime.Now} Failed to get leaderboard. ".Red(), ex.Message.DarkRed());
+                    ColorConsole.WriteLine(
+                        $"{DateTime.Now} Failed to get leaderboard. ".Red(),
+                        ex is ServerException ? "Could not communicate with the web API.".Yellow() : ex.Message.DarkRed());
+
                     await Task.Delay(250);
                     continue;
                 }
