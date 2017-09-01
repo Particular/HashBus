@@ -3,6 +3,7 @@
     using System;
     using System.Globalization;
     using System.Net;
+    using System.Runtime.Remoting;
     using System.Threading.Tasks;
     using LiteGuard;
     using Newtonsoft.Json;
@@ -28,9 +29,15 @@
             key = Uri.EscapeDataString(key.Replace("#", "해시"));
             var request = new RestRequest(string.Format(CultureInfo.InvariantCulture, this.resource, key));
             var response = await this.client.ExecuteGetTaskAsync(request);
+
+            if (response.StatusCode == 0)
+            {
+                throw new ServerException(response.ErrorMessage, response.ErrorException);
+            }
+
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception($"The server returned {(int)response.StatusCode} ({response.StatusCode}).");
+                throw new Exception($"The server returned: {(int)response.StatusCode} {response.StatusDescription}", response.ErrorException);
             }
 
             return JsonConvert.DeserializeObject<WebApi.Leaderboard<TEntry>>(response.Content);
