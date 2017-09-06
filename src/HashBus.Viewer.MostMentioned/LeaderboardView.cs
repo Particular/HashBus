@@ -7,7 +7,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using ColoredConsole;
-    using Humanizer;
 
     class LeaderboardView<TEntry> : IRunAsync where TEntry : WebApi.IEntry
     {
@@ -160,14 +159,18 @@
                     ColorConsole.WriteLine(new ColorToken[] { padding }.Concat(line).ToArray());
                 }
 
+                ColorConsole.WriteLine();
+
+                var totalColor = currentLeaderboard?.Count - previousLeaderboard?.Count > 0 ? movementColors[-1] : movementColors[0];
+                ColorConsole.Write(padding, $"{currentLeaderboard?.Count ?? 0:N0} ".Color(totalColor), $"{itemsName}".DarkGray());
+
                 if (currentLeaderboard.Since.HasValue)
                 {
                     ColorConsole.WriteLine(
-                        padding,
-                        $"{currentLeaderboard.Since?.ToLocalTime()} to {currentLeaderboard.LastActivityDateTime?.ToLocalTime()}".Gray());
+                        $" since ".DarkGray(),
+                        $"{currentLeaderboard.Since?.ToLocalTime():dddd} {currentLeaderboard.Since?.ToLocalTime():HH:mm}".Gray());
                 }
 
-                var totalColor = currentLeaderboard?.Count - previousLeaderboard?.Count > 0 ? movementColors[-1] : movementColors[0];
                 var maxMessageLength = 0;
                 var refreshTime = DateTime.UtcNow.AddMilliseconds(refreshInterval);
                 using (var timer = new Timer(c =>
@@ -180,9 +183,8 @@
 
                     var tokens = new[]
                     {
-                        $"\r{padding}Total {itemsName}: ".DarkGray(),
-                        $"{currentLeaderboard?.Count ?? 0:N0}".Color(totalColor),
-                        $" · Refreshing in {timeLeft.Humanize()}...".DarkGray()
+                        $"\r{padding}github.com/Particular/HashBus".Cyan(),
+                        $" · Refreshing in {timeLeft.TotalSeconds}...".DarkGray(),
                     };
 
                     var currentLength = tokens.Sum(x => x.Text.Length);
