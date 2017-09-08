@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer.MostHashtagged
+﻿namespace HashBus.Viewer
 {
     using System;
     using ColoredConsole;
