@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D2C63E63-7076-4EA1-933C-520776D6F9B5}</ProjectGuid>
+    <ProjectGuid>{8E09CB51-03C5-413A-8570-1A121A01B0A4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Viewer.TopRetweeters</RootNamespace>
-    <AssemblyName>HashBus.Viewer.TopRetweeters</AssemblyName>
+    <RootNamespace>HashBus.Viewer</RootNamespace>
+    <AssemblyName>HashBus.Viewer</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -63,20 +63,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\HashBus.Viewer.MostMentioned\ColorTokenExtensions.cs">
-      <Link>ColorTokenExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\HashBus.Viewer.MostMentioned\IRunAsync.cs">
-      <Link>IRunAsync.cs</Link>
-    </Compile>
-    <Compile Include="..\HashBus.Viewer.MostMentioned\IService.cs">
-      <Link>IService.cs</Link>
-    </Compile>
-    <Compile Include="..\HashBus.Viewer.MostMentioned\LeaderboardService.cs">
-      <Link>LeaderboardService.cs</Link>
-    </Compile>
-    <Compile Include="..\HashBus.Viewer.MostMentioned\LeaderboardView.cs">
-      <Link>LeaderboardView.cs</Link>
+    <Compile Include="..\HashBus.WebApi\HashtagEntry.cs">
+      <Link>HashtagEntry.cs</Link>
     </Compile>
     <Compile Include="..\HashBus.WebApi\IEntry.cs">
       <Link>IEntry.cs</Link>
@@ -88,8 +76,18 @@
       <Link>UserEntry.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
-    <Compile Include="TopRetweetersLeaderBoardViewFactory.cs" />
+    <Compile Include="ColorTokenExtensions.cs" />
+    <Compile Include="IRunAsync.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="LeaderboardService.cs" />
+    <Compile Include="LeaderboardView.cs" />
+    <Compile Include="MostHashtaggedLeaderBoardViewFactory.cs" />
+    <Compile Include="MostMentionedLeaderBoardViewFactory.cs" />
+    <Compile Include="MostRetweetedLeaderBoardViewFactory.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="TopRetweetersLeaderBoardViewFactory.cs" />
+    <Compile Include="TopTweetersLeaderBoardViewFactory.cs" />
+    <Compile Include="TopTweetersRetweetersLeaderBoardViewFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

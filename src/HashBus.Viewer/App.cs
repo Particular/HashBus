@@ -1,15 +1,10 @@
-﻿namespace HashBus.Viewer.TopTweetersRetweeters
+﻿namespace HashBus.Viewer
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using HashBus.Viewer.MostHashtagged;
-    using HashBus.Viewer.MostMentioned;
-    using HashBus.Viewer.MostRetweeted;
-    using HashBus.Viewer.TopRetweeters;
-    using HashBus.Viewer.TopTweeters;
     using RestSharp;
 
     class App

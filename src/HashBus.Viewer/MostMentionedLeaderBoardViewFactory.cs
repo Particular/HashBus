@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer.MostMentioned
+﻿namespace HashBus.Viewer
 {
     using ColoredConsole;
     using HashBus.WebApi;

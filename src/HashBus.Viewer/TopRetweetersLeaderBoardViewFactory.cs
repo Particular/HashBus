@@ -1,4 +1,4 @@
-﻿namespace HashBus.Viewer.TopRetweeters
+﻿namespace HashBus.Viewer
 {
     using ColoredConsole;
     using HashBus.WebApi;
