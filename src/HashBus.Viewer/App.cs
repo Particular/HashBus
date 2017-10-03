@@ -9,7 +9,7 @@
 
     class App
     {
-        public static async Task RunAsync(
+        public static async Task Run(
             string webApiBaseUrl,
             string track,
             int refreshInterval,
