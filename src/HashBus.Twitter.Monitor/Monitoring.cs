@@ -12,7 +12,7 @@ namespace HashBus.Twitter.Monitor
     class Monitoring
     {
         public static async Task StartAsync(
-            ISendOnlyBus bus,
+            IEndpointInstance endpointInstance,
             string track,
             string consumerKey,
             string consumerSecret,
@@ -47,11 +47,12 @@ namespace HashBus.Twitter.Monitor
                         " stream stopped.".Red(),
                         args.Exception == null ? string.Empty : $" {args.Exception.Message}".DarkRed());
 
-                    stream.MatchingTweetReceived += (sender, e) =>
+                    stream.MatchingTweetReceived += async (sender, e) => 
                     {
                         var analyzeTweet = TweetMapper.Map(e.Tweet, track);
                         Writer.Write(analyzeTweet.Tweet);
-                        bus.Send(analyzeTweet);
+                        await endpointInstance.Send(analyzeTweet)
+                            .ConfigureAwait(false);
 
                         var tweetReceived = new TweetReceived()
                         {
@@ -59,7 +60,8 @@ namespace HashBus.Twitter.Monitor
                             Track = track,
                             TweetId = e.Tweet.Id
                         };
-                        bus.Publish(tweetReceived);
+                        await endpointInstance.Publish(tweetReceived)
+                            .ConfigureAwait(false);
                     };
 
                     await stream.StartStreamMatchingAnyConditionAsync();

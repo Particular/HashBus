@@ -2,18 +2,20 @@ namespace HashBus.Projector.TopTweetersRetweeters
 {
     using System;
     using System.Configuration;
+    using System.Threading.Tasks;
 
     class Program
     {
-        static void Main()
+        static Task Main()
         {
             var mongoConnectionString = ConfigurationManager.AppSettings["MongoConnectionString"];
             var mongoDBDatabase = ConfigurationManager.AppSettings["MongoDBDatabase"];
             var endpointName = ConfigurationManager.AppSettings["EndpointName"];
+            var analyzerAddress = ConfigurationManager.AppSettings["AnalyzerAddress"];
 
             Console.Title = typeof(Program).Assembly.GetName().Name;
 
-            App.Run(mongoConnectionString, mongoDBDatabase, endpointName);
+            return App.Run(mongoConnectionString, mongoDBDatabase, endpointName, analyzerAddress);
         }
     }
 }

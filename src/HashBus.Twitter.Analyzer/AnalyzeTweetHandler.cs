@@ -2,23 +2,14 @@
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using HashBus.Twitter.Analyzer.Commands;
     using HashBus.Twitter.Analyzer.Events;
-    using LiteGuard;
     using NServiceBus;
 
     public class AnalyzeTweetHandler : IHandleMessages<AnalyzeTweet>
     {
-        private ISendOnlyBus bus;
-
-        public AnalyzeTweetHandler(ISendOnlyBus bus)
-        {
-            Guard.AgainstNullArgument("bus", bus);
-
-            this.bus = bus;
-        }
-
-        public void Handle(AnalyzeTweet message)
+        public Task Handle(AnalyzeTweet message, IMessageHandlerContext context)
         {
             message.Tweet.UserMentions = message.Tweet.UserMentions
                 .Where(userMention =>
@@ -41,7 +32,8 @@
                 .ToList();
 
             Writer.Write(message.Tweet);
-            bus.Publish(new TweetAnalyzed { Tweet = TweetMapper.Map(message.Tweet) });
+
+            return context.Publish(new TweetAnalyzed { Tweet = TweetMapper.Map(message.Tweet) });
         }
     }
 }
