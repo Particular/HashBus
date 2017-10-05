@@ -8,7 +8,7 @@ namespace HashBus.Twitter.Monitor
 
     class App
     {
-        public static async Task RunAsync(
+        public static async Task Run(
             string nserviceBusConnectionString,
             string track,
             string consumerKey,

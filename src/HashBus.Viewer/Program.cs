@@ -3,10 +3,11 @@
     using System;
     using System.Configuration;
     using System.Linq;
+    using System.Threading.Tasks;
 
     class Program
     {
-        static void Main()
+        static Task Main()
         {
             var webApiBaseUrl = ConfigurationManager.AppSettings["WebApiBaseUrl"];
             var track = ConfigurationManager.AppSettings["Track"];
@@ -22,16 +23,15 @@
 
             Console.Title = typeof(Program).Assembly.GetName().Name;
 
-            App.RunAsync(
-                    webApiBaseUrl,
-                    track,
-                    refreshInterval,
-                    showPercentages,
-                    verticalPadding,
-                    horizontalPadding,
-                    views,
-                    rotateInterval)
-                .GetAwaiter().GetResult();
+            return App.Run(
+                webApiBaseUrl,
+                track,
+                refreshInterval,
+                showPercentages,
+                verticalPadding,
+                horizontalPadding,
+                views,
+                rotateInterval);
         }
     }
 }

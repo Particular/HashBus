@@ -2,10 +2,11 @@ namespace HashBus.Twitter.Monitor
 {
     using System;
     using System.Configuration;
+    using System.Threading.Tasks;
 
     class Program
     {
-        static void Main()
+        static Task Main()
         {
             var track = ConfigurationManager.AppSettings["Track"];
             var nserviceBusConnectionString = ConfigurationManager.AppSettings["NServiceBusConnectionString"];
@@ -43,16 +44,15 @@ namespace HashBus.Twitter.Monitor
 
             Console.Title = typeof(Program).Assembly.GetName().Name;
 
-            App.RunAsync(
-                    nserviceBusConnectionString,
-                    track,
-                    consumerKey,
-                    consumerSecret,
-                    accessToken,
-                    accessTokenSecret,
-                    endpointName,
-                    analyzerAddress)
-                .GetAwaiter().GetResult();
+            return App.Run(
+                nserviceBusConnectionString,
+                track,
+                consumerKey,
+                consumerSecret,
+                accessToken,
+                accessTokenSecret,
+                endpointName,
+                analyzerAddress);
         }
     }
 }
