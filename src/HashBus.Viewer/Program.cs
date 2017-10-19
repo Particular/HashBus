@@ -22,6 +22,7 @@
                 .ToArray();
 
             Console.Title = typeof(Program).Assembly.GetName().Name;
+            ConsoleHelper.MakeTopMost();
 
             return App.Run(
                 webApiBaseUrl,
