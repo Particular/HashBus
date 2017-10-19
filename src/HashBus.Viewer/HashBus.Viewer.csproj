@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="App.cs" />
     <Compile Include="ColorTokenExtensions.cs" />
+    <Compile Include="ConsoleHelper.cs" />
     <Compile Include="IRunAsync.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="LeaderboardService.cs" />
