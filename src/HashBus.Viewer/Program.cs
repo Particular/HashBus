@@ -3,6 +3,7 @@
     using System;
     using System.Configuration;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
     class Program
@@ -21,6 +22,7 @@
                 .Select(view => view.Trim())
                 .ToArray();
 
+            Console.OutputEncoding = Encoding.UTF8;
             Console.Title = typeof(Program).Assembly.GetName().Name;
             ConsoleHelper.MakeTopMost();
 
