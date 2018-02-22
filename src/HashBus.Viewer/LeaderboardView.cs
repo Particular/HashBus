@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.Remoting;
     using System.Threading;
     using System.Threading.Tasks;
     using ColoredConsole;
@@ -89,15 +88,9 @@
                 {
                     currentLeaderboard = await leaderboards.GetAsync(track);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    ColorConsole.WriteLine(
-                        $"{DateTime.Now} ".DarkGray(),
-                        "Failed to get leaderboard. ".Red(),
-                        ex is ServerException ? "Could not communicate with the web API.".Yellow() : ex.Message.DarkRed());
-
-                    await Task.Delay(250);
-                    continue;
+                    currentLeaderboard = previousLeaderboard;
                 }
 
                 var lines = new List<IEnumerable<ColorToken>>();
@@ -140,11 +133,18 @@
                 }
 
                 var padding = new string(' ', horizontalPadding);
-                ColorConsole.WriteLine(
+                ColorConsole.Write(
                     padding,
                     $" {track} ".DarkCyan().On(ConsoleColor.White),
                     " ",
                     name.White());
+
+                if (currentLeaderboard == previousLeaderboard)
+                {
+                    ColorConsole.Write(" ", currentLeaderboard == previousLeaderboard ? " Service unavailable ".Yellow().OnRed() : "");
+                }
+
+                ColorConsole.WriteLine();
 
                 ColorConsole.WriteLine(
                     padding,
