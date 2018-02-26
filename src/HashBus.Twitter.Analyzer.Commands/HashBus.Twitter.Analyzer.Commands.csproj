@@ -21,7 +21,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;APPLICATION_COMMANDS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -32,7 +32,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;APPLICATION_COMMANDS</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -42,16 +42,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\HashBus.Twitter.Analyzer.Events\Hashtag.cs">
-      <Link>Hashtag.cs</Link>
-    </Compile>
-    <Compile Include="..\HashBus.Twitter.Analyzer.Events\Tweet.cs">
-      <Link>Tweet.cs</Link>
-    </Compile>
-    <Compile Include="..\HashBus.Twitter.Analyzer.Events\UserMention.cs">
-      <Link>UserMention.cs</Link>
-    </Compile>
     <Compile Include="AnalyzeTweet.cs" />
+    <Compile Include="Hashtag.cs" />
+    <Compile Include="Tweet.cs" />
+    <Compile Include="UserMention.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

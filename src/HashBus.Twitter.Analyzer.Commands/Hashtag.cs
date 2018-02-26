@@ -1,4 +1,4 @@
-﻿namespace HashBus.Twitter.Analyzer.Events
+﻿namespace HashBus.Twitter.Analyzer.Commands
 {
     public class Hashtag
     {
