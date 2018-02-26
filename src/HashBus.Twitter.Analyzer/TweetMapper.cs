@@ -13,7 +13,6 @@
                 {
                     CreatedAt = tweet.CreatedAt,
                     CreatedById = tweet.CreatedById,
-                    CreatedByIdStr = tweet.CreatedByIdStr,
                     CreatedByName = tweet.CreatedByName,
                     CreatedByScreenName = tweet.CreatedByScreenName,
                     Hashtags = tweet.Hashtags
@@ -33,7 +32,6 @@
                             new UserMention
                             {
                                 Id = userMention.Id,
-                                IdStr = userMention.IdStr,
                                 Indices = userMention.Indices,
                                 Name = userMention.Name,
                                 ScreenName = userMention.ScreenName,
