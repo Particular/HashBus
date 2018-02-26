@@ -42,7 +42,6 @@
                         MentionedAt = message.Tweet.CreatedAt,
                         TweetId = message.Tweet.Id,
                         UserMentionId = userMention.Id,
-                        UserMentionIdStr = userMention.IdStr,
                         UserMentionName = userMention.Name,
                         UserMentionScreenName = userMention.ScreenName,
                     })

@@ -44,7 +44,6 @@
                     RetweetedAt = message.Tweet.CreatedAt,
                     TweetId = retweet.Id,
                     UserId = retweet.CreatedById,
-                    UserIdStr = retweet.CreatedByIdStr,
                     UserName = retweet.CreatedByName,
                     UserScreenName = retweet.CreatedByScreenName,
                 });
