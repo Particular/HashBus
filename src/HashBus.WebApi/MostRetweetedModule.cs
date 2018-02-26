@@ -22,7 +22,6 @@
                     .Select(g => new UserEntry
                     {
                         Id = g.Key,
-                        IdStr = g.First().UserIdStr,
                         Name = g.First().UserName,
                         ScreenName = g.First().UserScreenName,
                         Count = g.Count(),
