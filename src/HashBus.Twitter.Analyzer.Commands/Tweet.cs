@@ -1,4 +1,4 @@
-﻿namespace HashBus.Twitter.Analyzer.Events
+﻿namespace HashBus.Twitter.Analyzer.Commands
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,8 @@
         public DateTime CreatedAt { get; set; }
 
         public long CreatedById { get; set; }
+
+        public string CreatedByIdStr { get; set; }
 
         public string CreatedByName { get; set; }
 

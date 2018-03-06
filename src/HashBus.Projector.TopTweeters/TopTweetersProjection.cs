@@ -40,7 +40,6 @@
                 TweetedAt = message.Tweet.CreatedAt,
                 TweetId = message.Tweet.Id,
                 UserId = message.Tweet.CreatedById,
-                UserIdStr = message.Tweet.CreatedByIdStr,
                 UserName = message.Tweet.CreatedByName,
                 UserScreenName = message.Tweet.CreatedByScreenName,
             });

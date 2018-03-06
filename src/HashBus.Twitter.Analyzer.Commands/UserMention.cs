@@ -1,10 +1,12 @@
-﻿namespace HashBus.Twitter.Analyzer.Events
+﻿namespace HashBus.Twitter.Analyzer.Commands
 {
     using System.Collections.Generic;
 
     public class UserMention
     {
         public long Id { get; set; }
+
+        public string IdStr { get; set; }
 
         public IList<int> Indices { get; set; }
 

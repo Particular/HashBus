@@ -35,16 +35,15 @@
                 return;
             }
 
-            var rewRetweetees = new List<Retweetee>();
+            var retweetees = new List<Retweetee>();
             var retweet = message.Tweet.RetweetedTweet;
             while (retweet != null)
             {
-                rewRetweetees.Add(new Retweetee
+                retweetees.Add(new Retweetee
                 {
                     RetweetedAt = message.Tweet.CreatedAt,
                     TweetId = retweet.Id,
                     UserId = retweet.CreatedById,
-                    UserIdStr = retweet.CreatedByIdStr,
                     UserName = retweet.CreatedByName,
                     UserScreenName = retweet.CreatedByScreenName,
                 });
@@ -52,11 +51,11 @@
                 retweet = retweet.RetweetedTweet;
             }
 
-            trackRetweetees.AddRange(rewRetweetees);
+            trackRetweetees.AddRange(retweetees);
             await this.retweetees.SaveAsync(message.Tweet.Track, trackRetweetees)
                 .ConfigureAwait(false);
 
-            foreach (var retweetee in rewRetweetees)
+            foreach (var retweetee in retweetees)
             {
                 ColorConsole.WriteLine(
                     $"{message.Tweet.CreatedAt.ToLocalTime()}".DarkGray(),
