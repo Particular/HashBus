@@ -1,96 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F36FD7F7-0C41-44E3-89FE-AAF560BA69DC}</ProjectGuid>
+    <TargetFramework>net461</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashBus.Twitter.BackFill</RootNamespace>
-    <AssemblyName>HashBus.Twitter.BackFill</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NServiceBus.6.4.0\lib\net452\NServiceBus.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.NHibernate, Version=7.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NServiceBus.NHibernate.7.2.2\lib\net452\NServiceBus.NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
+    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" />
+    <PackageReference Include="NServiceBus" Version="6.4.0" />
+    <PackageReference Include="NServiceBus.NHibernate" Version="7.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj" />
+    <ProjectReference Include="..\HashBus.Twitter.CatchUp.Commands\HashBus.Twitter.CatchUp.Commands.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Configuration" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App.cs" />
-    <Compile Include="Program.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HashBus.NServiceBusConfiguration\HashBus.NServiceBusConfiguration.csproj">
-      <Project>{F302F223-C0CD-46A6-8BB6-01F1213BDD58}</Project>
-      <Name>HashBus.NServiceBusConfiguration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HashBus.Twitter.CatchUp.Commands\HashBus.Twitter.CatchUp.Commands.csproj">
-      <Project>{89c81fa0-a06b-4fb9-a3fc-4dab2a93aa2c}</Project>
-      <Name>HashBus.Twitter.CatchUp.Commands</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\GitVersionTask.3.6.2\build\dotnet\GitVersionTask.targets" Condition="Exists('..\..\packages\GitVersionTask.3.6.2\build\dotnet\GitVersionTask.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\GitVersionTask.3.6.2\build\dotnet\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GitVersionTask.3.6.2\build\dotnet\GitVersionTask.targets'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
